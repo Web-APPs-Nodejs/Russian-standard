@@ -14,9 +14,12 @@
 |Димитър Печев |__dimpechev__ |	
 |Ния Керанова|__Nayata__       	|	
 
-##<a href="https://github.com/Web-APPs-Nodejs/Russian-standard/blob/master/Project-Requirements.md">Project Requirements</a>  
+##<a href="http://github.com/Web-APPs-Nodejs/Russian-standard/blob/master/Project-Requirements.md">Project Requirements</a>  
 
-##Project Description
 
-###ProjectName
+##<a href="./documentation/README.md">Project Description</a>  
 
+This is a  simple single page application for ski, board and bicycle fans.
+
+It is an open-closed :) group for extreme and regular activities. 
+People can joint the group by creating account. After the account is approved by admin the user can start creating events or join to already present.
