@@ -60,42 +60,5 @@ Again this part is visible to all site visitors and the add new button is allowe
 
 All memers have to pass a very simple live resque training, based on the acient russian stadard rule, a must in every first aid kit ;))))))))))))))!
 
-
-##Project models
-
-
-    	event {
-    		owner : user,
-    		interested in going: users[],
-    		sure participating: users[]
-    	}    
-	
- .
-	
-	comment {
-		author: user,
-		text: string
-	}
-	
- .
-		
-	person {
-		firstName: firstName,
-		lastName: lastName,
-		age: age,
-		gender: gender
-	}
-	
- .
-	
-	user {
-		id: id,	
-		userName: userName,
-		passHash: passHash,
-		avatarPicture: avatarPicture,
-		person: person		
-	}
-	
- .
 		
 

@@ -1,7 +1,7 @@
 
 ![Cover photo](../images/all-main.jpg) 
 
-##<a href="../documentation/README.md">Project Description</a>  
+##<a href="../README.md">Project Description</a>  
 
 
 ##Project models
