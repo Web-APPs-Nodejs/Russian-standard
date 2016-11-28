@@ -9,7 +9,6 @@
     },
     "rules": {
         "indent": "error",
-        "linebreak-style": "error",
         "no-console": "off",
         "quotes": [
             "error",

@@ -1,3 +1,3 @@
 /* globals module */
 
-module.exports = {};
+module.exports = function (models) { };
