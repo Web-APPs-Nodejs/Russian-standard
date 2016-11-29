@@ -11,4 +11,7 @@ module.exports = function (app, data) {
     router.get('/', controllers.getHomePage);
 
     app.use(router);
+
+    nav = require('./nag.pug')
+    main = require('./nag.pug')
 };
