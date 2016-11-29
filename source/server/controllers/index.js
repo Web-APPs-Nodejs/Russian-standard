@@ -5,7 +5,7 @@
 const fs = require('fs'),
     path = require('path');
 
-module.exports = function (data) {
+module.exports = (data) => {
     let dataExport = {};
 
     fs.readdirSync('./server/controllers')

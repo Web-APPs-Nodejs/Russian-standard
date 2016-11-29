@@ -8,10 +8,8 @@ module.exports = function (app, data) {
     let router = new express.Router(),
         controllers = require('../controllers')(data);
 
-    router.get('/', controllers.getHomePage);
+    router.get('/login', controllers.getLoginPage);
+    router.post('/login', controllers.login);
 
     app.use(router);
-
-   // nav = require('./nag.pug')
-   // main = require('./nag.pug')
 };
