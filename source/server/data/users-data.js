@@ -5,7 +5,8 @@
 var testUser = {
     username: 'test',
     password: 'test',
-    _id: 1
+    _id: 1,
+    avatar: 'https://sap-certification.info/img/default-avatar.jpg'
 };
 
 module.exports = (models) => {

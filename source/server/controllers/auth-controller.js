@@ -7,7 +7,7 @@ const passport = require('passport');
 module.exports = (data) => {
     return {
         getLoginPage(req, res) {
-            res.render('login-page');
+            res.render('login-page', { isAuth: req.isAuthenticated() });
         },
         login(req, res, next) {
             passport.authenticate('local', function (error, user) {

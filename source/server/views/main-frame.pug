@@ -25,12 +25,20 @@ body
                 li
                     a(href="/") Events
                 li
-                    a(href="/") Forum
+                    a(href="/") Stories
+                li
+                    a(href="/") Gallery
             ul.nav.navbar-nav.navbar-right
-                li
-                    a(href="/login") Login
-                li
-                    a(href="/") Register
+                if !isAuth
+                    li
+                        a(href="/login") Login
+                    li
+                        a(href="/") Register
+                else
+                    li
+                        a(href="/profile") Profile
+                    li
+                        a(href="/logout") Logout
            
 #content
     block content           

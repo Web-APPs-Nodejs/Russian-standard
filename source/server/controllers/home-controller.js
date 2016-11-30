@@ -2,10 +2,10 @@
 
 'use strict';
 
-module.exports = function(data) {
+module.exports = function (data) {
     return {
         getHomePage(req, res) {
-            res.render('main-frame');
+            res.render('main-frame', { isAuth: req.isAuthenticated() });
         }
     };
 };

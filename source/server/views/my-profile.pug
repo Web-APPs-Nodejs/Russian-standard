@@ -1,0 +1,10 @@
+extends main-frame.pug
+
+block content
+    .container-fluid
+        .row
+            .col-md-9.col-md-offset-1
+                .col-md-3.text-center
+                    a.thumbnail
+                        img(src= user.avatar, alt="profile-pic")
+                    h2 #{user.username}
