@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    title Extreme Sports
+    
+    link(href="/res/css/bootstrap.css", rel="stylesheet")
+    link(rel="stylesheet", href="/res/css/main.css")
+    block styles
+            
+    script(src="/res/js/jquery.js")
+    script(src="/res/js/bootstrap.js")
+    block scripts
+    
+body
+
+.navbar.navbar-default.navbar-fixed-top
+    .container
+        .navbar-header
+            a.navbar-brand(href='/') Extreme Sports
+        .navbar-collapse.collapse
+            ul.nav.navbar-nav
+                li
+                    a(href="/") Categories
+                li
+                    a(href="/") Events
+                li
+                    a(href="/") Forum
+            ul.nav.navbar-nav.navbar-right
+                li
+                    a(href="/login") Login
+                li
+                    a(href="/") Register
+           
+#content
+    block content           

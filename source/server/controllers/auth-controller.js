@@ -10,30 +10,28 @@ module.exports = (data) => {
             res.render('login-page');
         },
         login(req, res, next) {
-            const auth = passport.authenticate('local', function (error, user) {
-                if(error) {
+            passport.authenticate('local', function (error, user) {
+                if (error) {
                     next(error);
                     return;
                 }
 
-                if(!user) {
-                    res.json({ 
+                if (!user) {
+                    res.json({
                         success: false,
                         message: 'Invalid name or password!'
                     });
                 }
 
                 req.login(user, error => {
-                    if(error) {
+                    if (error) {
                         next(error);
                         return;
                     }
 
                     res.redirect('/profile');
                 });
-            });
-
-            auth(req, res, next);
+            })(req, res, next);
         },
     };
 };
