@@ -1,17 +1,18 @@
+/**
+ * Created by admin on 29.11.2016 г..
+ */
 /* globals require module __dirname */
-
 'use strict';
 
 const fs = require('fs'),
-    path = require('path'),
-    models = require('./mongoose/models');
+    path = require('path');
 
 let dataExport = {};
 
 fs.readdirSync(__dirname)
-    .filter(x => x.includes('-data.js'))
+    .filter(x => x.includes('-model.js'))
     .forEach(data => {
-        let dataModule = require(path.join(__dirname, data))(models);
+        let dataModule = require(path.join(__dirname, data));
 
         Object.keys(dataModule)
             .forEach(key => {
