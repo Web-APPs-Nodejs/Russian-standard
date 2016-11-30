@@ -15,11 +15,11 @@ class Person {
     }
 
     get FirstName() {
-        return this._age;
+        return this._firstName;
     }
 
     get LastName() {
-        return this._age;
+        return this._lastName;
     }
 
     get FullName() {

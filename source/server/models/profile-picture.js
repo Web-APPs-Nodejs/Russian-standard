@@ -23,6 +23,10 @@ class ProfilePicture{
         return this._src;
     }
 
+    get Alt() {
+        return this._alt;
+    }
+
     get getHtmlElement(){
         var htmlElementToReturn = '<img src="' + this._src + '" alt="' + this._alt + '">';
 
