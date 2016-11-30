@@ -13,9 +13,9 @@ let strategy = new LocalStrategy(
                     return done(null, user);
                 }
 
-                return done(null, false);
+                return done(null, false, { message: 'Incorrect username or password!' });
             })
-            .catch(err => done(err, null));
+            .catch(err => done(err, null, { message: 'A server exception occured! Please try again!' }));
     });
 
 module.exports = strategy;

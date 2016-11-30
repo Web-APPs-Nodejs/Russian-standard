@@ -9,7 +9,7 @@ const fs = require('fs'),
 let dataExport = {};
 
 fs.readdirSync('./server/data')
-    .filter(x => x.includes('-data'))
+    .filter(x => x.includes('-data.js'))
     .forEach(data => {
         let dataModule = require(path.join(__dirname, data))(models);
 

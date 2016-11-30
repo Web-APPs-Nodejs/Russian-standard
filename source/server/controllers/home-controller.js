@@ -5,7 +5,7 @@
 module.exports = function(data) {
     return {
         getHomePage(req, res) {
-            res.render('home-page');
+            res.render('main-frame');
         }
     };
 };
