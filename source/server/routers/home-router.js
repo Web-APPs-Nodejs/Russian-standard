@@ -8,7 +8,7 @@ module.exports = function (app, data) {
     let router = new express.Router(),
         controllers = require('../controllers')(data);
 
-    router.get('/', controllers.getHomePage);
+    router.get('/home', controllers.getHomePage);
 
     app.use(router);
 

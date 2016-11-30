@@ -14,31 +14,31 @@ head
     
 body
 
-.navbar.navbar-default.navbar-fixed-top
+.navbar.navbar-default.navbar-fixed-top.relative
     .container
         .navbar-header
-            a.navbar-brand(href='/') Extreme Sports
+            a.navbar-brand(href='/home') Extreme Sports
         .navbar-collapse.collapse
             ul.nav.navbar-nav
                 li
-                    a(href="/") Categories
+                    a(href="/home") Categories
                 li
-                    a(href="/") Events
+                    a(href="/events") Events
                 li
-                    a(href="/") Stories
+                    a(href="/stories") Stories
                 li
-                    a(href="/") Gallery
+                    a(href="/gallery") Gallery
             ul.nav.navbar-nav.navbar-right
                 if !isAuth
                     li
                         a(href="/login") Login
                     li
-                        a(href="/") Register
-                else
+                        a(href="/register") Register
+                else                    
                     li
                         a(href="/profile") Profile
                     li
                         a(href="/logout") Logout
            
-#content
+#content.container-full
     block content           

@@ -29,7 +29,7 @@ module.exports = (data) => {
         },
         logout(req, res) {
             req.logout();
-            res.redirect('/');
+            res.redirect('/home');
         }
     };
 };

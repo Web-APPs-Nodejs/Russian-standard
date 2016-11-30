@@ -5,6 +5,7 @@
 var testUser = {
     username: 'test',
     password: 'test',
+    role: 'admin',
     _id: 1,
     avatar: 'https://sap-certification.info/img/default-avatar.jpg'
 };
