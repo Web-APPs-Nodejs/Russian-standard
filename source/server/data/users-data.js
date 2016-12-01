@@ -13,7 +13,7 @@ module.exports = (models) => {
     var UserModel = models.UserModel;
 
     return {
-        createAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture){
+        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture){
 
             var userObject = {
                 firstName: firstName,
