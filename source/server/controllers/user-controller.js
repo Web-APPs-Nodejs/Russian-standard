@@ -68,6 +68,11 @@ module.exports = (data) => {
             }
 
             res.render('login-page', { isAuth: req.isAuthenticated() });
+
+        },
+        logout(req, res) {
+            req.logout();
+            res.redirect('/home');
         }
     };
 };
