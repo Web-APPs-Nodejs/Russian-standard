@@ -20,7 +20,7 @@ module.exports = (models) => {
             };
             var event = new EventModel(eventObject);
 
-            var promise = new Promise(function (resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
                     if(error){
                         return reject(error);
@@ -29,10 +29,8 @@ module.exports = (models) => {
                     return resolve(dbEvent);
                 })
             });
-
-            return promise;
         },
-        findById(eventId) {
+        eventFindById(eventId) {
             // TODO this is for tests only, edit and refactor later
             var dbUser = {
                 firstName: 'Alex',
@@ -56,7 +54,7 @@ module.exports = (models) => {
             if (eventId == dbEvent._id) {
                 return Promise.resolve(dbEvent);
             }
-            
+
 
             return Promise.resolve(null);
         }
