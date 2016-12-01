@@ -19,7 +19,7 @@ module.exports = (app, data) => {
 
     passport.deserializeUser((userId, done) => {
         data
-            .findById(userId)
+            .findUserById(userId)
             .then(user => done(null, user || false))
             .catch(error => done(error, false));
     });
