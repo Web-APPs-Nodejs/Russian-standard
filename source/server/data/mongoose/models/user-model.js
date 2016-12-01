@@ -2,9 +2,9 @@
  * Created by admin on 29.11.2016 г..
  */
 /* globals require module String Number*/
-"use strict";
-
-const mongoose = require('mongoose'),
+'use strict';
+const encryptor = require('../../../utils/encryptor'),
+    mongoose = require('mongoose'),
     profilePictureSchema = require('./profile-picture-model').ProfilePictureSchema;
 
 
@@ -13,7 +13,7 @@ const mongoose = require('mongoose'),
 var validateEmail = function (emailString) {
     emailString = '' + emailString;
     var isValidEmail = emailString.includes('@');
-    if(!isValidEmail){
+    if (!isValidEmail) {
         return false;
     }
 
@@ -34,13 +34,14 @@ var userSchema = function () {
         gender: String,
         username: { type: String, unique: true, required: true },
         passHash: String,
-        email: {type: String, validate: emailValidation },
+        salt: String,
+        email: { type: String, validate: emailValidation },
         profilePicture: ProfilePictureSchema
     });
 
     userSchemaToReturn.method({
-        authenticate: function(password) {
-            if (password === this.PassHash) {
+        authenticate: function (password) {
+            if (encryptor.generateHashedPassword(this.salt, password) === this.passHash) {
                 return true;
             }
             else {

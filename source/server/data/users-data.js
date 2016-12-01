@@ -1,19 +1,25 @@
-/* globals module */
+/* globals module require */
 
 'use strict';
+
+const encryptor = require('../utils/encryptor');
 
 module.exports = (models) => {
     var UserModel = models.UserModel;
 
     return {
-        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture){
-            var userObject = {
+        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture) {
+            let salt = encryptor.generateSalt(),
+                passHash = encryptor.generateHashedPassword(salt, password);
+
+            let userObject = {
                 firstName: firstName,
                 lastName: lastName,
                 age: age,
                 gender: gender,
                 username: userName,
-                passHash: password,
+                passHash: passHash,
+                salt: salt,
                 email: email,
                 profilePicture: profilePicture
             };
