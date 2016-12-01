@@ -50,8 +50,6 @@ module.exports = (data) => {
                 gender: req.body.gender
             };
 
-            console.log(user);
-
             data.userCreateAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
                 .then(() => {
                     passport.authenticate('local')(req, res, function () {

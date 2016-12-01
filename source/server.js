@@ -6,6 +6,7 @@ const config = require('./server/config'),
     app = require('./server/config/express'),
     data = require('./server/data');
 
+// connecting to mongoDb, attaching auth and routes
 require('./server/config/mongoose')(config);
 require('./server/config/passport')(app, data);
 require('./server/routers')(app, data);
