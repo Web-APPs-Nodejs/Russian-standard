@@ -11,7 +11,8 @@ const mongoose = require('mongoose'),
 // TODO this is simple validation example, make it to real email validation with regex
 // TODO extract function to other file
 var validateEmail = function (emailString) {
-    var isValidEmail = '' + emailString.includes('@');
+    emailString = '' + emailString;
+    var isValidEmail = emailString.includes('@');
     if(!isValidEmail){
         return false;
     }
@@ -57,5 +58,5 @@ var userModel = function () {
 
     return userModelToReturn;
 };
-
+module.exports.UserSchema = userSchema;
 module.exports.UserModel = userModel();

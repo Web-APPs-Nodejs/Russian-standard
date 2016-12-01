@@ -52,7 +52,7 @@ module.exports = (data) => {
 
             console.log(user);
 
-            data.createAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
+            data.userCreateAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
                 .then(() => {
                     passport.authenticate('local')(req, res, function () {
                         res.redirect('/profile');
