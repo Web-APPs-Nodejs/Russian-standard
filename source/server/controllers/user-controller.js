@@ -12,30 +12,51 @@ require("../config/mongoose.js")(config.connectionStringForLocalTests);
 
 const dataForTest = require('../data');
 
-// var persssiUser = {};
-
-dataForTest.userCreateAndSave('Alex', 'Toplijski', 36, 'gender', 'persssi5', '123456', 'email@email.com', {src: 'source'})
+dataForTest.userCreateAndSave('Alex', 'Toplijski', 36, 'gender', 'persssi6', '123456', 'email@email.com', {src: 'source'})
     .then((res) => {
+        // Create and Save user
+        console.log('------------- User -------------');
         console.log(res);
         return res;
     })
     .then((persssiUser) => {
+        // Create and Save event
         var nowDt = new Date();
-        // var res = dataForTest.eventCreateAndSave('First event title', persssiUser.get('userName'), 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt)
-        var res = dataForTest.eventCreateAndSave('First event title', persssiUser.userName, 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt)
-        res.then((ev)=>{
-            console.log(ev);
-        });
+        var res = dataForTest.eventCreateAndSave('First event title', persssiUser.userName, 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt);
+
         return res;
     })
-    .then((persssiFirstEvent) => {
-        persssiFirstEvent.participatingIn.push(persssiFirstEvent.get('author'));
-        persssiFirstEvent.save(function (error, dbEvent) {
+    .then((dbEvent) => {
+        console.log('------------- Event -------------');
+        console.log(dbEvent);
+
+        // Add participant to event
+        dbEvent.participatingIn.push(dbEvent.get('author'));
+
+        return new Promise((resolve, reject) => {
+            dbEvent.save(function (error, res) {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve(dbEvent);
+            });
+        });
+    })
+    .then((dbEvent) => {
+        // Create and add new comment to event
+        var nowDt = new Date();
+
+        var firstComment = dataForTest.commentCreate(dbEvent.author, 'comment comment.... by me', nowDt, false);
+
+        dbEvent.comments.push(firstComment);
+        dbEvent.save(function (error, res) {
             if(error){
                 console.log(error);
             }
-
-            console.log(dbEvent);
+            console.log('------------- Event + one comment -------------');
+            console.log(res);
+            //return res;
         });
     })
     .catch((err) => {

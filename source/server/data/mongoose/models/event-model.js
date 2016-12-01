@@ -31,13 +31,12 @@ var eventSchema = function () {
     let CommentSchema = commentSchema();
     let eventSchemaToReturn = new Schema({
         title: { type: String, required: true, validate: titleValidation },
-        // author: { type: String, unique: true, required: true },
-        author: { type: String, index: {unique: true, dropDups: true}, required: true },
-
+        author: { type: String, required: true },
+        // author: { type: String, index: {unique: true, dropDups: true}, required: true },
         body: { type: String, required: true },
         date: { type: Date, default: Date.now},
         comments: [CommentSchema],
-        hidden: {type: Boolean, default: false},
+        hidden: {type: Boolean },
         interestedIn: [{type: String}],
         participatingIn: [{type: String}],
         meta: {

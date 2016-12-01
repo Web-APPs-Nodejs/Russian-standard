@@ -47,7 +47,7 @@ module.exports = (models) => {
 
             return Promise.resolve(null);
         },
-        findById(userId) {
+        userFindById(userId) {
             if (userId == testUser._id) {
                 return Promise.resolve(testUser);
             }
