@@ -57,7 +57,7 @@
 
 // // AT test Event.createAndSave end
 // //---------------------------------------
-        
+
 module.exports = (data) => {
     return {
         getLoginPage(req, res) {
@@ -74,6 +74,28 @@ module.exports = (data) => {
         },
         getRegisterPage(req, res) {
             res.render('register-page');
+        },
+        getUpdateInfoPage(req, res) {
+            res.render('update-user-info', { isAuth: req.isAuthenticated(), user: req.user });
+        },
+        updateUserInfo(req, res) {
+            let newData = {};
+
+            Object.keys(req.body)
+                .forEach(key => {
+                    if (req.body[key] && req.body[key].trim() !== '') {
+                        newData[key] = req.body[key];
+                    }
+                });
+
+            data.updateUserInfo(req.user, newData)
+                .then(() => {
+                    res.redirect('/profile');
+                })
+                .catch((err) => {
+                    res.status(400).send('Invalid data passed!');
+                    res.redirect('/update-info', { isAuth: req.isAuthenticated(), user: req.user });
+                });
         }
     };
 };

@@ -10,7 +10,9 @@ module.exports = function (app, data) {
 
     router
         .get('/profile', controllers.getMyProfile)
-        .get('/logout', controllers.logout);
+        .get('/logout', controllers.logout)
+        .get('/update-info', controllers.getUpdateInfoPage)
+        .post('/update-info', controllers.updateUserInfo);
 
     app.use(router);
 };

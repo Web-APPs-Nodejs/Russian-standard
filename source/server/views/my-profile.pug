@@ -3,8 +3,10 @@ extends main-frame.pug
 block content
     .container-fluid
         .row
-            .col-md-9.col-md-offset-1
+            .col-md-10.col-md-offset-1
                 .col-md-3.text-center
                     a.thumbnail
                         img(src= user.profilePicture.src, alt="profile-pic")
                     h2 #{user.username}
+                    a.btn.btn-md.btn-success.btn-block(href="/update-info") Update Info
+                block rightSide

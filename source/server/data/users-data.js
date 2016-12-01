@@ -25,8 +25,8 @@ module.exports = (models) => {
             };
             var user = new UserModel(userObject);
 
-            var promise = new Promise(function (resolve, reject) {
-                user.save(function (error, dbUser) {
+            var promise = new Promise(function(resolve, reject) {
+                user.save(function(error, dbUser) {
                     if (error) {
                         return reject(error);
                     }
@@ -56,6 +56,17 @@ module.exports = (models) => {
                     }
 
                     return resolve(user);
+                });
+            });
+        },
+        updateUserInfo(user, newData) {            
+            return new Promise((resolve, reject) => {
+                UserModel.update({ username: user.username }, newData, (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(res);
                 });
             });
         }
