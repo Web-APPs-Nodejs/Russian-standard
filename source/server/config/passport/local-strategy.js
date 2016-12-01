@@ -9,7 +9,7 @@ let strategy = new LocalStrategy(
     (username, password, done) => {
         data.findUserByCredentials(username)
             .then(user => {
-                if (user && user.password === password) {
+                if (user && user.authenticate(password)) {
                     return done(null, user);
                 }
 

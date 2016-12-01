@@ -65,35 +65,45 @@ dataForTest.userCreateAndSave('Alex', 'Toplijski', 36, 'gender', 'persssi6', '12
 
 // AT test User.createAndSave end
 
-//---------------------------------------
-// AT test Event.createAndSave start
-// var nowDt = new Date();
-// dataForTest.eventCreateAndSave('First event title', persssiUser.username, 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt)
-//     .then((res) => {
-//         console.log(res);
-//
-//     }).catch((err) => {
-//         console.log(err);
-//     });
-
-// AT test Event.createAndSave end
-//---------------------------------------
 
 module.exports = (data) => {
     return {
-        // TODO only copy paste made by AT
-        addComment(req, res) {
+        getLoginPage(req, res) {
+            res.render('login-page', { isAuth: req.isAuthenticated() });
+        },
+        getMyProfile(req, res) {
             if (req.isAuthenticated()) {
-                res.render('events/eventId', { isAuth: req.isAuthenticated(), user: req.user });
+                res.render('my-profile', { isAuth: req.isAuthenticated(), user: req.user });
                 return;
             }
 
             res.render('login-page', { isAuth: req.isAuthenticated() });
 
         },
-        logout(req, res) {
-            req.logout();
-            res.redirect('/home');
+        getRegisterPage(req, res) {
+            res.render('register-page');
+        },
+        getUpdateInfoPage(req, res) {
+            res.render('update-user-info', { isAuth: req.isAuthenticated(), user: req.user });
+        },
+        updateUserInfo(req, res) {
+            let newData = {};
+
+            Object.keys(req.body)
+                .forEach(key => {
+                    if (req.body[key] && req.body[key].trim() !== '') {
+                        newData[key] = req.body[key];
+                    }
+                });
+
+            data.updateUserInfo(req.user, newData)
+                .then(() => {
+                    res.redirect('/profile');
+                })
+                .catch((err) => {
+                    res.status(400).send('Invalid data passed!');
+                    res.redirect('/update-info', { isAuth: req.isAuthenticated(), user: req.user });
+                });
         }
     };
 };

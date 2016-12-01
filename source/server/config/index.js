@@ -1,9 +1,13 @@
-/* globals module */
+/* globals module process */
 
 // Connect from terminal --> 'mongo ds163667.mlab.com:63667/extreme-sports -u team-russian-standard -p maskarada' (without the quotes)
-// connectionStringForLocalTests add for resting purpose in local environment
+
+let connectionString = {
+    production: 'mongodb://team-russian-standard:maskarada@ds163667.mlab.com:63667/extreme-sports',
+    development: 'mongodb://localhost/extreme-sports'
+};
+
 module.exports = {
-    port: 3001,
-    connectionString: 'mongodb://team-russian-standard:maskarada@ds163667.mlab.com:63667/extreme-sports',
-    connectionStringForLocalTests: "mongodb://localhost/extreme-sports"
+    port: process.env.PORT || 3001,
+    connectionString: connectionString[process.env.NODE_ENV || 'development']
 };

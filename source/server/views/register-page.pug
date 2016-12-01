@@ -1,0 +1,29 @@
+extends main-frame.pug
+
+block content
+    .container-fluid
+        .row
+            .col-md-4.col-md-offset-4.text-center
+                form.form-signin(action="/register" method="post")
+                    h2.form-signin-heading Register
+                    br  
+                    label.sr-only(for='username') Username
+                    input.form-control(type='text', placeholder='Username', name="username" required='', autofocus='')
+                    label.sr-only(for='password') Password  
+                    input#inputPassword.form-control(type='password', name="password" placeholder='Password', required='')
+                    label.sr-only(for='password') Repeat password  
+                    input#inputPassword.form-control(type='password', name="con-password" placeholder='Confirm Password', required='')
+                    label.sr-only(for='username') First Name
+                    input.form-control(type='text', placeholder='First Name', name="firstName" required='', autofocus='')
+                    label.sr-only(for='username') Last Name
+                    input.form-control(type='text', placeholder='Last Name', name="lastName" required='', autofocus='')
+                    label.sr-only(for='username') Age
+                    input.form-control(type='text', placeholder='Age', name="age" required='true', autofocus='')                    
+                    label.sr-only(for='username') Gender
+                    input.form-control(type='text', placeholder='Gender', name="gender" required='true', autofocus='')
+                    label.sr-only(for='username') E-Mail
+                    input.form-control(type='email', placeholder='E-Mail', name="email" required='true', autofocus='')
+                    label.sr-only(for='username') Avatar Url
+                    input.form-control(type='text', placeholder='Avatar Url', name="avatar" required='true', autofocus='')
+                    br 
+                    button.btn.btn-md.btn-success.btn-block(type='submit') Register & Login

@@ -1,58 +1,74 @@
-/* globals module */
+/* globals module require */
 
 'use strict';
 
-var testUser = {
-    username: 'test',
-    password: 'test',
-    role: 'admin',
-    _id: 1,
-    avatar: 'https://sap-certification.info/img/default-avatar.jpg'
-};
+const encryptor = require('../utils/encryptor');
 
 module.exports = (models) => {
     var UserModel = models.UserModel;
 
     return {
-        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture){
+        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture) {
+            let salt = encryptor.generateSalt(),
+                passHash = encryptor.generateHashedPassword(salt, password);
 
-            var userObject = {
+            let userObject = {
                 firstName: firstName,
                 lastName: lastName,
                 age: age,
                 gender: gender,
-                userName: userName,
-                passHash: password,
+                username: userName,
+                passHash: passHash,
+                salt: salt,
                 email: email,
-                ProfilePicture: profilePicture
+                profilePicture: profilePicture
             };
             var user = new UserModel(userObject);
 
-            var promise = new Promise(function (resolve, reject) {
-                user.save(function (error, dbUser) {
-                    if(error){
+            var promise = new Promise(function(resolve, reject) {
+                user.save(function(error, dbUser) {
+                    if (error) {
                         return reject(error);
                     }
 
                     return resolve(dbUser);
-                })
+                });
             });
 
             return promise;
         },
         findUserByCredentials(username) {
-            if (username === testUser.username) {
-                return Promise.resolve(testUser);
-            }
+            return new Promise((resolve, reject) => {
+                UserModel.findOne({ username: username }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
 
-            return Promise.resolve(null);
+                    return resolve(user);
+                });
+            });
         },
-        userFindById(userId) {
-            if (userId == testUser._id) {
-                return Promise.resolve(testUser);
-            }
+        findUserById(userId) {
+            return new Promise((resolve, reject) => {
+                UserModel.findOne({ _id: userId }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
 
-            return Promise.resolve(null);
+                    return resolve(user);
+                });
+            });
+        },
+        updateUserInfo(user, newData) {            
+            return new Promise((resolve, reject) => {
+                UserModel.update({ username: user.username }, newData, (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(res);
+                });
+            });
         }
     };
 };
