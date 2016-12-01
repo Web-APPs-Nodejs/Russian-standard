@@ -31,15 +31,15 @@ var userSchema = function () {
         lastName: String,
         age: { type: Number, required: true },
         gender: String,
-        userName: { type: String, unique: true, required: true },
+        username: { type: String, unique: true, required: true },
         passHash: String,
         email: {type: String, validate: emailValidation },
-        ProfilePicture: ProfilePictureSchema
+        profilePicture: ProfilePictureSchema
     });
 
     userSchemaToReturn.method({
         authenticate: function(password) {
-            if (password === user.PassHash) {
+            if (password === this.PassHash) {
                 return true;
             }
             else {
@@ -48,7 +48,7 @@ var userSchema = function () {
         }
     });
 
-    return userSchemaToReturn
+    return userSchemaToReturn;
 };
 
 var userModel = function () {

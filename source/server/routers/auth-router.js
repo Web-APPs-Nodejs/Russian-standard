@@ -8,8 +8,11 @@ module.exports = function (app, data) {
     let router = new express.Router(),
         controllers = require('../controllers')(data);
 
-    router.get('/login', controllers.getLoginPage);
-    router.post('/login', controllers.login);
+    router
+        .get('/login', controllers.getLoginPage)
+        .post('/login', controllers.login)
+        .get('/register', controllers.getRegisterPage)
+        .post('/register', controllers.register);
 
     app.use(router);
 };

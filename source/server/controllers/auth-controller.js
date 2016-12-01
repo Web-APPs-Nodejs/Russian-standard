@@ -6,9 +6,6 @@ const passport = require('passport');
 
 module.exports = (data) => {
     return {
-        getLoginPage(req, res) {
-            res.render('login-page', { isAuth: req.isAuthenticated() });
-        },
         login(req, res, next) {
             passport.authenticate('local', function (error, user) {
                 if (error) {
@@ -33,5 +30,37 @@ module.exports = (data) => {
                 });
             })(req, res, next);
         },
+
+        logout(req, res) {
+            req.logout();
+            res.redirect('/home');
+        },
+
+        register(req, res) {
+            let user = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email,
+                age: req.body.age,
+                profilePicture: {
+                    src: req.body.avatar
+                },
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                gender: req.body.gender
+            };
+
+            console.log(user);
+
+            data.createAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
+                .then(() => {
+                    passport.authenticate('local')(req, res, function () {
+                        res.redirect('/profile');
+                    });
+                })
+                .catch((err) => {
+                    res.redirect('/register', { message: err });
+                });
+        }
     };
 };
