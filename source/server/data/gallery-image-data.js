@@ -28,6 +28,7 @@ module.exports = (models) => {
 
                 image.save((err, res) => {
                     if (err) {
+                        console.log(err);
                         return reject(err);
                     }
 
