@@ -15,7 +15,7 @@ block content
                                 img(src='res/images/Nav/signin.PNG' height=30)
                             li
                                 label.sr-only(for='username') Username
-                                input#username-login.form-control(type='text', placeholder='Username', name="username" required='true', autofocus='')
+                                input#username-login.form-control(type='text', placeholder='Username', name="username" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Username'")
 
                     div.form-group
                         ul.signinLi
@@ -23,8 +23,8 @@ block content
                                 img(src='res/images/Nav/pass.PNG' height=30)
                             li
                                 label.sr-only(for='password') Password
-                                input#password-login.form-control(type='password', name="password" placeholder='Password', required='')
-                    br
-                    button.btn.signin(type='submit' onclick="return false;") Sign in
+                                input#password-login.form-control(type='password', name="password" placeholder='Password', onfocus="this.placeholder = ''" onblur="this.placeholder ='Password'")
+                            br
+                    button.btn.signin(type='submit' onclick="return false") Sign in
 
     div.freeSpace
