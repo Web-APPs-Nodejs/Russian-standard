@@ -40,7 +40,10 @@ body
                     li
                         a(href="/profile") Profile
                     li
-                        a(href="/logout") Logout
+                        a#btn-logout(href="/logout") Logout
            
 #content.container-full
     block content           
+                    
+script(src="/res/js/requester.js")
+script(src="/res/js/users/user-auth.js")

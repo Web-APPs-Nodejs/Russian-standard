@@ -12,7 +12,8 @@ module.exports = function (app, data) {
         .get('/login', controllers.getLoginPage)
         .post('/login', controllers.login)
         .get('/register', controllers.getRegisterPage)
-        .post('/register', controllers.register);
+        .post('/register', controllers.register)        
+        .get('/logout', controllers.logout);
 
     app.use(router);
 };

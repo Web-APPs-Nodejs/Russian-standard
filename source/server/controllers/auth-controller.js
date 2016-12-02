@@ -12,7 +12,7 @@ module.exports = (data) => {
             passport.authenticate('local', function (error, user) {
                 if (error) {
                     next(error);
-                    return;
+                    return res.status(500).json('Server error! Please try again!');
                 }
 
                 if (!user) {
@@ -22,7 +22,7 @@ module.exports = (data) => {
                 req.login(user, error => {
                     if (error) {
                         next(error);
-                        return;
+                        return res.status(500).json('Server error! Please try again!');
                     }
 
                     res.status(200).json('Login successful!');

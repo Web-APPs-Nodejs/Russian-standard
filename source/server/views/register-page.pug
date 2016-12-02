@@ -8,22 +8,22 @@ block content
                     h2.form-signin-heading Register
                     br  
                     label.sr-only(for='username') Username
-                    input.form-control(type='text', placeholder='Username', name="username" required='', autofocus='')
+                    input#username-register.form-control(type='text', placeholder='Username', name="username" required='', autofocus='')
                     label.sr-only(for='password') Password  
-                    input#inputPassword.form-control(type='password', name="password" placeholder='Password', required='')
+                    input#password-register.form-control(type='password', name="password" placeholder='Password', required='')
                     label.sr-only(for='password') Repeat password  
-                    input#inputPassword.form-control(type='password', name="con-password" placeholder='Confirm Password', required='')
+                    input#reenter-password-register.form-control(type='password', name="con-password" placeholder='Confirm Password', required='')
                     label.sr-only(for='username') First Name
-                    input.form-control(type='text', placeholder='First Name', name="firstName" required='', autofocus='')
+                    input#first-name-register.form-control(type='text', placeholder='First Name', name="firstName" required='', autofocus='')
                     label.sr-only(for='username') Last Name
-                    input.form-control(type='text', placeholder='Last Name', name="lastName" required='', autofocus='')
+                    input#last-name-register.form-control(type='text', placeholder='Last Name', name="lastName" required='', autofocus='')
                     label.sr-only(for='username') Age
-                    input.form-control(type='text', placeholder='Age', name="age" required='true', autofocus='')                    
+                    input#age-register.form-control(type='text', placeholder='Age', name="age" required='true', autofocus='')                    
                     label.sr-only(for='username') Gender
-                    input.form-control(type='text', placeholder='Gender', name="gender" required='true', autofocus='')
+                    input#gender-register.form-control(type='text', placeholder='Gender', name="gender" required='true', autofocus='')
                     label.sr-only(for='username') E-Mail
-                    input.form-control(type='email', placeholder='E-Mail', name="email" required='true', autofocus='')
+                    input#email-register.form-control(type='email', placeholder='E-Mail', name="email" required='true', autofocus='')
                     label.sr-only(for='username') Avatar Url
-                    input.form-control(type='text', placeholder='Avatar Url', name="avatar" required='true', autofocus='')
+                    input#avatar-register.form-control(type='text', placeholder='Avatar Url', name="avatar" required='true', autofocus='')
                     br 
-                    button.btn.btn-md.btn-success.btn-block(type='submit') Register & Login
+                    button#btn-register.btn.btn-md.btn-success.btn-block(type='submit' onclick="return false") Register & Login
