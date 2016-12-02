@@ -18,18 +18,44 @@ module.exports = (models) => {
                 date: date,
                 hidden: hidden
             };
+            console.log('eventCreateAndSave' + JSON.stringify(eventObject));
             var event = new EventModel(eventObject);
 
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
                     if(error){
                         return reject(error);
+                        console.log('eventCreateAndSave-err - error');
                     }
-
+                    console.log('eventCreateAndSave-ok' + dbEvent);
                     return resolve(dbEvent);
                 })
             });
         },
+
+        getSkiEvents(){
+            return new Promise(function (resolve, reject) {
+                EventModel.find(function (error, events) {
+                    if(error){
+                        return reject(error);
+                    }
+                    return resolve(events);
+                })
+            });
+        },
+
+        // getAllSuperheroes() {
+        //     return new Promise((resolve, reject) => {
+        //         Superhero.find((err, superheroes) => {
+        //             if (err) {
+        //                 return reject(err);
+        //             }
+        //
+        //             return resolve(superheroes);
+        //         });
+        //     });
+        // },
+
         eventFindById(eventId) {
             // TODO this is for tests only, edit and refactor later
             var dbUser = {

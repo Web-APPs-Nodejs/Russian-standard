@@ -50,15 +50,24 @@ module.exports = (data) => {
                 gender: req.body.gender
             };
 
+            console.log('register');
+
             data.userCreateAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
-                .then(() => {
+                .then((res) => {
                     passport.authenticate('local')(req, res, function () {
+                        console.log('register'+res);
                         res.redirect('/profile');
                     });
                 })
                 .catch((err) => {
-                    res.redirect('/register', { message: err });
+                    console.log('register'+err);
+                    res.redirect('/register');
                 });
+        },
+
+        notAuthorised(req, res) {
+            res.render('auth-not-authorised-page');
         }
+
     };
 };

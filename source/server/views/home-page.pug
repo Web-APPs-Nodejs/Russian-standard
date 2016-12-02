@@ -1,5 +1,25 @@
 extends main-frame.pug
 
 block content
+
     .banner
-        img(src="/res/images/all-main.jpg", alt="extreme-sports")
+    //img(src="/res/images/all-main.jpg", alt="extreme-sports")
+    p.banner-extra-styles Hey man, do a can-can, or fly like Superman, if you can... do things like Batman, put an event an try beat them . Have a go at a no... hander.  Perhaps a spin, whip or clicker will satisfy... Or, nail a rail on your tail... A new vocabulary to describe a new eXtreme variation of the venerable sport of ski, biking, and snowboarding. Chanlange yourself and other friends, or other mates. It's a new style, a new sensation, that's destined to add a fresh dimension to the sport.
+
+    // Declaration
+    mixin link(href, name)
+        //- attributes == {class: "btn"}
+        .main-button-wrapper
+            //<a class="btn btn-default" href="#" role="button">Link</a>
+            a(class!=attributes.class href=href)= name
+
+    mixin home-page-picture(title, imgSrc, href)
+        .home-page-picture
+            img(src=imgSrc, height=150, alt="extreme-sports-" + title)
+            +link(href, title)(class="btn btn-default" role="button")
+
+    //Use
+    .main-container-wrapper
+        +home-page-picture('Ski', '/res/images/ski-main.jpg', '/categories/ski')
+        +home-page-picture('Bike', '/res/images/bike-main.jpg', '/categories/bike')
+        +home-page-picture('Snowboard', '/res/images/snowboard-main.jpg', '/categories/board')
