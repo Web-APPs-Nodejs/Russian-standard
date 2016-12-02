@@ -8,7 +8,7 @@ module.exports = (models) => {
     var UserModel = models.UserModel;
 
     return {
-        userCreateAndSave(firstName, lastName, age, gender, userName, password, email, profilePicture) {
+        userCreateAndSave(firstName, lastName, age, gender, username, password, email, profilePicture) {
             let salt = encryptor.generateSalt(),
                 passHash = encryptor.generateHashedPassword(salt, password);
 
@@ -17,7 +17,7 @@ module.exports = (models) => {
                 lastName: lastName,
                 age: age,
                 gender: gender,
-                userName: userName,
+                username: username,
                 passHash: passHash,
                 salt: salt,
                 email: email,

@@ -6,10 +6,12 @@ head
     
     link(href="/res/css/bootstrap.css", rel="stylesheet")
     link(rel="stylesheet", href="/res/css/main.css")
+    link(rel="stylesheet", href="/res/css/toastr.css")
     block styles
             
-    script(src="/res/js/jquery.js")
-    script(src="/res/js/bootstrap.js")
+    script(src="/res/lib/jquery.js")
+    script(src="/res/lib/bootstrap.js")
+    script(src="/res/lib/toastr.js")
     block scripts
     
 body
@@ -29,7 +31,7 @@ body
                 li
                     a(href="/gallery") Gallery
             ul.nav.navbar-nav.navbar-right
-                if !isAuth
+                if !user
                     li
                         a(href="/login") Login
                     li
@@ -38,7 +40,10 @@ body
                     li
                         a(href="/profile") Profile
                     li
-                        a(href="/logout") Logout
+                        a#btn-logout(href="/logout") Logout
            
 #content.container-full
     block content           
+                    
+script(src="/res/js/requester.js")
+script(src="/res/js/users/user-auth.js")

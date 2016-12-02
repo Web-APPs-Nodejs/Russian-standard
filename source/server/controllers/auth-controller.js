@@ -2,7 +2,9 @@
 
 'use strict';
 
-const passport = require('passport');
+const passport = require('passport'),
+    characterEscaper = require('../utils/character-escaper');
+
 
 module.exports = (data) => {
     return {
@@ -10,23 +12,20 @@ module.exports = (data) => {
             passport.authenticate('local', function (error, user) {
                 if (error) {
                     next(error);
-                    return;
+                    return res.status(500).json('Server error! Please try again!');
                 }
 
                 if (!user) {
-                    res.json({
-                        success: false,
-                        message: 'Invalid name or password!'
-                    });
+                    res.status(401).json('Invalid username or password!');
                 }
 
                 req.login(user, error => {
                     if (error) {
                         next(error);
-                        return;
+                        return res.status(500).json('Server error! Please try again!');
                     }
 
-                    res.redirect('/profile');
+                    res.status(200).json('Login successful!');
                 });
             })(req, res, next);
         },
@@ -37,31 +36,19 @@ module.exports = (data) => {
         },
 
         register(req, res) {
-            let user = {
-                username: req.body.username,
-                password: req.body.password,
-                email: req.body.email,
-                age: req.body.age,
-                profilePicture: {
-                    src: req.body.avatar
-                },
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                gender: req.body.gender
-            };
+            Object.keys(req.body)
+                .forEach(key => req.body[key] = characterEscaper(req.body[key]));
 
-            console.log('register');
-
-            data.userCreateAndSave(user.firstName, user.lastName, user.age, user.gender, user.username, user.password, user.email, user.profilePicture)
-                .then((res) => {
+            data.userCreateAndSave(req.body.firstName, req.body.lastName, req.body.age, req.body.gender, req.body.username, req.body.password, req.body.email, { src: req.body.avatar })
+                .then(() => {
                     passport.authenticate('local')(req, res, function () {
-                        console.log('register'+res);
                         res.redirect('/profile');
                     });
                 })
                 .catch((err) => {
-                    console.log('register'+err);
                     res.redirect('/register');
+                    res.status(400).send(err);
+                    res.redirect('/register', { message: err });
                 });
         },
 
