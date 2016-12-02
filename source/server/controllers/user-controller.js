@@ -3,67 +3,67 @@
 'use strict';
 
 const passport = require('passport');
-//---------------------------------------
-// AT test User.createAndSave start
-const mongoose = require("mongoose"),
-    config = require('../config');
-// require("../config/mongoose.js")(config.connectionString);
-require("../config/mongoose.js")(config.connectionStringForLocalTests);
+// //---------------------------------------
+// // AT test User.createAndSave start
+// const mongoose = require("mongoose"),
+//     config = require('../config');
+// // require("../config/mongoose.js")(config.connectionString);
+// require("../config/mongoose.js")(config.connectionStringForLocalTests);
 
-const dataForTest = require('../data');
+// const dataForTest = require('../data');
 
-dataForTest.userCreateAndSave('Alex', 'Toplijski', 36, 'gender', 'persssi6', '123456', 'email@email.com', {src: 'source'})
-    .then((res) => {
-        // Create and Save user
-        console.log('------------- User -------------');
-        console.log(res);
-        return res;
-    })
-    .then((persssiUser) => {
-        // Create and Save event
-        var nowDt = new Date();
-        var res = dataForTest.eventCreateAndSave('First event title', persssiUser.userName, 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt);
+// dataForTest.userCreateAndSave('Alex', 'Toplijski', 36, 'gender', 'persssi6', '123456', 'email@email.com', {src: 'source'})
+//     .then((res) => {
+//         // Create and Save user
+//         console.log('------------- User -------------');
+//         console.log(res);
+//         return res;
+//     })
+//     .then((persssiUser) => {
+//         // Create and Save event
+//         var nowDt = new Date();
+//         var res = dataForTest.eventCreateAndSave('First event title', persssiUser.userName, 'this si th body text, this si th body text, this si th body text, this si th body text', nowDt);
 
-        return res;
-    })
-    .then((dbEvent) => {
-        console.log('------------- Event -------------');
-        console.log(dbEvent);
+//         return res;
+//     })
+//     .then((dbEvent) => {
+//         console.log('------------- Event -------------');
+//         console.log(dbEvent);
 
-        // Add participant to event
-        dbEvent.participatingIn.push(dbEvent.get('author'));
+//         // Add participant to event
+//         dbEvent.participatingIn.push(dbEvent.get('author'));
 
-        return new Promise((resolve, reject) => {
-            dbEvent.save(function (error, res) {
-                if (error) {
-                    return reject(error);
-                }
+//         return new Promise((resolve, reject) => {
+//             dbEvent.save(function (error, res) {
+//                 if (error) {
+//                     return reject(error);
+//                 }
 
-                return resolve(dbEvent);
-            });
-        });
-    })
-    .then((dbEvent) => {
-        // Create and add new comment to event
-        var nowDt = new Date();
+//                 return resolve(dbEvent);
+//             });
+//         });
+//     })
+//     .then((dbEvent) => {
+//         // Create and add new comment to event
+//         var nowDt = new Date();
 
-        var firstComment = dataForTest.commentCreate(dbEvent.author, 'comment comment.... by me', nowDt, false);
+//         var firstComment = dataForTest.commentCreate(dbEvent.author, 'comment comment.... by me', nowDt, false);
 
-        dbEvent.comments.push(firstComment);
-        dbEvent.save(function (error, res) {
-            if(error){
-                console.log(error);
-            }
-            console.log('------------- Event + one comment -------------');
-            console.log(res);
-            //return res;
-        });
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+//         dbEvent.comments.push(firstComment);
+//         dbEvent.save(function (error, res) {
+//             if(error){
+//                 console.log(error);
+//             }
+//             console.log('------------- Event + one comment -------------');
+//             console.log(res);
+//             //return res;
+//         });
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
 
-// AT test User.createAndSave end
+// // AT test User.createAndSave end
 
 
 module.exports = (data) => {
@@ -101,7 +101,7 @@ module.exports = (data) => {
                     res.redirect('/profile');
                 })
                 .catch((err) => {
-                    res.status(400).send('Invalid data passed!');
+                    res.status(400).send(err);
                     res.redirect('/update-info', { isAuth: req.isAuthenticated(), user: req.user });
                 });
         }
