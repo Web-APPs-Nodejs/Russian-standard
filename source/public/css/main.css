@@ -32,7 +32,7 @@ body {
     width: 70%;
     padding: 5px 10px 3px 10px;
     background-color: white;
-    border: 1px solid darkgray;
+    /*border: 1px solid darkgray;*/
 }
 
 .home-page-picture{
@@ -42,7 +42,7 @@ body {
     height: 80%;
     margin: 10px 5px 10px 5px;
     padding: 10px 5px 10px 5px;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
 }
 
 .home-page-picture img{
@@ -50,9 +50,94 @@ body {
     /*height: 80%;*/
     width: 280px;
     height: 200px;
-    border: 1px solid blue;
+    margin-left: 220px;
+    border-top: 5px solid #FF8000;
 }
 .main-button-wrapper{
-    margin: 5px;
-    padding: 0px;
+    margin: 20px;
+    padding: 0;
+    margin-left: 330px;
+}
+.btn.ssb{
+    margin-top: -80px;
+    color: white;
+    background-color: #FF8000;
+
+}
+.topFloat{
+    top: 50px;
+}
+.logo{
+    background-color: black;
+    height: 15px;
+}
+.logo img{
+    margin-top: 5px;
+    margin-left: 140px;
+}
+.bannerImg{
+    background-color: black;
+
+}
+img.snowImg{
+    /*margin-left: 70px;
+    height: 700px;*/
+}
+.icons {
+    margin-left: 400px;
+}
+.icons li a{
+   /* width: 350px; */
+}
+.icons a img{
+    margin-bottom: 5px;
+}
+.navColor{
+    /*background-color: rgba(92, 165, 255, 0.3);*/
+    background-color: #1E74FF;
+}
+/*.navColor .navbar-header{
+    margin-right: 80px;
+}*/
+.icons li{
+
+}
+.pointer{
+    cursor: pointer;
+}
+.search{
+    margin-top: 10px;
+    height: 3px;
+}
+.searchNav{
+    margin-left: 400px;
+}
+
+.home{
+    margin-top: 10px;
+    margin-left: 30px;
+
+}
+.navigation{
+    margin-left: 30px;
+}
+#search-bar.form-control.search{
+    height: 25px;
+    margin-bottom: 10px;
+}
+footer {
+
+    background-color: #1E74FF;
+}
+.footer{
+    text-align: center;
+    color: white;
+}
+.seconFooter ul{
+    margin-left: 400px;
+}
+.seconFooter button{
+    color: white;
+    background-color: #FF8000;
+
 }
