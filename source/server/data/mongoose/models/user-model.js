@@ -32,7 +32,7 @@ var userSchema = function () {
         lastName: String,
         age: { type: Number, required: true },
         gender: String,
-        userName: { type: String, unique: true, required: true },
+        username: { type: String, unique: true, required: true },
         passHash: String,
         salt: String,
         email: { type: String, validate: emailValidation },
