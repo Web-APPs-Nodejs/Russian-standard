@@ -70,7 +70,6 @@
             .then(() => {
                 toastr.success('Registration successful! Redirecting...');
                 setTimeout(() => { window.location = '/'; }, 1500);
-
             })
             .catch((err) => {
                 if (err.responseJSON.code === 11000) {

@@ -54,6 +54,7 @@ body {
     border-top: 5px solid #FF8000;
 }
 .main-button-wrapper{
+<<<<<<< HEAD
     margin: 20px;
     padding: 0;
     margin-left: 330px;
@@ -140,4 +141,54 @@ footer {
     color: white;
     background-color: #FF8000;
 
+=======
+    margin: 5px;
+    padding: 0px;
+}
+
+.image-gallery {
+    max-width: 200px;
+}
+
+.heading-gallery {
+    margin-top: -2em;
+    margin-bottom: 1em;
+    border-bottom: solid grey 1px;
+}
+
+.home-page-picture{
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    height: 80%;
+    margin: 10px 5px 10px 5px;
+    padding: 10px 5px 10px 5px;
+    border: 1px solid blue;
+}
+
+.home-page-picture img{
+    /*width: 80%;*/
+    /*height: 80%;*/
+    width: 280px;
+    height: 200px;
+    border: 1px solid blue;
+}
+.main-button-wrapper{
+    margin: 5px;
+    padding: 0px;
+}
+
+.image-gallery {
+    max-width: 200px;
+}
+
+.heading-gallery {
+    margin-top: -2em;
+    margin-bottom: 1em;
+    border-bottom: solid grey 1px;
+}
+
+#btn-add-gallery-photo {
+    width: 16em;
+>>>>>>> 2cc7150adf8916ab2820e104c7e72104b5676903
 }
