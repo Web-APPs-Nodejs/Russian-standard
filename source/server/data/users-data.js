@@ -17,7 +17,7 @@ module.exports = (models) => {
                 lastName: lastName,
                 age: age,
                 gender: gender,
-                username: userName,
+                userName: userName,
                 passHash: passHash,
                 salt: salt,
                 email: email,
