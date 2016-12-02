@@ -36,7 +36,11 @@ var userSchema = function () {
         passHash: String,
         salt: String,
         email: { type: String, validate: emailValidation },
-        profilePicture: ProfilePictureSchema
+        profilePicture: ProfilePictureSchema,
+        role: {
+            type: String,
+            default: 'user'
+        }
     });
 
     userSchemaToReturn.method({

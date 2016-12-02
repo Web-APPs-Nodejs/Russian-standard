@@ -69,22 +69,22 @@ const passport = require('passport');
 module.exports = (data) => {
     return {
         getLoginPage(req, res) {
-            res.render('login-page', { isAuth: req.isAuthenticated() });
+            res.render('users/login-page', { user: req.user });
         },
         getMyProfile(req, res) {
             if (req.isAuthenticated()) {
-                res.render('my-profile', { isAuth: req.isAuthenticated(), user: req.user });
+                res.render('users/my-profile', { user: req.user });
                 return;
             }
 
-            res.render('login-page', { isAuth: req.isAuthenticated() });
+            res.render('users/login-page', { user: req.user });
 
         },
         getRegisterPage(req, res) {
-            res.render('register-page');
+            res.render('users/register-page');
         },
         getUpdateInfoPage(req, res) {
-            res.render('update-user-info', { isAuth: req.isAuthenticated(), user: req.user });
+            res.render('users/update-user-info', { user: req.user });
         },
         updateUserInfo(req, res) {
             let newData = {};
@@ -102,7 +102,7 @@ module.exports = (data) => {
                 })
                 .catch((err) => {
                     res.status(400).send(err);
-                    res.redirect('/update-info', { isAuth: req.isAuthenticated(), user: req.user });
+                    res.redirect('/update-info', { user: req.user });
                 });
         }
     };
