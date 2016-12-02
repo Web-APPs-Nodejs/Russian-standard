@@ -19,7 +19,18 @@ module.exports = (models) => {
                             return reject(err);
                         }
 
-                        return resolve(res);
+                        galleryImage.count((err, count) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            let result = {
+                                photos: res,
+                                count
+                            };
+
+                            return resolve(result);
+                        });
                     });
             });
         },

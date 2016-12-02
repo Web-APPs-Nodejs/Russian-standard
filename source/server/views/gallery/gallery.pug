@@ -25,17 +25,23 @@ block content
                                         #dislike1.glyphicon.glyphicon-thumbs-down
                 .row.text-center
                     ul.pagination
-                        li.disabled
-                            a(href='#') &laquo;
-                        - for(let i = 1; i <= pages; i += 1)
-                            if currentPage === i
-                                li.active
-                                    a(href="/gallery?page=" + i)= i
-                            else
-                                li
-                                    a(href="/gallery?page=" + i)= i
-                        li.active
-                            a(href='#') &raquo;
+                        if page == 1
+                            li.disabled
+                                a() &laquo;
+                        else 
+                            li.active
+                                a(href="/gallery?page=" + (page - 1)) &laquo;
+                        
+                        - for (let i = 1; i <= totalPagesCount; i += 1)
+                            li.active
+                                a(href="/gallery?page=" + i)= i 
+
+                        if page == totalPagesCount
+                            li.disabled
+                                a() &raquo;
+                        else
+                            li.active
+                                a(href="/gallery?page=" + (page + 1)) &raquo;
             else
                 .row.text-center
                     h3 No photos yet...

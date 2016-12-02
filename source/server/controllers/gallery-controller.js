@@ -8,10 +8,13 @@ module.exports = (data) => {
     return {
         getGalleryPage(req, res) {
             const page = +req.query.page || 1;
+            let totalPagesCount;
+            let pageSize = 12;
 
             data.getGalleryImagesByPage(page)
-                .then(galleryImages => {
-                    res.render('gallery/gallery', { galleryImages: galleryImages, user: req.user });
+                .then(photosObj => {
+                    totalPagesCount = Math.ceil(photosObj.count / pageSize);
+                    res.render('gallery/gallery', { galleryImages: photosObj.photos, page, totalPagesCount, user: req.user });
                 })
                 .catch((err) => {
                     res.status(500).send(err);
