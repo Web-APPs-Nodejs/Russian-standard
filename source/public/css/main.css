@@ -6,3 +6,20 @@ body {
     max-width: 100%;
     margin-top: -1.8em;
 }
+
+.gallery-panel {
+}
+
+.image-gallery {
+    max-width: 200px;
+}
+
+.heading-gallery {
+    margin-top: -2em;
+    margin-bottom: 1em;
+    border-bottom: solid grey 1px;
+}
+
+#btn-add-gallery-photo {
+    width: 16em;
+}
