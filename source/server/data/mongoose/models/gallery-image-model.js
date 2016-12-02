@@ -3,6 +3,7 @@
 'use strict';
 
 const mongoose = require('mongoose'),
+    constants = require('../../../common/constants'),
     Schema = mongoose.Schema;
 
 let schema = new Schema({
@@ -20,7 +21,8 @@ let schema = new Schema({
     },
     category: {
         type: String,
-        required: true
+        required: true,
+        enum: constants.categories
     },
     createdOn: {
         type: Date,

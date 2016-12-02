@@ -1,12 +1,11 @@
 /* globals $ requester toastr */
 
 (function() {
-    $('#btn-add-gallery-photo').on('click', () => {
-        
+    $('#btn-add-gallery-photo').on('click', () => {        
         let body = {
             url: $('#add-photo-url').val().trim(),
             title: $('#add-photo-title').val().trim(),
-            category: $('#add-photo-category').val()
+            category: $('#add-photo-category').val().trim()
         };
 
         for(let key in body) {

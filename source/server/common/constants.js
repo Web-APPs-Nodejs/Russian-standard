@@ -1,3 +1,5 @@
 /* globals module */
 
-module.exports = {};
+const categories = ['Ski', 'Snowboard', 'Bike'];
+
+module.exports.categories = categories;

@@ -6,6 +6,23 @@ module.exports = (models) => {
     let galleryImage = models.GalleryImage;
 
     return {
+        getGalleryImagesByPage(page) {
+            page = page || 1;
+            const pageSize = 12;
+
+            return new Promise((resolve, reject) => {
+                galleryImage.find()
+                    .skip((page - 1) * pageSize)
+                    .limit(pageSize)
+                    .exec((err, res) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        return resolve(res);
+                    });
+            });
+        },
         getAllGalleryImages() {
             return new Promise((resolve, reject) => {
                 galleryImage.find((err, res) => {

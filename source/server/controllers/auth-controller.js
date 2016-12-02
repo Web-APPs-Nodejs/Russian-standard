@@ -46,9 +46,15 @@ module.exports = (data) => {
                     });
                 })
                 .catch((err) => {
+                    res.redirect('/register');
                     res.status(400).send(err);
                     res.redirect('/register', { message: err });
                 });
+        },
+
+        notAuthorised(req, res) {
+            res.render('auth-not-authorised-page');
         }
+
     };
 };

@@ -27,17 +27,14 @@ block content
                     ul.pagination
                         li.disabled
                             a(href='#') &laquo;
+                        - for(let i = 1; i <= pages; i += 1)
+                            if currentPage === i
+                                li.active
+                                    a(href="/gallery?page=" + i)= i
+                            else
+                                li
+                                    a(href="/gallery?page=" + i)= i
                         li.active
-                            a(href='#') 1
-                        li
-                            a(href='#') 2
-                        li
-                            a(href='#') 3
-                        li
-                            a(href='#') 4
-                        li
-                            a(href='#') 5
-                        li
                             a(href='#') &raquo;
             else
                 .row.text-center

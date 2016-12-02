@@ -12,8 +12,9 @@ module.exports = function (app, data) {
         .get('/login', controllers.getLoginPage)
         .post('/login', controllers.login)
         .get('/register', controllers.getRegisterPage)
-        .post('/register', controllers.register)        
-        .get('/logout', controllers.logout);
+        .post('/register', controllers.register)
+        .get('/logout', controllers.logout)
+        .get('/not-authorised', controllers.notAuthorised);
 
     app.use(router);
 };

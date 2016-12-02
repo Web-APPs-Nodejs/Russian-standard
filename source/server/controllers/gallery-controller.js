@@ -7,7 +7,9 @@ const characterEscaper = require('../utils/character-escaper');
 module.exports = (data) => {
     return {
         getGalleryPage(req, res) {
-            data.getAllGalleryImages()
+            const page = +req.query.page || 1;
+
+            data.getGalleryImagesByPage(page)
                 .then(galleryImages => {
                     res.render('gallery/gallery', { galleryImages: galleryImages, user: req.user });
                 })
