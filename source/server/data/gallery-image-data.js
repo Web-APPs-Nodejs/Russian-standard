@@ -3,7 +3,7 @@
 'use strict';
 
 module.exports = (models) => {
-    let galleryImage = models.GalleryImage;
+    let GalleryImage = models.GalleryImage;
 
     return {
         getGalleryImagesByPage(page) {
@@ -11,16 +11,16 @@ module.exports = (models) => {
             const pageSize = 12;
 
             return new Promise((resolve, reject) => {
-                galleryImage.find()
+                GalleryImage.find()
                     .skip((page - 1) * pageSize)
-                    .sort({'createdOn': -1})
+                    .sort({ 'createdOn': -1 })
                     .limit(pageSize)
                     .exec((err, res) => {
                         if (err) {
                             return reject(err);
                         }
 
-                        galleryImage.count((err, count) => {
+                        GalleryImage.count((err, count) => {
                             if (err) {
                                 return reject(err);
                             }
@@ -37,7 +37,7 @@ module.exports = (models) => {
         },
         getAllGalleryImages() {
             return new Promise((resolve, reject) => {
-                galleryImage.find((err, res) => {
+                GalleryImage.find((err, res) => {
                     if (err) {
                         return reject(err);
                     }
@@ -48,7 +48,7 @@ module.exports = (models) => {
         },
         addGalleryPhoto(url, title, author, category) {
             return new Promise((resolve, reject) => {
-                let image = new galleryImage({
+                let image = new GalleryImage({
                     url,
                     title,
                     author,
@@ -58,6 +58,17 @@ module.exports = (models) => {
                 image.save((err, res) => {
                     if (err) {
                         console.log(err);
+                        return reject(err);
+                    }
+
+                    return resolve(res);
+                });
+            });
+        },
+        getGalleryPhotoById(id) {
+            return new Promise((resolve, reject) => {
+                GalleryImage.findOne({ _id: id }, (err, res) => {
+                    if (err) {
                         return reject(err);
                     }
 

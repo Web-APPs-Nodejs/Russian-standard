@@ -41,6 +41,19 @@ module.exports = (data) => {
                 .catch(err => {
                     res.status(500).json(err);
                 });
+        },
+        getSinglePhotoPage(req, res) {
+            let imageId = req.params.id;
+
+            data.getGalleryPhotoById(imageId)
+                .then((image) => {
+                    res.render('gallery/single-photo-page', { user: req.user, image });
+                })
+                .catch((err) => {
+                    console.log(err);
+
+                    res.status(404).json('No such item found!');
+                });
         }
     };
 };

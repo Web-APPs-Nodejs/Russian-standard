@@ -11,7 +11,8 @@ module.exports = function (app, data) {
     router
         .get('/gallery', controllers.getGalleryPage)
         .get('/add-photo', controllers.getAddGalleryPhotoPage)
-        .post('/add-photo', controllers.addGalleryPhoto);
+        .post('/add-photo', controllers.addGalleryPhoto)
+        .get('/photo/:id', controllers.getSinglePhotoPage);
 
     app.use(router);
 };

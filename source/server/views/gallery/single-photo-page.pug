@@ -1,0 +1,18 @@
+extends ../main-frame.pug
+
+block content
+    
+    .col-md-10.col-md-offset-1
+        .row.text-center.heading-gallery
+            .row.text-center
+                h1 #{image.title}
+        .row.text-center
+            .row.text-center.thumbnail
+                img(src= image.url, alt= image.title)
+            .row.text-center 
+            | Added by: 
+            a(href="/profile/" + image.author)= image.author
+            br
+            | Created on: #{image.createdOn}
+            br
+            | Category: #{image.category}

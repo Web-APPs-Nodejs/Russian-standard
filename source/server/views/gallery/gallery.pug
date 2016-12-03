@@ -16,7 +16,7 @@ block content
                 .row
                     each image in galleryImages
                         .col-md-3.thumbnail.gallery-panel.text-center
-                            a.zoom(href="#", title= image.title, data-type="image", data-toggle="lightbox")
+                            a.zoom(href="/photo/" + image._id, title= image.title, data-type="image", data-toggle="lightbox")
                                 img.image-gallery(src= image.url, alt= image.title)
                                 a(href='#', title= image.title)= image.title
                                 if user
