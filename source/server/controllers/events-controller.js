@@ -19,7 +19,7 @@ module.exports = (data) => {
             console.log(categoryName);
 
             if (req.isAuthenticated()) {
-                res.render('categories-add-event-page', {
+                res.render('./events/add-event-page', {
                     user: req.user,
                     category: categoryName
                 });
@@ -42,7 +42,7 @@ module.exports = (data) => {
                     .then((events) => {
                         // TODO remove before production :)
                         console.log(events);
-                        res.render('categories-all-page', {
+                        res.render('./events/all-categories-page', {
                             user: req.user,
                             events: events
                         });
@@ -56,7 +56,7 @@ module.exports = (data) => {
                     .then((events) => {
                         // TODO remove before production :)
                         //console.log(events);
-                        res.render('categories-skiing-page', {
+                        res.render('./events/single-category-page', {
                             user: req.user,
                             category: categoryName,
                             events: events
@@ -71,7 +71,7 @@ module.exports = (data) => {
                     .then((event) => {
                         // TODO remove before production :)
                         //console.log(event);
-                        res.render('categories-single-event-page', {
+                        res.render('./events/single-event-page', {
                             user: req.user,
                             category: categoryName,
                             event: event
@@ -136,7 +136,7 @@ module.exports = (data) => {
             //             //     user: req.user
             //             // });
             //             //console.log('thenthen');
-            //             res.render('categories-all-page', {
+            //             res.render('all-categories-page', {
             //                 user: req.user,
             //                 category: categoryName,
             //                 event: event
