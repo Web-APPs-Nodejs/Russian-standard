@@ -21,7 +21,9 @@ block content
                         li
                             div.form-group
                                 label.sr-only(for='username') Gender
-                                input#gender-register.form-control(type='text', placeholder='Gender', name="gender" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Gender'")
+                                select#gender-register.form-control(name="gender" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Gender'")
+                                    option(value="male") male
+                                    option(value="female") female
                         li
                             div.form-group
                                 label.sr-only(for='username') Age
@@ -45,7 +47,7 @@ block content
                         li
                             div.form-group
                                 label.sr-only(for='username') Avatar Url
-                                input#avatar-register.form-control(type='text', placeholder='Avatar Url', name="avatar" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Avatar Url'")
+                                input#avatar-register.form-control(type='text', placeholder='Avatar Url (optional)', name="avatar" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Avatar Url (optional)'")
                             br
                         button#btn-register.btn.register(type='submit' onclick='return false') Sign up
                         

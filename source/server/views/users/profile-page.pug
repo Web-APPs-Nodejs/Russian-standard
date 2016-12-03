@@ -1,64 +1,35 @@
-extends ../main-frame.pug
-
-block styles
-    link(rel="stylesheet", href="/res/css/profile.css")
-
-block content
-    
-    div.freeSpace
-
-    .container-fluid
-        .row
-            .col-md-10.col-md-offset-1
-                .col-md-3.text-center
-                    a.thumbnail
-                        img(src= userData.profilePicture.src, alt="profile-pic")
-                    h2 #{userData.username}
-                    if userData.username != userData.firstName + ' ' + userData.lastName
-                        p #{userData.firstName} #{userData.lastName}
-                    if userData.email && user
-                        p E-Mail: #{userData.email}
-                    if userData.gender
-                        p Gender: #{userData.gender}
-                    if userData.age
-                        p Age: #{userData.age}
-                    if userData.role == 'admin'
-                        p Role: ADMIN
-                    if user.username == userData.username
-                        a.btn.profile(href="/update-info") Update Info
-                .col-md-9
-                    if userData.addedPhotos.length != 0
-                        h2 Photos added by #{userData.username}
-                        table.table.table-stripped.table-hover
-                            thead
-                                th
-                                th Title
-                            each photo in userData.addedPhotos                                
-                                tr
-                                    td.image-thumb
-                                        img(src= photo.url, alt= photo.title)
-                                    td 
-                                        a(href="/photo/" + photo._id)= photo.title
-                    if userData.addedEvents.length != 0
-                        h2 Events added by #{userData.username}
-                        table.table.table-stripped.table-hover
-                            thead
-                                th.image-thumb
-                                th.category-cell Category
-                                th Event
-                                th Date
-                            each event in userData.addedEvents                                
-                                tr
-                                    td.image-thumb
-                                        img(src= event.photo, alt= event.title)
-                                    td.category-cell #{event.category}
-                                    td 
-                                        a(href="/categories/" + event.category + "/" + event._id)= event.title
-                                    td #{event.date}
-                    if userData.addedEvents.length == 0 && userData.addedPhotos.length == 0
-                        .row.text-center
-                            h2 No photos or events uploaded by #{userData.username} yet...
-
-                block rightSide
-
-    div.freeSpace
+extends profile-frame.pug
+               
+block rightSide
+    .col-md-9
+        if userData.addedPhotos.length != 0
+            h2 Photos added by #{userData.username}
+            table.table.table-stripped.table-hover
+                thead
+                    th
+                    th Title
+                each photo in userData.addedPhotos                                
+                    tr
+                        td.image-thumb
+                            img(src= photo.url, alt= photo.title)
+                        td 
+                            a(href="/photo/" + photo._id)= photo.title
+        if userData.addedEvents.length != 0
+            h2 Events added by #{userData.username}
+            table.table.table-stripped.table-hover
+                thead
+                    th.image-thumb
+                    th.category-cell Category
+                    th.link-cell Event
+                    th Date
+                each event in userData.addedEvents                                
+                    tr
+                        td.image-thumb
+                            img(src= event.photo, alt= event.title)
+                        td.category-cell #{event.category}
+                        td.link-cell
+                            a.link-title(href="/categories/" + event.category + "/" + event._id)= event.title
+                        td #{event.date}
+        if userData.addedEvents.length == 0 && userData.addedPhotos.length == 0
+            .row.text-center
+                h2 No photos or events uploaded by #{userData.username} yet...

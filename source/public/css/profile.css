@@ -9,3 +9,11 @@
 .category-cell {
     width: 6em;
 }
+
+.link-title {    
+    text-overflow: ellipsis;
+}
+
+.link-cell {
+    width: 10em;
+}

@@ -1,7 +1,7 @@
-extends ./my-profile.pug
+extends ./profile-frame.pug
 
 block rightSide
-    .col-md-6.text-center
+    .col-md-8.col-md-offset-1.text-center
             h2.form-signin-heading Update Info
             br
             form.form-signin(action="/update-info" method="post")
@@ -21,7 +21,9 @@ block rightSide
                     li
                         div.form-group
                             label.sr-only(for='username') Gender
-                            input.form-control(type='text', placeholder='Gender', name="gender", autofocus='')
+                            select.form-control(name="gender", autofocus='')
+                                option(value="male") male
+                                option(value="female") female
                     li
                         div.form-group
                                 label.sr-only(for='username') E-Mail

@@ -13,7 +13,7 @@ module.exports = (models) => {
                 passHash = encryptor.generateHashedPassword(salt, password);
 
             let _profilePicture = {};
-            if(!profilePicture) {
+            if(!profilePicture.src) {
                 _profilePicture = {
                     src: '/res/images/default-user.png'
                 };
