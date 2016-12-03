@@ -6,10 +6,10 @@
 
 const mongoose = require('mongoose'),
     userSchema = require('./user-model').UserSchema,
+    pictureSchema = require('./picture-model').PictureSchema,
     commentSchema = require('./comment-model').CommentSchema;
 
 
-// TODO this is simple validation example, make it to real email validation with regex
 // TODO extract function to other file
 var validateTitle = function (title) {
     title = '' + title;
@@ -21,21 +21,48 @@ var validateTitle = function (title) {
     return true;
 };
 
+var validateCategory = function (category) {
+    category = '' + category.toLowerCase();
+    var isValidCategory = (category === 'ski' || category === 'bike' || category === 'snowboard');
+    if(!isValidCategory){
+        return false;
+    }
+
+    return true;
+};
+
 var eventSchema = function () {
     var Schema = mongoose.Schema;
 
     //TODO put all validations here
     var titleValidation = [validateTitle, 'Title length is out of range!'];
+    var categoryValidation = [validateCategory, 'Category is not valid!'];
 
     let UserSchema = userSchema();
+    let PictureSchema = pictureSchema();
     let CommentSchema = commentSchema();
+
+    // test: {
+    //     type: String,
+    //         index: true,
+    //         unique: true // Unique index. If you specify `unique: true`
+    //     // specifying `index: true` is optional if you do `unique: true`
+    // }
+
     let eventSchemaToReturn = new Schema({
         title: { type: String, required: true, validate: titleValidation },
-        author: { type: String, required: true },
-        // author: { type: String, index: {unique: true, dropDups: true}, required: true },
+        category: { type: String, required: true, validate: categoryValidation },
+        // pictures: [PictureSchema],
+        pictures: {
+            type: [PictureSchema],
+            index: false,
+            unique: false
+        },
+        //author: UserSchema,
+        author: { type: UserSchema, index: false, unique: false},
         body: { type: String, required: true },
         date: { type: Date, default: Date.now},
-        comments: [CommentSchema],
+        comments: { type: [CommentSchema], index: false, unique: false},
         hidden: {type: Boolean },
         interestedIn: [{type: String}],
         participatingIn: [{type: String}],

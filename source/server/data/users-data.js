@@ -12,6 +12,15 @@ module.exports = (models) => {
             let salt = encryptor.generateSalt(),
                 passHash = encryptor.generateHashedPassword(salt, password);
 
+            let _profilePicture = {};
+            if(!profilePicture) {
+                _profilePicture = {
+                    src: '/res/images/default-user.png'
+                }
+            } else {
+                _profilePicture.src = profilePicture.src;
+            }
+
             let userObject = {
                 firstName: firstName,
                 lastName: lastName,
@@ -21,11 +30,12 @@ module.exports = (models) => {
                 passHash: passHash,
                 salt: salt,
                 email: email,
-                profilePicture: profilePicture
+                profilePicture: _profilePicture
             };
+            console.log(userObject);
             var user = new UserModel(userObject);
 
-            var promise = new Promise(function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 user.save(function(error, dbUser) {
                     if (error) {
                         return reject(error);
@@ -34,31 +44,38 @@ module.exports = (models) => {
                     return resolve(dbUser);
                 });
             });
-
-            return promise;
         },
+
         findUserByCredentials(username) {
             return new Promise((resolve, reject) => {
-                UserModel.findOne({ username: username }, (err, user) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                UserModel
+                    .findOne()
+                    .where('username').equals(username)
+                    .exec(function (error, user) {
+                        if(error){
+                            return reject(error);
+                        }
 
-                    return resolve(user);
-                });
+                        return resolve(user);
+                    });
             });
         },
+
         findUserById(userId) {
             return new Promise((resolve, reject) => {
-                UserModel.findOne({ _id: userId }, (err, user) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                UserModel
+                    .findOne()
+                    .where('_id').equals(userId)
+                    .exec(function (error, user) {
+                        if(error){
+                            return reject(error);
+                        }
 
-                    return resolve(user);
-                });
+                        return resolve(user);
+                    });
             });
         },
+
         updateUserInfo(user, newData) {            
             return new Promise((resolve, reject) => {
                 UserModel.update({ username: user.username }, newData, (err, res) => {

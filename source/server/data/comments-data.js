@@ -1,18 +1,15 @@
 /**
  * Created by admin on 1.12.2016 г..
  */
-/* globals module */
+/* globals module Promise*/
 
 'use strict';
 
 module.exports = (models) => {
     var CommentModel = models.CommentModel;
-    var EventModel = models.EventModel;
-    // var CommentModel = require('./mongoose/models/comment-model').CommentModel;
 
     return {
         commentCreate(author, body, date, hidden = false){
-
             var commentObject = {
                 author: author,
                 body: body,
@@ -31,27 +28,26 @@ module.exports = (models) => {
                 }
             });
         },
+
+        // TODO do not use this function ;) Check for usage later
         commentCreateAndSave(author, body, date, hidden = false){
-
-            var commentObject = {
-                author: author,
-                body: body,
-                date: date,
-                hidden: hidden ,
-                meta: { like: 0 }
-            };
-            var comment = new CommentModel(commentObject);
-
             return new Promise(function (resolve, reject) {
-                comment.save(function (error, result) {
-                    if(error){
-                        return reject(error);
-                    }
+                commentCreate(author, body, date, hidden)
+                    .then((comment)=>{
+                        comment.save(function (error, result) {
+                            if(error){
+                                return reject(error);
+                            }
 
-                    return resolve(result);
-                })
+                            return resolve(result);
+                        })
+                    })
+                    .catch((error) => {
+                        return reject(error);
+                    });
             });
         },
+
         commentAddToEvent(event, comment) {
             event.comments.push(comment);
 
@@ -65,47 +61,16 @@ module.exports = (models) => {
                 });
             });
         },
+
         commentFindById(commentId) {
-            // TODO this is for tests only, edit and refactor later
-            var dbUser = {
-                firstName: 'Alex',
-                lastName: 'Toplijski',
-                age: 36,
-                gender: 'gender',
-                userName: 'userName101',
-                passHash: '123456',
-                email: 'email@email.com',
-                ProfilePicture: { src: 'source'}
-            };
-            var dbEvent = {
-                _id: e123456789,
-                title: 'test event',
-                author: dbUser.userName,
-                body: 'event body event body event body event body ',
-                date: new Date(),
-                hidden: false
-            };
-            var dbComment = {
-                _id: c123456789,
-                author: dbUser.userName,
-                body: 'comment comment.... by me',
-                date: new Date(),
-                hidden: false
-            };
-
-            if (commentId == dbComment._id) {
-                return Promise.resolve(dbComment);
-            }
-
-            return Promise.resolve(null);
-        },
-        commentGetAll() {
             return new Promise((resolve, reject) => {
-                CommentModel.find((err, comments) => {
-                    if (err) {
-                        return reject(err);
+                CommentModel.find({ _id: commentId }, (error, comment) => {
+                    if (error) {
+                        return reject(error);
                     }
-                    return resolve(comments);
+                    console.log('Single comment in with _id ' + commentId + ' is found.');
+
+                    return resolve(comment);
                 });
             });
         },

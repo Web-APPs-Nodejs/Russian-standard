@@ -24,11 +24,13 @@ body {
     border: 1px solid lightblue;
 }
 
+.ski-event img, a {
+    margin-right: 10px;
+}
+
 .main-container-wrapper {
     display: block;
-    /*text-align: center;*/
     margin: 0;
-    /*padding: 0;*/
     width: 70%;
     padding: 5px 10px 3px 10px;
     background-color: white;
@@ -56,3 +58,41 @@ body {
     margin: 5px;
     padding: 0px;
 }
+
+.single-event-banner{
+    width: 70%;
+    marging: 5px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid darkgray;
+}
+.event-with-detail-draw-wrapper {
+    margin-top: 5px;
+    padding: 5px 10px 3px 10px;
+    width: 70%;
+    background-color: white;
+    border: 1px solid darkslategrey;
+}
+.event-with-detail-draw-wrapper-author {
+    margin: 5px;
+    padding: 5px;
+    border: 0px solid darkslategrey;
+}
+.event-with-detail-draw-wrapper-buttons {
+    text-align: right;
+    margin: 5px;
+    padding: 5px;
+    background-color: gainsboro;
+}
+.event-with-detail-draw-wrapper-event-draw-body {
+    margin: 5px;
+    padding: 5px;
+}
+
+.event-with-detail-comments {
+    text-align: left;
+    width: 70%;
+    margin: 5px;
+    padding: 5px;
+}
+

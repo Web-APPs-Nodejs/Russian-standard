@@ -2,11 +2,12 @@
  * Created by admin on 29.11.2016 г..
  */
 /* globals require module String Number*/
+
 'use strict';
+
 const encryptor = require('../../../utils/encryptor'),
     mongoose = require('mongoose'),
-    profilePictureSchema = require('./profile-picture-model').ProfilePictureSchema;
-
+    pictureSchema = require('./picture-model').PictureSchema;
 
 // TODO this is simple validation example, make it to real email validation with regex
 // TODO extract function to other file
@@ -26,7 +27,7 @@ var userSchema = function () {
     //TODO put all validations here
     var emailValidation = [validateEmail, 'Email {PATH} is not a valid email address.'];
 
-    let ProfilePictureSchema = profilePictureSchema();
+    let PictureSchema = pictureSchema();
     let userSchemaToReturn = new Schema({
         firstName: { type: String, required: true },
         lastName: String,
@@ -36,7 +37,11 @@ var userSchema = function () {
         passHash: String,
         salt: String,
         email: { type: String, validate: emailValidation },
-        profilePicture: ProfilePictureSchema,
+        profilePicture: {
+            type: [PictureSchema],
+            index: false,
+            unique: false
+        },
         role: {
             type: String,
             default: 'user'

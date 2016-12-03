@@ -4,13 +4,15 @@
 /* globals require module String Number Boolean*/
 "use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+    userSchema = require('./user-model').UserSchema;
 
 var commentSchema = function () {
     var Schema = mongoose.Schema;
 
+    let UserSchema = userSchema();
     let commentSchemaToReturn = new Schema({
-        author: { type: String, required: true },
+        author: UserSchema,
         body: { type: String, required: true },
         date: { type: Date, default: Date.now},
         hidden: {type: Boolean },

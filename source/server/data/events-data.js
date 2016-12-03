@@ -1,7 +1,7 @@
 /**
  * Created by admin on 1.12.2016 г..
  */
-/* globals module */
+/* globals module Promise*/
 
 'use strict';
 
@@ -9,80 +9,101 @@ module.exports = (models) => {
     var EventModel = models.EventModel;
 
     return {
-        eventCreateAndSave(title, author, body, date, hidden = false){
+        eventCreateAndSave(title, category, picture, author, body, date, hidden = false){
+
+            var _category = 'ski';
+            if(!category) {
+                _category = category;
+            }
+
+            var _picture = {};
+            if(picture.src == '') {
+                _picture = {
+                    src: '/res/images/default-picture.png'
+                }
+            } else {
+                _picture.src = picture.src;
+            }
 
             var eventObject = {
                 title: title,
+                category: _category,
+                pictures: [_picture],
                 author: author,
                 body: body,
                 date: date,
                 hidden: hidden
             };
-            console.log('eventCreateAndSave' + JSON.stringify(eventObject));
             var event = new EventModel(eventObject);
+            // TODO remove before production :)
+            // console.log('eventCreateAndSave' + JSON.stringify(event));
 
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
                     if(error){
                         return reject(error);
-                        console.log('eventCreateAndSave-err - error');
+
                     }
-                    console.log('eventCreateAndSave-ok' + dbEvent);
+
                     return resolve(dbEvent);
                 })
             });
         },
 
-        getSkiEvents(){
+        getAllEvents(){
             return new Promise(function (resolve, reject) {
-                EventModel.find(function (error, events) {
-                    if(error){
-                        return reject(error);
-                    }
-                    return resolve(events);
-                })
+                EventModel
+                    .find()
+                    .limit(300)
+                    .sort('-date')
+                    .exec(function (error, events) {
+                        if(error){
+                            return reject(error);
+                        }
+                        // TODO remove before production :)
+                        // console.log('All events in all categories are found.');
+
+                        return resolve(events);
+                    });
             });
         },
 
-        // getAllSuperheroes() {
-        //     return new Promise((resolve, reject) => {
-        //         Superhero.find((err, superheroes) => {
-        //             if (err) {
-        //                 return reject(err);
-        //             }
-        //
-        //             return resolve(superheroes);
-        //         });
-        //     });
-        // },
+        getEventByCategoryName(categoryName) {
+            return new Promise((resolve, reject) => {
+                EventModel
+                    .find()
+                    .where('category').equals(categoryName)
+                    .limit(300)
+                    .sort('-date')
+                    .exec(function (error, events) {
+                        if(error){
+                            return reject(error);
+                        }
+                        // TODO remove before production :)
+                        // console.log('All events in ' + categoryName + ' are found.');
 
-        eventFindById(eventId) {
-            // TODO this is for tests only, edit and refactor later
-            var dbUser = {
-                firstName: 'Alex',
-                lastName: 'Toplijski',
-                age: 36,
-                gender: 'gender',
-                userName: 'userName101',
-                passHash: '123456',
-                email: 'email@email.com',
-                ProfilePicture: { src: 'source'}
-            };
-            var dbEvent = {
-                _id: 123456789,
-                title: 'test event',
-                author: dbUser,
-                body: 'this si th body text, this si th body text, this si th body text, this si th body text',
-                date: new Date(),
-                hidden: false
-            };
+                        return resolve(events);
+                    });
+            });
+        },
 
-            if (eventId == dbEvent._id) {
-                return Promise.resolve(dbEvent);
-            }
+        getEventByCategoryAndId(categoryName, eventId) {
+            return new Promise((resolve, reject) => {
+                EventModel
+                    .find()
+                    .where('_id').equals(eventId)
+                    .where('category').equals(categoryName)
+                    .limit(300)
+                    .sort('-date')
+                    .exec(function (error, events) {
+                        if(error){
+                            return reject(error);
+                        }
+                        console.log('All events in ' + categoryName + ' are found.');
 
-
-            return Promise.resolve(null);
+                        return resolve(events);
+                    });
+            });
         }
     };
 };

@@ -10,6 +10,7 @@ module.exports = function (app, data) {
 
     router
         .get('/profile', controllers.getMyProfile)
+        .get('/profile/:username', controllers.getUserProfilePage)
         .get('/update-info', controllers.getUpdateInfoPage)
         .post('/update-info', controllers.updateUserInfo);
 

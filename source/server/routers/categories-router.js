@@ -45,17 +45,14 @@ module.exports = function (app, data) {
     let eventsController = require('../controllers/events-controller')(data);
 
     router
-        .get('/', eventsController.getAllEvents)
-        .get('/ski', eventsController.getSkiEvents)
-        .get('/add-event', eventsController.getCreateSkiEventPage )
-        .post('/add-event/:categoryName', eventsController.createSkiEvent )
+        .get('/', eventsController.getEventsPage)
+        .get('/add-event', eventsController.getCreateEventPage )
+        .get('/add-event/:categoryName', eventsController.getCreateEventPage )
+        .post('/add-event/:categoryName', eventsController.createEvent )
+        .get('/:category', eventsController.getEventsPage)
+        .get('/:category/:id', eventsController.getEventsPage);
+
 
     app.use('/categories',  router);
 
-    // router
-    //     .get("/", controller.getAll)
-    //     .get("/:id", controller.getById)
-    //     .post("/", controller.create);
-    //
-    // app.use("/superheroes", router);
 };

@@ -1,29 +1,38 @@
 extends main-frame.pug
 
 block content
-
-
-    // Declaration
+    //-----------------------------------------------
+    // Declarations start
     mixin link(href, name)
-        //- attributes == {class: "btn"}
         .button-wrapper
-            //<a class="btn btn-default" href="#" role="button">Link</a>
             a(class!=attributes.class href=href)= name
 
     mixin ski-event(event)
+        - var cat = event.category
+        - var id = event._id
+        - var title = event.title
+        - var urlCat = '/categories/' + category
+        - var urlEvent = '/categories/' + category + '/' + id
+        - var src = '/res/images/ski-main.jpg'
         .ski-event
-            - var url = 'categories/ski/' + event._id;
-            - var src = '/res/images/ski-main.jpg'; //event.pictures[0].src
             img(src=src, width=30, height=30, alt="extreme-sports-event-main-picture")
-            a(href='/' + url)= event.title
+            a(href=urlCat)= cat
+            a(href=urlEvent)= title
 
             = '\n'
-    .ski-banner
-        img(src="/res/images/ski-main.jpg", width=300 alt="extreme-sports-ski")
-        span.banner-extra-styles Hey man, do a can-can ski fahren?!
+    //-Declarations end
 
-    +link('/categories/add-event', 'Add event')(class="btn btn-default text-right" role="button")
+    //-----------------------------------------------
+    //-Page content start
+    //p 'logged in user:' + #{user}
+    //= '\n'
 
-    each events in result
-        //h1= events.title
-        +ski-event(events)
+    .ski-banner.banner-extra-styles
+        img.left(src='/res/images/' + category + '-main.jpg', width=300 alt='extreme-sports' + category)
+        span Hey man, do a can-can category fahren?!
+
+    +link('/categories/add-event/' + category, 'Add ' + category + ' event')(class="btn btn-default text-right" role="button")
+
+    each event in events
+        +ski-event(event)
+

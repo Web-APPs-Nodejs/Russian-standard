@@ -1,11 +1,13 @@
 extends ../main-frame.pug
 
 block content
+    h3 logged in user: #{user}
     .container-fluid
         .row
             .col-md-10.col-md-offset-1
                 .col-md-3.text-center
                     a.thumbnail
+                        //- var src = user.profilePicture.src
                         img(src= user.profilePicture.src, alt="profile-pic")
                     h2 #{user.username}
                     a.btn.btn-md.btn-success.btn-block(href="/update-info") Update Info
