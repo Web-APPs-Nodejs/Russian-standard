@@ -22,26 +22,26 @@ body
         .navbar-collapse.collapse
             ul.nav.navbar-nav
                 li
-                    img(src='res/images/Nav/Logo.PNG' height=40 alt="Logo")
+                    img(src='/res/images/Nav/Logo.PNG' height=40 alt="Logo")
                 li
             ul.nav.navbar-nav.pull-right.icons
                 if !user
                     li
                         a(href='/login')
-                            img(src='res/images/Nav/login.PNG' height=30)
+                            img(src='/res/images/Nav/login.PNG' height=30)
                             |  LOGIN
                     li
                         a(href='/register')
-                            img(src='res/images/Nav/register.PNG' height=30)
+                            img(src='/res/images/Nav/register.PNG' height=30)
                             |  REGISTER
                 else
                     li
-                        a(href='/profile')
-                            img(src='res/images/Nav/register.PNG' height=30)
+                        a(href='/profile/' + user.username)
+                            img(src='/res/images/Nav/register.PNG' height=30)
                             |  PROFILE
                     li
                         a(href='/logout')
-                            img(src='res/images/Nav/logout.PNG' height=30)
+                            img(src='/res/images/Nav/logout.PNG' height=30)
                             |  LOGOUT
 
 .navbar.navbar-default.container-fluid.navbar-fixed-top.relative.topFloat.navColor
@@ -49,7 +49,7 @@ body
         .navbar-header
             .brand
                 a(href='/home')
-                    img.home(src='res/images/Nav/Home_.PNG' height=30)
+                    img.home(src='/res/images/Nav/Home_.PNG' height=30)
 
         .collapse.navbar-collapse
             ul.nav.navbar-nav.navigation
@@ -69,7 +69,7 @@ body
                                     input#search-bar.form-control.search(type='text', name="search" placeholder='Search...', onfocus="this.placeholder = ''" onblur="this.placeholder ='Search...'")
                         li
                             a#btn-search.pointer
-                                img(src="res/images/Nav/search_wht.PNG")
+                                img(src="/res/images/Nav/search_wht.PNG")
 
 #content.container-full
     block content

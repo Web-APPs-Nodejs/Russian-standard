@@ -36,7 +36,20 @@ module.exports = (data) => {
 
             data.addGalleryPhoto(req.body.url, req.body.title, req.user.username, req.body.category)
                 .then(success => {
-                    res.status(201).json(success);
+                    let photo = {
+                        url: req.body.url,
+                        title: req.body.title,
+                        _id: success._id
+                    };
+
+                    let query = {
+                        addedPhotos: req.user.addedPhotos || []
+                    };
+
+                    query.addedPhotos.push(photo);
+                    data.updateUserInfo(req.user, query);
+                    
+                    res.status(201).json(success);   
                 })
                 .catch(err => {
                     res.status(500).json(err);

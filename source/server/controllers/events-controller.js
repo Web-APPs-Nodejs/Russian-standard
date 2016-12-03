@@ -91,11 +91,34 @@ module.exports = (data) => {
 
             data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden, req)
                 .then((dbEvent) => {
+<<<<<<< HEAD
                     // res.redirect(201, '/categories/ski');
                     // res.status(400).send(err);
                     // res.redirect('/update-info');
                     res.redirect('/categories/ski');
 
+=======
+                    // updating user info => adding relation to the event he created
+                    let event = {
+                        _id: dbEvent._id,
+                        category: dbEvent.category,
+                        date: dbEvent.date,
+                        photo: dbEvent.pictures[0].src,
+                        title: dbEvent.title
+                    };
+
+                    let query = {
+                        addedEvents: req.user.addedEvents || []
+                    };
+
+                    query.addedEvents.push(event);
+                    data.updateUserInfo(req.user, query);
+
+                    res.render('error-page', {
+                        user: req.user,
+                        error: dbEvent
+                    });
+>>>>>>> f109f357f8c705507da3ecc038f926c883cdd1e3
                 })
                 .catch((error) => {
                     var statusCode = 400;
@@ -159,5 +182,5 @@ module.exports = (data) => {
             //res.render('auth-not-authorised-page');
 
         }
-    }
+    };
 };

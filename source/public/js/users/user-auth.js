@@ -16,7 +16,7 @@
             })
             .catch((err) => {
                 toastr.error(err.responseText);
-                $('#username-login').val('');
+                $('#username-login').val();
                 $('#password-login').val('');
             });
     });
@@ -38,31 +38,50 @@
             toastr.error('Please fill out all of the fields!');
             return;
         }
-
+        
         for (let prop in body) {
-            if (!body[prop].trim()) {
-                toastr.error('Please fill out all of the fields!');
+            if (!body[prop].trim() && prop !== 'avatar') {
+                toastr.error('Please fill out all of the fields! Only the avatar is optional!');
                 return;
             }
         }
 
-        if (!body.password || body.password !== body.reenterPassword) {
-            toastr.error('Passwords do not match!');
-            $('#password-register').val('');
-            $('#reenter-password-register').val('');
+        if (body.firstName.length < 2 || body.firstName.lenght > 18) {
+            toastr.error('First name cannot be smaller than 2 symbols or greater than 18!');
+            $('#first-name-register').val('').focus();
+            return;
+        }
+
+        if (body.lastName.length < 2 || body.lastName.lenght > 18) {
+            toastr.error('Last name cannot be smaller than 2 symbols or greater than 18!');
+            $('#last-name-register').val('').focus();
             return;
         }
 
         if (isNaN(+body.age) || +body.age < 1 || +body.age > 120) {
             toastr.error('Invalid age!');
-            $('#age-register').val('');
+            $('#age-register').val('').focus();
+            return;
+        }
+
+        if (!body.password || body.password !== body.reenterPassword) {
+            toastr.error('Passwords do not match!');
+            $('#password-register').val('').focus();
+            $('#reenter-password-register').val('');
+            return;
+        }
+
+        if (body.password.length < 6 || body.password.length > 18) {
+            toastr.error('Password should be between 6 and 18 symbols!');
+            $('#password-register').val('').focus();
+            $('#reenter-password-register').val('');
             return;
         }
 
         let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!emailRegex.test(body.email)) {
             toastr.error('Invalid E-Mail!');
-            $('#email-register').val('');
+            $('#email-register').val('').focus();
             return;
         }
 

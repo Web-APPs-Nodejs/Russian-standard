@@ -47,7 +47,7 @@ module.exports = (data) => {
                         return;
                     }
 
-                    res.redirect('/profile');
+                    res.redirect('/profile/' + req.user.username);
                 });
             })(req, res, next);
         },
@@ -64,7 +64,7 @@ module.exports = (data) => {
             data.userCreateAndSave(req.body.firstName, req.body.lastName, req.body.age, req.body.gender, req.body.username, req.body.password, req.body.email, { src: req.body.avatar })
                 .then(() => {
                     passport.authenticate('local')(req, res, function () {
-                        res.redirect('/profile');
+                        res.redirect('/profile/' + req.user.username);
                     });
                 })
                 .catch((err) => {

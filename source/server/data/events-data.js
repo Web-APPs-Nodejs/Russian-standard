@@ -11,8 +11,12 @@ module.exports = (models) => {
     var EventModel = models.EventModel;
 
     return {
+<<<<<<< HEAD
         createAndSaveEvent(title, category, picture, author, body, date, hidden = false, req){
 
+=======
+        createAndSaveEvent(title, category, picture, author, body, date, hidden = false) {
+>>>>>>> f109f357f8c705507da3ecc038f926c883cdd1e3
             var _category = validate.category(category);
             var _picture = validate.picture(picture, req);
 
@@ -37,14 +41,13 @@ module.exports = (models) => {
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
                     if(error){
-
                         return reject(error);
                     }
 
                     // TODO remove before production :)
                     console.log('eventCreateAndSave' + JSON.stringify(event));
                     return resolve(dbEvent);
-                })
+                });
             });
         },
 

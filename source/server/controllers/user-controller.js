@@ -1,8 +1,6 @@
-/* globals module require */
+/* globals module */
 
 'use strict';
-
-const passport = require('passport');
 
 module.exports = (data) => {
     return {
@@ -12,7 +10,7 @@ module.exports = (data) => {
 
         getMyProfile(req, res) {
             if (req.isAuthenticated()) {
-                res.render('users/my-profile', { user: req.user });
+                res.render('users/profile-page', { user: req.user });
                 return;
             }
 
@@ -44,11 +42,11 @@ module.exports = (data) => {
         },
 
         getFacebookCallbackPage(req, res) {
-            res.render('users/my-profile', { user: req.user });
+            res.render('users/profile-page', { user: req.user });
         },
 
         getUpdateInfoPage(req, res) {
-            res.render('users/update-user-info', { user: req.user });
+            res.render('users/update-user-info', { user: req.user, userData: req.user });
         },
 
         updateUserInfo(req, res) {
@@ -59,7 +57,6 @@ module.exports = (data) => {
             console.log(req.user);
 
             Object.keys(req.body)
-
                 .forEach(key => {
                     if (req.body[key] && req.body[key].trim() !== '') {
                         newData[key] = req.body[key];
