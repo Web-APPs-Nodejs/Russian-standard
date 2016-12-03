@@ -48,7 +48,6 @@ module.exports = (data) => {
         },
 
         getUpdateInfoPage(req, res) {
-            console.log('getUpdateInfoPage');
             res.render('users/update-user-info', { user: req.user });
         },
 
