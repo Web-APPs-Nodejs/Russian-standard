@@ -90,22 +90,8 @@ module.exports = (data) => {
                 categoryName = req.params.categoryName,
                 pictureUrl = req.body.eventPicture;
 
-            var _category = 'ski';
-            if(!(categoryName == undefined) && !(categoryName==='')){
-                _category = categoryName;
-            }
-
-            var _picture = { src: '/res/images/default-picture.png' };
-            if(!(pictureUrl == undefined) || !(pictureUrl==='')){
-                _picture.src = pictureUrl;
-            }
-
-            // TODO remove before production :)
-            console.log('picture-'+_picture);
-            console.log('category-'+_category);
-
-            data.eventCreateAndSave(body.title, categoryName, _picture, req.user, body.body, nowDt, eventIsHidden)
-                .then((dbEvent) => {                    
+            data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden)
+                .then((dbEvent) => {
                     // updating user info => adding relation to the event he created
                     let event = {
                         _id: dbEvent._id,
@@ -181,5 +167,5 @@ module.exports = (data) => {
             //res.render('auth-not-authorised-page');
 
         }
-    }
+    };
 };
