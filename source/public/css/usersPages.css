@@ -2,7 +2,7 @@ div.freeSpace{
     height: 100px;
 }
 
-.btn.signin, .btn.register, .btn.profile{
+.btn.signin, .btn.register, .btn.profile, .updateBtn{
     color: white;
     background-color: #FF8000;
 }
@@ -28,4 +28,13 @@ div.form-group{
 .facebook{
     color:white;
     background-color: #1E74FF;
+}
+
+ul.information{
+    list-style-type: none;
+    display: inline-block;
+}
+ul.update{
+    list-style-type: none;
+    padding: 5px;
 }
