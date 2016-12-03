@@ -5,25 +5,20 @@
 
 'use strict';
 
+const validate  = require('./utilities').validate;
+
 module.exports = (models) => {
     var EventModel = models.EventModel;
 
     return {
-        eventCreateAndSave(title, category, picture, author, body, date, hidden = false){
+        createAndSaveEvent(title, category, picture, author, body, date, hidden = false){
 
-            var _category = 'ski';
-            if(!category) {
-                _category = category;
-            }
+            var _category = validate.category(category);
+            var _picture = validate.picture(picture);
 
-            var _picture = {};
-            if(picture.src == '') {
-                _picture = {
-                    src: '/res/images/default-picture.png'
-                }
-            } else {
-                _picture.src = picture.src;
-            }
+            // TODO remove before production :)
+            console.log('picture- '+ JSON.stringify(_picture));
+            console.log('category- '+_category);
 
             var eventObject = {
                 title: title,
@@ -41,8 +36,8 @@ module.exports = (models) => {
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
                     if(error){
-                        return reject(error);
 
+                        return reject(error);
                     }
 
                     return resolve(dbEvent);
