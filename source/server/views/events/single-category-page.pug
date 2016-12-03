@@ -8,16 +8,20 @@ block content
             a(class!=attributes.class href=href)= name
 
     mixin ski-event(event)
-        - var cat = event.category
-        - var id = event._id
-        - var title = event.title
-        - var urlCat = '/categories/' + category
-        - var urlEvent = '/categories/' + category + '/' + id
-        - var src = '/res/images/ski-main.jpg'
+        //.new
+        //    event
+        //- var cat = event.category
+        //- var id = event._id
+        //- var title = event.title
+        //- var urlCat = '/categories/' + category
+        //- var urlEvent = '/categories/' + category + '/' + event._id
+        //- var src = event.pictures[0].src
+        //- var urlUser = '/profile/' + event.author.username
         .ski-event
-            img(src=src, width=30, height=30, alt="extreme-sports-event-main-picture")
-            a(href=urlCat)= cat
-            a(href=urlEvent)= title
+            img(src=event.pictures[0].src, width=40, height=30, alt="extreme-sports-event-main-picture")
+            a(href='/categories/' + category)= event.category
+            a(href='/profile/' + event.author.username)= event.author.username
+            a(href='/categories/' + category + '/' + event._id)= event.title
 
             = '\n'
     //-Declarations end
@@ -35,4 +39,5 @@ block content
 
     each event in events
         +ski-event(event)
+        //p #{event}
 
