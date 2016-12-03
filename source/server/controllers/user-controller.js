@@ -60,7 +60,14 @@ module.exports = (data) => {
             Object.keys(req.body)
                 .forEach(key => {
                     if (req.body[key] && req.body[key].trim() !== '') {
-                        newData[key] = req.body[key];
+                        if (key !== 'avatar') {
+                            newData[key] = req.body[key];
+                        }
+                        else {
+                            newData.profilePicture = { 
+                                src: req.body[key]
+                            };
+                        }
                     }
                 });
 
