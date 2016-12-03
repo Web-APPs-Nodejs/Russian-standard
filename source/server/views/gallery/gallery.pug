@@ -1,7 +1,6 @@
 extends ../main-frame.pug
 
 block content
-    
         .col-md-10.col-md-offset-1
             .row.text-center.heading-gallery
                 if user
@@ -12,6 +11,7 @@ block content
                 else
                     .row.text-center
                         h1 Gallery
+
             if galleryImages.length
                 .row
                     each image in galleryImages
@@ -45,3 +45,4 @@ block content
             else
                 .row.text-center
                     h3 No photos yet...
+

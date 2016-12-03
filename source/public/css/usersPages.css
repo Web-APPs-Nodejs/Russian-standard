@@ -2,7 +2,7 @@ div.freeSpace{
     height: 100px;
 }
 
-.btn.signin, .btn.register, .btn.profile{
+.btn.signin, .btn.register, .btn.profile, .updateBtn, #btn-add-gallery-photo{
     color: white;
     background-color: #FF8000;
 }
@@ -21,11 +21,20 @@ div.form-group{
     padding-right: 20px;
 }
 
-.regLi li{
-    text-decoration: none;
+.regLi {
+    list-style-type: none;
     padding: 5px;
 }
 .facebook{
     color:white;
     background-color: #1E74FF;
+}
+
+ul.information{
+    list-style-type: none;
+    display: inline-block;
+}
+ul.update{
+    list-style-type: none;
+    padding: 5px;
 }

@@ -1,6 +1,9 @@
 extends ../main-frame.pug
 
 block content
+        div.freeSpace
+        div.freeSpace
+
         .col-md-10.col-md-offset-1
             .col-md-4.col-md-offset-4.text-center
                 form.form-signin(action="/add-photo", method="POST")
@@ -16,6 +19,11 @@ block content
                         option(value="Snowboard") Snowboard
                         option(value="Bike") Bike
                     br 
-                    button#btn-add-gallery-photo.btn.btn-md.btn-success.btn-block(type='submit'  onclick="return false;") Upload
+                    button#btn-add-gallery-photo.btn(type='submit'  onclick="return false;") Upload
                        
-                
+        div.freeSpace
+        div.freeSpace
+        div.freeSpace
+        div.freeSpace
+        div.freeSpace
+        div.freeSpace
