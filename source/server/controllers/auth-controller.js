@@ -32,22 +32,22 @@ module.exports = (data) => {
 
         facebookLogin(req, res, next) {
             passport.authenticate('facebook', (error, user) => {
-                if(error) {
+                if (error) {
                     next(error);
                     return;
                 }
 
-                if(!user) {
-                    res.status(400).json('Bad request!');
+                if (!user) {
+                    res.redirect('/login');
                 }
 
                 req.login(user, error => {
-                    if(error) {
+                    if (error) {
                         next(error);
                         return;
                     }
 
-                    res.redirect('/profile', { user: req.user });
+                    res.redirect('/profile');
                 });
             })(req, res, next);
         },
