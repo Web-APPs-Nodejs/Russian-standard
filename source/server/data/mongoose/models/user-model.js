@@ -46,7 +46,9 @@ var userSchema = function () {
             default: 'user'
         },
         facebookId: String,
-        facebookToken: String,        
+        facebookToken: String,      
+        addedPhotos: [String],
+        addedEvents: [String]
     });
 
     userSchemaToReturn.method({
