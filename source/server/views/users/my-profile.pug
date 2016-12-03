@@ -1,6 +1,8 @@
 extends ../main-frame.pug
 
 block content
+    div.freeSpace
+
     .container-fluid
         .row
             .col-md-10.col-md-offset-1
@@ -8,5 +10,7 @@ block content
                     a.thumbnail
                         img(src= user.profilePicture.src, alt="profile-pic")
                     h2 #{user.username}
-                    a.btn.btn-md.btn-success.btn-block(href="/update-info") Update Info
+                    a.btn.profile(href="/update-info") Update Info
                 block rightSide
+
+    div.freeSpace
