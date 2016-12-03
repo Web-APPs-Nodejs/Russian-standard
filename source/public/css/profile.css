@@ -1,0 +1,11 @@
+.image-thumb img {
+    max-width: 2em;
+}
+
+.image-thumb {
+    width: 4em;
+}
+
+.category-cell {
+    width: 6em;
+}
