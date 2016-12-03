@@ -67,12 +67,13 @@
         }
 
         requester.postJSON('/register', body)
-            .then(() => {
+            .then((res) => {
+                console.log(res);
                 toastr.success('Registration successful! Redirecting...');
                 setTimeout(() => { window.location = '/'; }, 1500);
-
             })
             .catch((err) => {
+                console.log(err);
                 if (err.responseJSON.code === 11000) {
                     toastr.error(`Username "${body.username}" already exists!`);
                     $('#username-register').val('');

@@ -1,0 +1,47 @@
+extends ../main-frame.pug
+
+block content
+    
+        .col-md-10.col-md-offset-1
+            .row.text-center.heading-gallery
+                if user
+                    .row.text-center
+                        h1 Gallery
+                            span.pull-right
+                                a.btn.btn-success.btn-md.btn-block#btn-add-gallery-photo(href="add-photo") Add Photo
+                else
+                    .row.text-center
+                        h1 Gallery
+            if galleryImages.length
+                .row
+                    each image in galleryImages
+                        .col-md-3.thumbnail.gallery-panel.text-center
+                            a.zoom(href="#", title= image.title, data-type="image", data-toggle="lightbox")
+                                img.image-gallery(src= image.url, alt= image.title)
+                                a(href='#', title= image.title)= image.title
+                                if user
+                                    span.pull-right
+                                        #like1.glyphicon.glyphicon-thumbs-up
+                                        #dislike1.glyphicon.glyphicon-thumbs-down
+                .row.text-center
+                    ul.pagination
+                        if page == 1
+                            li.disabled
+                                a() &laquo;
+                        else 
+                            li.active
+                                a(href="/gallery?page=" + (page - 1)) &laquo;
+                        
+                        - for (let i = 1; i <= totalPagesCount; i += 1)
+                            li.active
+                                a(href="/gallery?page=" + i)= i 
+
+                        if page == totalPagesCount
+                            li.disabled
+                                a() &raquo;
+                        else
+                            li.active
+                                a(href="/gallery?page=" + (page + 1)) &raquo;
+            else
+                .row.text-center
+                    h3 No photos yet...

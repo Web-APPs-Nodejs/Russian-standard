@@ -9,6 +9,7 @@ const passport = require('passport');
 
 module.exports = (data) => {
     return {
+
         getCreateEventPage(req, res) {
             let categoryName = req.params.categoryName;
 
@@ -17,14 +18,14 @@ module.exports = (data) => {
             }
             console.log(categoryName);
 
-            //if (req.isAuthenticated()) {
+            if (req.isAuthenticated()) {
                 res.render('categories-add-event-page', {
                     user: req.user,
                     category: categoryName
                 });
 
                 return;
-            //}
+            }
 
             res.render('auth-not-authorised-page');
         },

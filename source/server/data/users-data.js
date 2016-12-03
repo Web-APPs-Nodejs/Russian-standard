@@ -76,6 +76,42 @@ module.exports = (models) => {
             });
         },
 
+        findUserByFacebookId(facebookId) {
+            return new Promise((resolve, reject) => {
+                UserModel.findOne({ facebookId: facebookId }, (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(res);
+                });
+            });
+        },
+
+        createFacebookUser(username, facebookId, facebookToken, email, firstName, lastName, gender, profilePicture) {
+            let userObject = {
+                username,
+                facebookId,
+                facebookToken,
+                email,
+                firstName,
+                lastName,
+                gender,
+                profilePicture               
+            };
+
+            let user = new UserModel(userObject);
+            return new Promise((resolve, reject) => {
+                user.save((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(res);
+                });
+            });
+        },
+
         updateUserInfo(user, newData) {            
             return new Promise((resolve, reject) => {
                 UserModel.update({ username: user.username }, newData, (err, res) => {

@@ -4,9 +4,10 @@ head
     meta(charset="UTF-8")
     title Extreme Sports
     
-    link(href="/res/css/bootstrap.css", rel="stylesheet")
+    link(rel="stylesheet", href="/res/css/bootstrap.css")
     link(rel="stylesheet", href="/res/css/main.css")
     link(rel="stylesheet", href="/res/css/toastr.css")
+    link(rel="stylesheet", href="/res/css/usersPages.css")
     block styles
             
     script(src="/res/lib/jquery.js")
@@ -15,35 +16,108 @@ head
     block scripts
     
 body
+.navbar.navbar-inverse.navbar-fixed-top.relative.logo
+    .navbar-collapse.collapse
+        ul.nav.navbar-nav
+            li
+                img(src='res/images/Nav/Logo.PNG' height=40 alt="Logo")
+            li
+                ul.nav.navbar-nav.navbar-right.icons
+                    if !user
+                        li
+                            a(href='/login')
+                                img(src='res/images/Nav/login.PNG' height=30)
+                                |  LOGIN
+                        li
+                            a(href='/register')
+                                img(src='res/images/Nav/register.PNG' height=30)
+                                |  REGISTER
+                    else
+                        li
+                            a(href='/profile')
+                                img(src='res/images/Nav/register.PNG' height=30)
+                                |  PROFILE
+                        li
+                            a(href='/logout')
+                                img(src='res/images/Nav/logout.PNG' height=30)
+                                |  LOGOUT
 
-.navbar.navbar-default.navbar-fixed-top.relative
+.navbar.navbar-default.navbar-fixed-top.relative.topFloat.navColor
     .container
         .navbar-header
-            a.navbar-brand(href='/home') Extreme Sports
+            a(href='/home')
+                img.home(src='res/images/Nav/Home_.PNG' height=30)
+
         .navbar-collapse.collapse
-            ul.nav.navbar-nav
+            ul.nav.navbar-nav.navigation
                 li
-                    a(href="/categories") Categories
+                    a(href="/categories") CATEGORIES
                 li
-                    a(href="/events") Latest events
+                    a(href="/events") EVENTS
                 li
-                    a(href="/stories") Stories
+                    a(href="/stories") STORIES
                 li
-                    a(href="/gallery") Gallery
-            ul.nav.navbar-nav.navbar-right
-                if !user
-                    li
-                        a(href="/login") Login
-                    li
-                        a(href="/register") Register
-                else                    
-                    li
-                        a(href="/profile") Profile
-                    li
-                        a#btn-logout(href="/logout") Logout
+                    a(href="/gallery") GALLERY
+                li.searchNav
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            form.navbar-form.navbar-right
+                                .form-group
+                                    input#search-bar.form-control.search(type='text', name="search" placeholder='Search...', onfocus="this.placeholder = ''" onblur="this.placeholder ='Search...'")
+                        li
+                            a#btn-search.pointer
+                                img(src="res/images/Nav/search_wht.PNG")
            
 #content.container-full
-    block content           
-                    
+    block content
+
+footer
+    .footer
+        strong SBS
+        |  |
+        em by Extreem Sports
+    .seconFooter.panel-body
+        ul.list-inline
+            li
+                a(href='https://twitter.com/intent/tweet?text=Hello%20world')
+                    button.btn.btn-twitter
+                        i.fa.fa-twitter
+                        |  | Share to Twitter
+            li
+                a(href='https://www.facebook.com/')
+                    button.btn.btn-facebook
+                        i.fa.fa-facebook
+                        |  | Share to Facebook
+            li
+                a(href='https://www.linkedin.com/')
+                    button.btn.btn-linkedin
+                        i.fa.fa-linkedin
+                        |  | Share to Linkedin
+
+//footer.container-fluid.text-center
+    .panel.panel-primary
+        .panel-heading.footer
+            strong SBS
+            |  |
+            em by Extreem Sports
+        .panel-body
+            ul.list-inline
+                li
+                    a(href='https://twitter.com/intent/tweet?text=Hello%20world')
+                        button.btn.btn-twitter
+                            i.fa.fa-twitter
+                            |  | Share to Twitter
+                li
+                    a(href='https://www.facebook.com/')
+                        button.btn.btn-facebook
+                            i.fa.fa-facebook
+                            |  | Share to Facebook
+                li
+                    a(href='https://www.linkedin.com/')
+                        button.btn.btn-linkedin
+                            i.fa.fa-linkedin
+                            |  | Share to Linkedin
+
 script(src="/res/js/requester.js")
 script(src="/res/js/users/user-auth.js")
+script(src="/res/js/gallery-handler.js")
