@@ -46,15 +46,16 @@ module.exports = (data) => {
         },
 
         getUpdateInfoPage(req, res) {
-            res.render('users/update-user-info', { user: req.user, userData: req.user });
+            if (req.isAuthenticated()) {
+                res.render('users/update-user-info', { user: req.user, userData: req.user });
+            }
+            else {
+                res.render('auth-not-authorised-page');
+            }
         },
 
         updateUserInfo(req, res) {
             let newData = {};
-
-            // TODO remove before production :(
-            console.log(req.body);
-            console.log(req.user);
 
             Object.keys(req.body)
                 .forEach(key => {
@@ -62,16 +63,16 @@ module.exports = (data) => {
                         newData[key] = req.body[key];
                     }
                 });
-            newData['profilePicture'] = { src: req.body.avatar };
 
             data.updateUserInfo(req.user, newData)
                 .then(() => {
-                    res.redirect('/profile', { user: req.user });
+                    res.redirect('/profile/' + req.user.username, { user: req.user });
                 })
                 .catch((err) => {
                     res.status(400).send(err);
                     res.redirect('/update-info');
                 });
+
         }
     };
 };
