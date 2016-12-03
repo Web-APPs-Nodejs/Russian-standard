@@ -13,6 +13,7 @@ module.exports = (models) => {
             return new Promise((resolve, reject) => {
                 galleryImage.find()
                     .skip((page - 1) * pageSize)
+                    .sort({'createdOn': -1})
                     .limit(pageSize)
                     .exec((err, res) => {
                         if (err) {

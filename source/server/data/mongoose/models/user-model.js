@@ -30,7 +30,7 @@ var userSchema = function () {
     let userSchemaToReturn = new Schema({
         firstName: { type: String, required: true },
         lastName: String,
-        age: { type: Number, required: true },
+        age: Number,
         gender: String,
         username: { type: String, unique: true, required: true },
         passHash: String,
@@ -40,7 +40,9 @@ var userSchema = function () {
         role: {
             type: String,
             default: 'user'
-        }
+        },
+        facebookId: String,
+        facebookToken: String,        
     });
 
     userSchemaToReturn.method({

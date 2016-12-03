@@ -25,6 +25,9 @@ block content
                                 label.sr-only(for='password') Password
                                 input#password-login.form-control(type='password', name="password" placeholder='Password', onfocus="this.placeholder = ''" onblur="this.placeholder ='Password'")
                             br
-                    button.btn.signin(type='submit' onclick="return false") Sign in
+                    button#btn-login.btn.signin(type='submit' onclick="return false") Sign in
+                    br
+                    br
+                    a.btn.signin(href="/login/facebook/callback") Sign in with Facebook
 
     div.freeSpace

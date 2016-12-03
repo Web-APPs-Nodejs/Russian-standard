@@ -11,6 +11,7 @@ module.exports = function (app, data) {
     router
         .get('/login', controllers.getLoginPage)
         .post('/login', controllers.login)
+        .get('/login/facebook/callback', controllers.facebookLogin)
         .get('/register', controllers.getRegisterPage)
         .post('/register', controllers.register)
         .get('/logout', controllers.logout)

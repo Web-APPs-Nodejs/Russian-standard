@@ -10,14 +10,15 @@ const passport = require('passport');
 module.exports = (data) => {
     return {
         getAllEvents(req, res) {
-            res.render('categories-all-page');
+            res.render('categories-all-page', { user: req.user });
         },
 
         getSkiEvents(req, res) {
             data.getSkiEvents()
                 .then((events) => {
                     res.render('categories-skiing-page', {
-                        result: events
+                        result: events,
+                        user: req.user 
                     });
                 })
                 .catch((error) => {
@@ -26,7 +27,7 @@ module.exports = (data) => {
         },
 
         getCreateSkiEventPage(req, res) {
-            res.render('categories-add-event-page');
+            res.render('categories-add-event-page',  { user: req.user });
         },
 
         createSkiEvent(req, res) {

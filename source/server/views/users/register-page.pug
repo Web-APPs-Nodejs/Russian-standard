@@ -47,6 +47,6 @@ block content
                                 label.sr-only(for='username') Avatar Url
                                 input#avatar-register.form-control(type='text', placeholder='Avatar Url', name="avatar" required='true', onfocus="this.placeholder = ''" onblur="this.placeholder ='Avatar Url'")
                             br
-                        button.btn.register(type='submit') Sign up
+                        button#btn-register.btn.register(type='submit' onclick='return false') Sign up
                         
     div.freeSpace

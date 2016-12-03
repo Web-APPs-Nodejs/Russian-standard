@@ -83,6 +83,9 @@ module.exports = (data) => {
         getRegisterPage(req, res) {
             res.render('users/register-page');
         },
+        getFacebookCallbackPage(req, res) {
+            res.render('users/my-profile', { user: req.user });
+        },
         getUpdateInfoPage(req, res) {
             res.render('users/update-user-info', { user: req.user });
         },
@@ -102,7 +105,7 @@ module.exports = (data) => {
                 })
                 .catch((err) => {
                     res.status(400).send(err);
-                    res.redirect('/update-info', { user: req.user });
+                    res.redirect('/update-info');
                 });
         }
     };

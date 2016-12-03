@@ -9,14 +9,14 @@ const passport = require('passport'),
 module.exports = (data) => {
     return {
         login(req, res, next) {
-            passport.authenticate('local', function (error, user) {
+            passport.authenticate('local', (error, user) => {
                 if (error) {
                     next(error);
                     return res.status(500).json('Server error! Please try again!');
                 }
 
                 if (!user) {
-                    res.status(401).json('Invalid username or password!');
+                    res.status(400).json('Invalid username or password!');
                 }
 
                 req.login(user, error => {
@@ -26,6 +26,28 @@ module.exports = (data) => {
                     }
 
                     res.status(200).json('Login successful!');
+                });
+            })(req, res, next);
+        },
+
+        facebookLogin(req, res, next) {
+            passport.authenticate('facebook', (error, user) => {
+                if(error) {
+                    next(error);
+                    return;
+                }
+
+                if(!user) {
+                    res.status(400).json('Bad request!');
+                }
+
+                req.login(user, error => {
+                    if(error) {
+                        next(error);
+                        return;
+                    }
+
+                    res.redirect('/profile', { user: req.user });
                 });
             })(req, res, next);
         },
@@ -46,9 +68,8 @@ module.exports = (data) => {
                     });
                 })
                 .catch((err) => {
-                    res.redirect('/register');
                     res.status(400).send(err);
-                    res.redirect('/register', { message: err });
+                    res.redirect('/register');
                 });
         },
 

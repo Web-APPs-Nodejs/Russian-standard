@@ -21,7 +21,12 @@ module.exports = (data) => {
                 });
         },
         getAddGalleryPhotoPage(req, res) {
-            res.render('gallery/add-photo', { user: req.user });
+            if (req.isAuthenticated()) {
+                res.render('gallery/add-photo', { user: req.user });
+            }
+            else {
+                res.render('auth-not-authorised-page', { user: req.user });
+            }
         },
         addGalleryPhoto(req, res) {
             Object.keys(req.body)
