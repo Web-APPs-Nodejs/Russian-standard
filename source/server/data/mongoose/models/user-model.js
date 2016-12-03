@@ -38,9 +38,8 @@ var userSchema = function () {
         salt: String,
         email: { type: String, validate: emailValidation },
         profilePicture: {
-            type: [PictureSchema],
-            index: false,
-            unique: false
+            type: PictureSchema,
+            index: false
         },
         role: {
             type: String,
