@@ -2,12 +2,7 @@ extends main-frame.pug
 
 block content
 
-    //-----------------------------------------------
-    // Declarations start
-    //or we can have black BG when we remove height prop
-    .banner.bannerImg
-        img(class='snowImg',height=600, src="/res/images/Nav/Snow.PNG", alt="Snow banner")
-    //p.banner-extra-styles Hey man, do a can-can, or fly like Superman, if you can... do things like Batman, put an event an try beat them . Have a go at a no... hander.  Perhaps a spin, whip or clicker will satisfy... Or, nail a rail on your tail... A new vocabulary to describe a new eXtreme variation of the venerable sport of ski, biking, and snowboarding. Chanlange yourself and other friends, or other mates. It's a new style, a new sensation, that's destined to add a fresh dimension to the sport.
+    img.page-wrap(class='snowImg', height=800, src="/res/images/Nav/Snow.PNG", alt="Snow banner")
 
     // Declaration
     mixin link(href, name)
@@ -23,12 +18,7 @@ block content
 
     //-Declarations end
 
-    //-----------------------------------------------
-    //-Page content start
-    //.banner
-    //    p.banner-extra-styles Hey man, do a can-can, or fly like Superman, if you can... do things like Batman, put an event an try beat them . Have a go at a no... hander.  Perhaps a spin, whip or clicker will satisfy... Or, nail a rail on your tail... A new vocabulary to describe a new eXtreme variation of the venerable sport of ski, biking, and snowboarding. Chanlange yourself and other friends, or other mates. It's a new style, a new sensation, that's destined to add a fresh dimension to the sport.
-
-    .main-container-wrapper
+    .page-wrap.main-container-wrapper
         +home-page-picture('Ski', '/res/images/ski-main.jpg', '/categories/ski')
         +home-page-picture('Bike', '/res/images/bike-main.jpg', '/categories/bike')
         +home-page-picture('Snowboard', '/res/images/snowboard-main.jpg', '/categories/snowboard')

@@ -16,39 +16,41 @@ head
     block scripts
     
 body
-.navbar.navbar-inverse.navbar-fixed-top.relative.logo
-    .navbar-collapse.collapse
-        ul.nav.navbar-nav
-            li
-                img(src='res/images/Nav/Logo.PNG' height=40 alt="Logo")
-            li
-                ul.nav.navbar-nav.navbar-right.icons
-                    if !user
-                        li
-                            a(href='/login')
-                                img(src='res/images/Nav/login.PNG' height=30)
-                                |  LOGIN
-                        li
-                            a(href='/register')
-                                img(src='res/images/Nav/register.PNG' height=30)
-                                |  REGISTER
-                    else
-                        li
-                            a(href='/profile')
-                                img(src='res/images/Nav/register.PNG' height=30)
-                                |  PROFILE
-                        li
-                            a(href='/logout')
-                                img(src='res/images/Nav/logout.PNG' height=30)
-                                |  LOGOUT
-
-.navbar.navbar-default.navbar-fixed-top.relative.topFloat.navColor
-    .container
-        .navbar-header
-            a(href='/home')
-                img.home(src='res/images/Nav/Home_.PNG' height=30)
-
+.navbar.navbar-inverse.container-fluid.navbar-fixed-top.relative.text-center.logo(role='navigation')
+    .container.text-center
         .navbar-collapse.collapse
+            ul.nav.navbar-nav
+                li
+                    img(src='res/images/Nav/Logo.PNG' height=40 alt="Logo")
+                li
+            ul.nav.navbar-nav.pull-right.icons
+                if !user
+                    li
+                        a(href='/login')
+                            img(src='res/images/Nav/login.PNG' height=30)
+                            |  LOGIN
+                    li
+                        a(href='/register')
+                            img(src='res/images/Nav/register.PNG' height=30)
+                            |  REGISTER
+                else
+                    li
+                        a(href='/profile')
+                            img(src='res/images/Nav/register.PNG' height=30)
+                            |  PROFILE
+                    li
+                        a(href='/logout')
+                            img(src='res/images/Nav/logout.PNG' height=30)
+                            |  LOGOUT
+
+.navbar.navbar-default.container-fluid.navbar-fixed-top.relative.topFloat.navColor
+    .container.text-center
+        .navbar-header
+            .brand
+                a(href='/home')
+                    img.home(src='res/images/Nav/Home_.PNG' height=30)
+
+        .collapse.navbar-collapse
             ul.nav.navbar-nav.navigation
                 li
                     a(href="/categories") CATEGORIES
@@ -72,35 +74,12 @@ body
     block content
 
 footer
-    .footer
-        strong SBS
-        |  |
-        em by Extreem Sports
-    .seconFooter.panel-body
-        ul.list-inline
-            li
-                a(href='https://twitter.com/intent/tweet?text=Hello%20world')
-                    button.btn.btn-twitter
-                        i.fa.fa-twitter
-                        |  | Share to Twitter
-            li
-                a(href='https://www.facebook.com/')
-                    button.btn.btn-facebook
-                        i.fa.fa-facebook
-                        |  | Share to Facebook
-            li
-                a(href='https://www.linkedin.com/')
-                    button.btn.btn-linkedin
-                        i.fa.fa-linkedin
-                        |  | Share to Linkedin
-
-//footer.container-fluid.text-center
-    .panel.panel-primary
-        .panel-heading.footer
+    .container-fluid.text-center
+        .footer
             strong SBS
             |  |
             em by Extreem Sports
-        .panel-body
+        .seconFooter.panel-body
             ul.list-inline
                 li
                     a(href='https://twitter.com/intent/tweet?text=Hello%20world')
