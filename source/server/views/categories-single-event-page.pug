@@ -1,0 +1,64 @@
+extends main-frame.pug
+
+block content
+
+    //-----------------------------------------------
+    // Declarations start
+    mixin link(href, name)
+        //- attributes == {class: "btn"}
+        .button-wrapper
+            //<a class="btn btn-default" href="#" role="button">Link</a>
+            a(class!=attributes.class href=href)= name
+
+    mixin draw-single-event-details(event)
+
+            .event-with-detail-draw-wrapper-author
+                //each picture in event.pictures
+                - var src = '/res/images/ski-main.jpg'
+                - var alt = '/categories/ski/' + 'event.picture._id' // put later picture.alt
+                - var hrefUser = '/profile/' + event.author
+                img(src=src, width=40, height=30, alt=alt)
+                +link(hrefUser, event.author)
+
+            .event-with-detail-draw-wrapper-buttons
+                +link('/categories/ski/interested/' + event._id, 'Im interested')(class="btn btn-default" role="button")
+                +link('/categories/ski/sure-participate/' + event._id, 'I will sure participate')(class="btn btn-default" role="button")
+            .event-with-detail-draw-wrapper-event-draw-body
+                h2 #{event.title}
+                = '\n'
+                = '\n'
+
+                p #{event.body}
+                = '\n'
+
+            .event-with-detail-draw-wrapper-footer
+
+
+
+    //-Declarations end
+
+    //-----------------------------------------------
+    //-Page content start
+
+    //h3 logged in user: #{user}
+
+    .single-event-banner
+        img(src="/res/images/all-main.jpg", height=100 alt="extreme-sports-main-all")
+        span Hey man, do a can-can ski fahren?! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit odio quis congue aliquam. Cras non placerat neque. Fusce suscipit tempus turpis. Aenean tempus scelerisque nunc, a vulputate sapien pharetra blandit. Donec sit amet massa iaculis, accumsan orci quis, malesuada lorem. Aenean rhoncus molestie congue. Integer sem ligula, auctor ut sodales at, lobortis vel magna. Maecenas convallis metus et libero lacinia, et ultricies ipsum pretium. Etiam vitae blandit leo, hendrerit gravida ex. Quisque malesuada varius luctus. Ut interdum dignissim porta. Vivamus suscipit, nulla in porttitor mattis, libero dui fringilla lectus, eu scelerisque tortor lacus a magna. Aenean fermentum in ante a vestibulum. Maecenas vel gravida lorem, eget vulputate urna. Praesent ultricies nisl ac vestibulum suscipit. Quisque dapibus sodales leo, quis laoreet magna vulputate non.
+        = '\n'
+        = '\n'
+
+    .event-with-detail-draw-wrapper.clearfix
+        +draw-single-event-details(event)
+        = '\n'
+        = '\n'
+
+    .event-with-detail-comments
+        .col-md-4.col-md-offset-4.text-left
+            form.form-add-comment(action='/categories/add-comment/' + event._id, method="post")
+                h2.form-add-comment-heading Add new comment
+                br
+                label.sr-only(for='body') text
+                input#add-comment-body.form-control(type='text', placeholder='text', name="body" required='', autofocus='true')
+                br
+                button#add-comment-button.btn.btn-md.btn-success.btn-block(type='submit' onclick="return false") Add comment
