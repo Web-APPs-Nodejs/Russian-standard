@@ -3,6 +3,7 @@
 'use strict';
 
 const express = require('express');
+const passport = require('passport');
 
 module.exports = function (app, data) {
     let router = new express.Router(),
@@ -11,6 +12,7 @@ module.exports = function (app, data) {
     router
         .get('/login', controllers.getLoginPage)
         .post('/login', controllers.login)
+        .get('/login/facebook', passport.authenticate('facebook'))
         .get('/login/facebook/callback', controllers.facebookLogin)
         .get('/register', controllers.getRegisterPage)
         .post('/register', controllers.register)
