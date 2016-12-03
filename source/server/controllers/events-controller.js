@@ -16,7 +16,6 @@ module.exports = (data) => {
             if(!categoryName) {
                 categoryName = 'ski';
             }
-            console.log(categoryName);
 
             if (req.isAuthenticated()) {
                 res.render('./events/add-event-page', {
@@ -90,32 +89,47 @@ module.exports = (data) => {
                 categoryName = req.params.categoryName,
                 pictureUrl = req.body.eventPicture;
 
-            data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden)
+            data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden, req)
                 .then((dbEvent) => {
-                    // updating user info => adding relation to the event he created
-                    let event = {
-                        _id: dbEvent._id,
-                        category: dbEvent.category,
-                        date: dbEvent.date,
-                        photo: dbEvent.pictures[0].src,
-                        title: dbEvent.title
-                    };
 
-                    let query = {
-                        addedEvents: req.user.addedEvents || []
-                    };
+                    // res.redirect(201, '/categories/ski');
+                    // res.status(400).send(err);
+                    // res.redirect('/update-info');
+                    res.redirect('/categories/ski');
+                    //
+                    // // updating user info => adding relation to the event he created
+                    // let event = {
+                    //     _id: dbEvent._id,
+                    //     category: dbEvent.category,
+                    //     date: dbEvent.date,
+                    //     photo: dbEvent.pictures[0].src,
+                    //     title: dbEvent.title
+                    // };
+                    //
+                    // let query = {
+                    //     addedEvents: req.user.addedEvents || []
+                    // };
+                    //
+                    // query.addedEvents.push(event);
+                    // data.updateUserInfo(req.user, query);
+                    //
+                    // res.render('error-page', {
+                    //     user: req.user,
+                    //     error: dbEvent
+                    // });
 
-                    query.addedEvents.push(event);
-                    data.updateUserInfo(req.user, query);
-
-                    res.render('error-page', {
-                        user: req.user,
-                        error: dbEvent
-                    });
                 })
                 .catch((error) => {
+                    var statusCode = 400;
+
+                    // TODO delete duplicated index and try again
+                    if(error.code == 11000) {
+                        statusCode = 409;
+                    }
+                    //res.status(statusCode).send(error.errmsg);
+
                     res.render('error-page', {
-                        user: req.user,
+                        user: res.user,
                         error: error
                     });
 

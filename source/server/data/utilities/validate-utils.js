@@ -21,8 +21,24 @@ var validateCategory = function(category) {
     return _category;
 };
 
-var validatePicture = function(pictureObj) {
-    const defaultPicture = { src: '/res/images/default-picture.png' };
+var validatePicture = function(pictureObj, req) {
+
+    // console.log(JSON.stringify(req.headers));
+    // {
+    //     "host":"localhost:8081",
+    //     "connection":"keep-alive",
+    //     "cache-control":"max-age=0",
+    //     "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    //     "upgrade-insecure-requests":"1",
+    //     "user-agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36",
+    //     "accept-encoding":"gzip, deflate, sdch",
+    //     "accept-language":"en-US,en;q=0.8,et;q=0.6"
+    // }
+    //
+    // http://localhost:3001/res/images/default-image.png
+    const defaultPicture = { src: 'http://' + req.headers.host + '/res/images/default-image.png' };
+
+
 
     var _picture = defaultPicture;
 
