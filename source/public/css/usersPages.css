@@ -21,8 +21,8 @@ div.form-group{
     padding-right: 20px;
 }
 
-.regLi li{
-    text-decoration: none;
+.regLi {
+    list-style-type: none;
     padding: 5px;
 }
 .facebook{

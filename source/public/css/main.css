@@ -126,6 +126,10 @@ body {
 }
 
 footer {
+    /*position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;*/
     background-color: #1E74FF;
 }
 
@@ -166,3 +170,15 @@ footer {
     margin-left: auto;
     max-width: 1600px; /* or 950px
 }*/
+@media (max-width: 800px) {
+    /* Smaller Resolution Desktops and Laptops */
+
+}
+@media (max-width: 650px) {
+    /* Smaller devices */
+
+}
+@media (max-width: 450px) {
+    /* Even Smaller devices */
+
+}
