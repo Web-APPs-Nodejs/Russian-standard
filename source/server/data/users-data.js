@@ -16,7 +16,7 @@ module.exports = (models) => {
             if(!profilePicture) {
                 _profilePicture = {
                     src: '/res/images/default-user.png'
-                }
+                };
             } else {
                 _profilePicture.src = profilePicture.src;
             }
@@ -111,7 +111,7 @@ module.exports = (models) => {
                 });
             });
         },
-
+        
         updateUserInfo(user, newData) {            
             return new Promise((resolve, reject) => {
                 UserModel.update({ username: user.username }, newData, (err, res) => {

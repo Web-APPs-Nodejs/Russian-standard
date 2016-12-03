@@ -1,8 +1,6 @@
-/* globals module require */
+/* globals module */
 
 'use strict';
-
-const passport = require('passport');
 
 module.exports = (data) => {
     return {

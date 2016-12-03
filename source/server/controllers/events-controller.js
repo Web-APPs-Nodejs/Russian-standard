@@ -105,7 +105,15 @@ module.exports = (data) => {
             console.log('category-'+_category);
 
             data.eventCreateAndSave(body.title, categoryName, _picture, req.user, body.body, nowDt, eventIsHidden)
-                .then((dbEvent) => {
+                .then((dbEvent) => {                    
+                    // updating user info => adding relation to the event he created
+                    let query = {
+                        addedEvents: req.user.addedEvents || []
+                    };
+
+                    query.addedEvents.push(dbEvent._id);
+                    data.updateUserInfo(req.user, query);
+
                     res.render('error-page', {
                         user: req.user,
                         error: dbEvent

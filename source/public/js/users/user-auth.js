@@ -16,7 +16,7 @@
             })
             .catch((err) => {
                 toastr.error(err.responseText);
-                $('#username-login').val('');
+                $('#username-login').val();
                 $('#password-login').val('');
             });
     });

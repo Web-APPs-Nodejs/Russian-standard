@@ -20,7 +20,7 @@ module.exports = (models) => {
             if(picture.src == '') {
                 _picture = {
                     src: '/res/images/default-picture.png'
-                }
+                };
             } else {
                 _picture.src = picture.src;
             }
@@ -42,11 +42,10 @@ module.exports = (models) => {
                 event.save(function (error, dbEvent) {
                     if(error){
                         return reject(error);
-
                     }
 
                     return resolve(dbEvent);
-                })
+                });
             });
         },
 

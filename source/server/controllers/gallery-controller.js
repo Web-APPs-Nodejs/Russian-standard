@@ -35,8 +35,15 @@ module.exports = (data) => {
                 });
 
             data.addGalleryPhoto(req.body.url, req.body.title, req.user.username, req.body.category)
-                .then(success => {
-                    res.status(201).json(success);
+                .then(success => {  
+                    let query = {
+                        addedPhotos: req.user.addedPhotos || []
+                    };
+
+                    query.addedPhotos.push(success._id);
+                    data.updateUserInfo(req.user, query);
+                    
+                    res.status(201).json(success);   
                 })
                 .catch(err => {
                     res.status(500).json(err);
