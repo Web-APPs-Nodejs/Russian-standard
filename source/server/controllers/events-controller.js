@@ -90,21 +90,7 @@ module.exports = (data) => {
                 categoryName = req.params.categoryName,
                 pictureUrl = req.body.eventPicture;
 
-            var _category = 'ski';
-            if(!(categoryName == undefined) && !(categoryName==='')){
-                _category = categoryName;
-            }
-
-            var _picture = { src: '/res/images/default-picture.png' };
-            if(!(pictureUrl == undefined) || !(pictureUrl==='')){
-                _picture.src = pictureUrl;
-            }
-
-            // TODO remove before production :)
-            console.log('picture-'+_picture);
-            console.log('category-'+_category);
-
-            data.eventCreateAndSave(body.title, categoryName, _picture, req.user, body.body, nowDt, eventIsHidden)
+            data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden)
                 .then((dbEvent) => {
                     res.render('error-page', {
                         user: req.user,
