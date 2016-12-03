@@ -1,0 +1,28 @@
+extends ../main-frame.pug
+
+block content
+    
+    div.freeSpace
+
+    .container-fluid
+        .row
+            .col-md-10.col-md-offset-1
+                .col-md-3.text-center
+                    a.thumbnail
+                        img(src= userData.profilePicture.src, alt="profile-pic")
+                    h2 #{userData.username}
+                    if userData.username != userData.firstName + ' ' + userData.lastName
+                        p #{userData.firstName} #{userData.lastName}
+                    if userData.email && user
+                        p E-Mail: #{userData.email}
+                    if userData.gender
+                        p Gender: #{userData.gender}
+                    if userData.age
+                        p Age: #{userData.age}
+                    if userData.role == 'admin'
+                        p Role: ADMIN
+                    
+
+                block rightSide
+
+    div.freeSpace

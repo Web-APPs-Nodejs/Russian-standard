@@ -19,26 +19,24 @@ module.exports = (data) => {
             res.render('users/login-page', { user: req.user });
         },
 
-        getUserProfilePage(req, res){
+        getUserProfilePage(req, res) {
             let username = req.params.username;
+            data.findUserByCredentials(username)
+                .then((userData) => {
+                    if (!userData) {
+                        return res.render('page-not-found', { user: req.user });
+                    }
 
-            // TODO remove before production :)
-            console.log('getUserProfilePage');
-
-            if (req.isAuthenticated()) {
-                data.findUserByCredentials(username)
-                    .then((userData) => {
-                        // TODO remove before production :(
-                        console.log(userData);
-                        res.render('profile/' + userData.username, {
-                            user: req.user,
-                            userData: userData
-                        });
-                    })
-                    .catch((error) => {
-                        throw error;
+                    res.render('users/profile-page', {
+                        user: req.user,
+                        userData: userData
                     });
-            }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.status(500).json('An error occurred! Please try again!');
+                });
+
         },
 
         getRegisterPage(req, res) {
@@ -68,7 +66,7 @@ module.exports = (data) => {
                         newData[key] = req.body[key];
                     }
                 });
-                newData['profilePicture'] = { src: req.body.avatar};
+            newData['profilePicture'] = { src: req.body.avatar };
 
             data.updateUserInfo(req.user, newData)
                 .then(() => {
