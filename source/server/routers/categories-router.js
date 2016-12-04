@@ -19,7 +19,9 @@ module.exports = function (app, data) {
         .get('/:category', eventsController.getEventsPage)
         .get('/:category/:id', eventsController.getEventsPage)
         .get('/:category/sure-participate/:id', eventsController.getIncreaseParticipatingInEventButtonAction)
-        .get('/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction);
+        .get('/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction)
+        .post('/:category/add-comment/:id', eventsController.createCommentToEventButtonAction)
+        .get('/:category/:id', eventsController.getIncreaseInterestedInEventButtonAction);
 
     app.use('/categories',  router);
 
