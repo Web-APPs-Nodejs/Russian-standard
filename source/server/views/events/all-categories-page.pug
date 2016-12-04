@@ -1,33 +1,29 @@
 extends ../main-frame
 
+block styles
+    link(href="/res/css/events.css", rel="stylesheet")
+
 block content
-    //-----------------------------------------------
-    // Declarations start
-    mixin link(href, name)
-        .button-wrapper
-            a(class!=attributes.class href=href)= name
 
-    mixin ski-event(event)
-        .ski-event
-            - var id = event._id
-            - var title = event.title
-            - var url = '/events/' + id
-            - var src = '/res/images/ski-main.jpg'
-            img(src=src, width=30, height=30, alt="extreme-sports-event-main-picture")
-            a(href=url)= title
+    .col-md-10.col-md-offset-1.single-event-page
+        .row.text-center
+            .image-bar
+                if events.length
+                    each galleryPicture in events.latestPicturesFromGallery
+                        img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
 
-            = '\n'
+            h1 See peoples near plans, choose a category and join...
 
-    //-Declarations end
-
-    //-----------------------------------------------
-    //-Page content start
-    //h3 'logged in user:' + #{user}
-
-    .ski-banner.banner-extra-styles
-        img.left(src="/res/images/ski-main.jpg", width=300 alt="extreme-sports-ski")
-        span All events for ski, bike, snowboard, where you can create and check new events?!
-
-    each event in events
-        +ski-event(event)
+        if events.length
+            each event in events
+                a.thumbnail(href="/events/" + event.category + '/' + event._id)
+                    .row.event-entry
+                        .col-md-3
+                            img.thumbnail(src= event.pictures[0].src, alt= event.title)
+                        .col-md-9
+                            h2 #{event.title}
+                            h4 #{event.category}
+                            p #{event.body}
+        else
+            h3 No events yet...
 
