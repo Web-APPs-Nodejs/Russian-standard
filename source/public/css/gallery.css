@@ -16,3 +16,7 @@ footer .hideFooter {
 .gallery {
     height: 50px;
 }
+
+.galleryContent{
+    height: 1000px;
+}
