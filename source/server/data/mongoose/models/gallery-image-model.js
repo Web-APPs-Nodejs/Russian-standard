@@ -3,6 +3,7 @@
 'use strict';
 
 const mongoose = require('mongoose'),
+    commentSchema = require('./comment-model').CommentSchema(),
     constants = require('../../../common/constants'),
     Schema = mongoose.Schema;
 
@@ -27,10 +28,11 @@ let schema = new Schema({
     createdOn: {
         type: Date,
         default: Date.now
-    }
+    },
+    comments: [commentSchema]
 });
 
 mongoose.model('gallery-image', schema);
-let galleryImage = mongoose.model('gallery-image'); 
+let galleryImage = mongoose.model('gallery-image');
 
 module.exports.GalleryImage = galleryImage;

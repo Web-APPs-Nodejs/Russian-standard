@@ -75,6 +75,28 @@ module.exports = (models) => {
                     return resolve(res);
                 });
             });
+        },
+        postGalleryPhotoComment(photoId, author, body) {
+            let query = {
+                author,
+                body
+            };
+
+            return new Promise((resolve, reject) => {
+                GalleryImage.update({ _id: photoId }, query, (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(res);
+                });
+            });
+        },
+        editGalleryPhotoComment() {
+
+        },
+        deleteGalleryPhotoComment() {
+
         }
     };
 };
