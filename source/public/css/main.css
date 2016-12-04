@@ -93,9 +93,7 @@ body {
     /*background-color: rgba(92, 165, 255, 0.3);*/
     background-color: #1E74FF;
 }
-.navColor ul{
 
-}
 .navColor ul .searchNav{
     margin-left: 400px;
 }
@@ -181,4 +179,7 @@ footer {
 @media (max-width: 450px) {
     /* Even Smaller devices */
 
+}
+.icons li a img{
+    margin-top: 0;
 }
