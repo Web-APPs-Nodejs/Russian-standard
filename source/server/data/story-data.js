@@ -49,7 +49,7 @@ module.exports = (models) => {
                         if (err) {
                             return reject(err);
                         }
-                        
+
                         Story.count({ hidden: false }, (err, count) => {
                             if (err) {
                                 return reject(err);
@@ -63,6 +63,17 @@ module.exports = (models) => {
                             return resolve(result);
                         });
                     });
+            });
+        },
+        getStoryById(storyId) {
+            return new Promise((resolve, reject) => {
+                Story.findOne({ _id: storyId }, (err, res)  => {
+                    if (err) {
+                        return reject(err);                        
+                    }
+
+                    return resolve(res);
+                });
             });
         }
     };

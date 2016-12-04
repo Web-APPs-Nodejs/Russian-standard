@@ -11,7 +11,8 @@ module.exports = function (app, data) {
     router
         .get('/stories', controllers.getStoriesPage)
         .get('/add-story', controllers.getAddStoryPage)
-        .post('/add-story', controllers.addStory);
+        .post('/add-story', controllers.addStory)
+        .get('/stories/:id', controllers.getSingleStoryPage);
 
     app.use(router);
 };

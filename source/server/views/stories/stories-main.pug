@@ -4,7 +4,7 @@ block styles
     link(href="/res/css/stories.css", rel="stylesheet")
     
 block content
-    .col-md-10.col-md-offset-1
+    .col-md-10.col-md-offset-1.single-story-page
         .row.text-center
             h1 Your story...
         if user
@@ -13,7 +13,7 @@ block content
                 br
         if stories.length
             each story in stories
-                a.thumbnail(href="")
+                a.thumbnail(href="/stories/" + story._id)
                     .row.story-entry
                         .col-md-3
                             img.thumbnail(src= story.pictureUrl, alt= story.title)

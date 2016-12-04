@@ -58,6 +58,26 @@ module.exports = (data) => {
                     console.log(err);
                     res.status(500).json(err);
                 });
+        },
+        getSingleStoryPage(req, res) {
+            let storyId = req.params.id;
+
+            data.getStoryById(storyId)
+                .then((story) => {
+                    if (!story) {
+                        res.status(404);
+                        res.render('page-not-found', { user: req.user });
+                        return;
+                    }
+
+                    res.render('stories/single-story', { user: req.user, story });
+                })
+                .catch((err) => {
+                    console.log(err);
+
+                    res.status(404);
+                    res.render('page-not-found', { user: req.user });
+                });
         }
     };
 };

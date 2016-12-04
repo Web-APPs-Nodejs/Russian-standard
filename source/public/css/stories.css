@@ -10,3 +10,15 @@
 .story-entry img {
     max-width: 100%;
 }
+
+.single-story-picture {
+    max-width: 100%;
+}
+
+.single-story-page {
+    margin-top: 2em;
+}
+
+.panel-left {
+    padding-top: 2em;
+}

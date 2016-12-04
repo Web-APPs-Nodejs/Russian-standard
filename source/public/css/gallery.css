@@ -8,8 +8,8 @@
 
 .gallery-thumb img {
     height: 100%;
-
 }
+
 footer .hideFooter {
     display:none;
 }
@@ -21,9 +21,8 @@ footer .hideFooter {
 .galleryContent{
     height: 1000px;
 }
-}
 
 .panel-footer > p {
     border-bottom: 1px solid lightgray;
     padding-bottom: 1em;
-
+}

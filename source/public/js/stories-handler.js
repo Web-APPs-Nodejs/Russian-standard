@@ -16,8 +16,8 @@
             }
         }
 
-        if (body.title.length < 3 || body.title.length > 30) {
-            toastr.error('The title should be between 3 and 30 symbols!');
+        if (body.title.length < 3 || body.title.length > 50) {
+            toastr.error('The title should be between 3 and 50 symbols!');
             $('#add-story-body').focus();
             return;
         }
