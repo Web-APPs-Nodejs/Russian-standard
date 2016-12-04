@@ -182,7 +182,7 @@ module.exports = (data) => {
                 return;
             }
 
-            let commentBody = req.body,
+            let body = req.body,
                 nowDt = new Date(),
                 commentIsHidden = false,
                 categoryName = req.params.category,
@@ -194,9 +194,11 @@ module.exports = (data) => {
                 return;
             }
 
+            console.log('createCommentToEventButtonAction');
+
             data.getEventById(eventId)
                 .then((dbEvent) => {
-                    return data.createCommentAndAddToEvent(dbEvent, data, req.user, commentBody, nowDt, commentIsHidden, meta)
+                    return data.createCommentAndAddToEvent(dbEvent, data, req.user, body.comment, nowDt, commentIsHidden, meta)
                 })
                 .then((dbEventUpdated) => {
                     res.redirect('/categories/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
