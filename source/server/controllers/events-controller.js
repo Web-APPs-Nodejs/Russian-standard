@@ -175,5 +175,39 @@ module.exports = (data) => {
 
         },
 
+        createCommentToEventButtonAction(req, res) {
+
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page');
+                return;
+            }
+
+            let commentBody = req.body,
+                nowDt = new Date(),
+                commentIsHidden = false,
+                categoryName = req.params.category,
+                eventId = req.params.id,
+                meta = { like: 0 };
+
+            if (!body.comment.trim() || body.comment.length > 100) {
+                res.redirect('/categories/' + categoryName + '/' + body.event._id);
+                return;
+            }
+
+            data.getEventById(eventId)
+                .then((dbEvent) => {
+                    return data.createCommentAndAddToEvent(dbEvent, data, req.user, commentBody, nowDt, commentIsHidden, meta)
+                })
+                .then((dbEventUpdated) => {
+                    res.redirect('/categories/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
+                })
+                .catch((error) => {
+                    res.render('error-page', {
+                        user: res.user,
+                        error: error
+                    });
+                });
+        }
+
     };
 };
