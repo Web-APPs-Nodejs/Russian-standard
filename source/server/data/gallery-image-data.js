@@ -77,26 +77,49 @@ module.exports = (models) => {
             });
         },
         postGalleryPhotoComment(photoId, author, body) {
-            let query = {
-                author,
-                body
-            };
-
             return new Promise((resolve, reject) => {
-                GalleryImage.update({ _id: photoId }, query, (err, res) => {
-                    if (err) {
-                        return reject(err);
+                GalleryImage.findOne({ _id: photoId }, (error, photo) => {
+                    if (error) {
+                        return reject(error);
                     }
 
-                    return resolve(res);
+                    let comment = new models.CommentModel({
+                        author,
+                        body,
+                        hidden: false
+                    });
+
+                    photo.comments.push(comment);
+                    photo.save((err, res) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        return resolve(res);
+                    });
                 });
             });
         },
-        editGalleryPhotoComment() {
+        deleteGalleryPhotoComment(photoId, commentId) {
+            return new Promise((resolve, reject) => {
+                GalleryImage.findOne({ _id: photoId }, (error, photo) => {
+                    if (error) {
+                        return reject(error);
+                    }
 
-        },
-        deleteGalleryPhotoComment() {
+                    var comment = photo.comments.id(commentId);
+                    comment.hidden = true;
+                    
+                    photo.save((err, res) => {
+                        if (err) {
+                            console.log(err);
+                            return reject(err);
+                        }
 
+                        return resolve(res);
+                    });
+                });
+            });
         }
     };
 };

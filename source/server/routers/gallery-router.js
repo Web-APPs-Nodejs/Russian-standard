@@ -12,7 +12,9 @@ module.exports = function (app, data) {
         .get('/gallery', controllers.getGalleryPage)
         .get('/add-photo', controllers.getAddGalleryPhotoPage)
         .post('/add-photo', controllers.addGalleryPhoto)
-        .get('/photo/:id', controllers.getSinglePhotoPage);
+        .get('/photo/:id', controllers.getSinglePhotoPage)
+        .post('/photo/:id/post-comment', controllers.postGalleryPhotoComment)
+        .post('/photo/:id/delete-comment/:commentId', controllers.deleteGalleryPhotoComment);
 
     app.use(router);
 };
