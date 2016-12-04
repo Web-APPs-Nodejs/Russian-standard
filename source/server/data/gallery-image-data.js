@@ -135,6 +135,32 @@ module.exports = (models) => {
                     });
                 });
             });
+        },
+        likeOrDislikePhoto(photoId, user) {
+            return new Promise((resolve, reject) => {
+                GalleryImage.findOne({ _id: photoId }, (error, photo) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    
+                    if (!photo.likes.includes(user.username)) {
+                        photo.likes.push(user.username);
+                    }
+                    else {                        
+                        let index = photo.likes.indexOf(user.username);
+                        photo.likes.splice(index, 1);
+                    }                    
+
+                    photo.save((err, res) => {
+                        if (err) {
+                            console.log(err);
+                            return reject(err);
+                        }
+
+                        return resolve(res);
+                    });
+                });
+            });
         }
     };
 };

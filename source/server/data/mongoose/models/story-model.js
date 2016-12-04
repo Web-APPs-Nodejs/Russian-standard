@@ -3,16 +3,24 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-    commentSchema = require('./comment-model').CommentSchema(),
+    commentSchema = require('./comment-model').CommentSchema(),    
     constants = require('../../../common/constants'),
     Schema = mongoose.Schema;
 
 let schema = new Schema({
-    url: {
+    title: {
         type: String,
         required: true
     },
-    title: {
+    createdOn: {
+        type: Date,
+        default: Date.now
+    },
+    hidden: {
+        type: String,
+        default: false
+    },
+    body: {
         type: String,
         required: true
     },
@@ -25,21 +33,12 @@ let schema = new Schema({
         required: true,
         enum: constants.categories
     },
-    createdOn: {
-        type: Date,
-        default: Date.now
-    },
+    pictureUrl: String,
     comments: [commentSchema],
-    hidden: {
-        type: Boolean,
-        default: false
-    },
-    likes: {
-        type: [String]
-    }
+    likes: [String]
 });
 
-mongoose.model('gallery-image', schema);
-let galleryImage = mongoose.model('gallery-image');
+mongoose.model('story', schema);
+let Story = mongoose.model('story');
 
-module.exports.GalleryImage = galleryImage;
+module.exports.Story = Story;

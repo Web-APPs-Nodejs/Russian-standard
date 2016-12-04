@@ -1,0 +1,25 @@
+extends ../main-frame.pug
+
+block styles
+    link(href="/res/css/stories.css", rel="stylesheet")
+    
+block content
+    .col-md-10.col-md-offset-1
+        .row.text-center
+            h1 Your story...
+        if user
+            .row
+                a.btn.btn-success.btn-md.btn-block(href="/add-story") Add Story
+                br
+        if stories.length
+            each story in stories
+                a.thumbnail(href="")
+                    .row.story-entry
+                        .col-md-3
+                            img.thumbnail(src= story.pictureUrl, alt= story.title)
+                        .col-md-9
+                            h2 #{story.title}
+                            h4 #{story.category}
+                            p #{story.body}
+        else 
+            h3 No stories yet...

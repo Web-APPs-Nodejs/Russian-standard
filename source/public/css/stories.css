@@ -1,0 +1,12 @@
+.story-entry {
+    height: 11em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
+
+.story-entry img {
+    max-width: 100%;
+}
