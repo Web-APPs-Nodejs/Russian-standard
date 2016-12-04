@@ -16,15 +16,7 @@
 
 ##<a href="http://github.com/Web-APPs-Nodejs/Russian-standard/blob/master/Project-Requirements.md">Project Requirements</a>  
 
-
 ##<a href="./documentation/README.md">Project Description</a>  
-
-This is a  simple single page application for ski, board and bicycle fans..
-
-It is an open-closed :) group for extreme and regular activities. 
-People can joint the group by creating account. After the account is approved by admin the user can start creating events or join to already present.
-
-##Project Description
 
 ###SSB: Extreme sport
 
@@ -36,7 +28,7 @@ Programmer bookstore was developed with __Node.js__, __Express__, __Passport__ a
 
 
 The application is a specific SSB: Extreme sport for passionate skiers, snowboarders and bikers. The users can find the best resources for sports events, cool pictures and shred stories. 
-The Standard Web application have navigation Home/Events/Stories/Gallery/Contacts. Every user can have a private profile by Sign Up - Log in/Log out functionality. Have the option to login with facebook account. Evry user can add events, stories or pictures. Can leave comments above the pictures from Gallery section. The APP provide an option to have access to the most popular sites for online shops. Our application uses third-party API to Share status to Facebook, Linkedin, Twitter, etc...
+The Standard Web application have navigation Home/Events/Stories/Gallery/Contacts. Every user can have a private profile by Sign Up - Log in/Log out functionality. Have the option to login with facebook account. Evry user can creating events or join to already present, add stories or pictures. Can leave comments above the pictures from Gallery section. The APP provide an option to have access to the most popular sites for online shops. Our application uses third-party API to Share status to Facebook, Linkedin, Twitter, etc...
 
 ###Deliverables
   * Record a short video showcasing your application - <a href="#">SSB: Extreme sport video</a>
