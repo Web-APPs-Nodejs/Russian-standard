@@ -15,11 +15,16 @@ block content
     //-----------------------------------------------
     //-Page content start
 
+    //.event-banner
+    //    img(src="/res/images/all-main.jpg", height=100 alt="extreme-sports-main-all")
+    //    span Hey man, do a can-can ski fahren?!
+    //    = '\n'
+    //    = '\n'
+
     .event-banner
-        img(src="/res/images/all-main.jpg", height=100 alt="extreme-sports-main-all")
-        span Hey man, do a can-can ski fahren?!
-        = '\n'
-        = '\n'
+        each pictureFromGallery in event.latestPicturesFromGallery
+            - var alt = 'event picture ' + event.category;
+            img(src=pictureFromGallery.url, width=150, height=100, alt=alt)
 
     .event-conntent
         // Event pictures part
@@ -61,8 +66,8 @@ block content
                         +link(hrefUser, userParticipating)
                         ='\n'
 
-        +link('/categories/ski/interested/' + event._id, 'Im interested too')(class="btn btn-default" role="button")
-        +link('/categories/ski/sure-participate/' + event._id, 'I will participate')(class="btn btn-default" role="button")
+        +link('/events/ski/interested/' + event._id, 'Im interested too')(class="btn btn-default" role="button")
+        +link('/events/ski/sure-participate/' + event._id, 'I will participate')(class="btn btn-default" role="button")
 
 
 

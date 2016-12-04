@@ -11,7 +11,7 @@ block content
         .ski-event
             - var id = event._id
             - var title = event.title
-            - var url = '/categories/' + id
+            - var url = '/events/' + id
             - var src = '/res/images/ski-main.jpg'
             img(src=src, width=30, height=30, alt="extreme-sports-event-main-picture")
             a(href=url)= title
@@ -26,7 +26,7 @@ block content
 
     .ski-banner.banner-extra-styles
         img.left(src="/res/images/ski-main.jpg", width=300 alt="extreme-sports-ski")
-        span All categories for ski, bike, snowboard, where you can create and check new events?!
+        span All events for ski, bike, snowboard, where you can create and check new events?!
 
     each event in events
         +ski-event(event)

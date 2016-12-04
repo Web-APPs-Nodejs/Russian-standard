@@ -14,7 +14,7 @@ block content
         img.left(src='/res/images/' + category + '-main.jpg', width=300 alt='extreme-sports' + category)
         span Hey man, do a can-can category fahren?!
 
-    +link('/categories/add-event/' + category, 'Add ' + category + ' event')(class="btn btn-default text-right" role="button")
+    +link('/events/add-event/' + category, 'Add ' + category + ' event')(class="btn btn-default text-right" role="button")
 
     each event in events
         //p #{event}
