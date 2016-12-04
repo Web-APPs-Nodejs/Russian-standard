@@ -1,3 +1,11 @@
 .gallery-single-photo > img {
     max-width: 100%;
 } 
+
+.gallery-thumb {
+    height: 14em;
+}
+
+.gallery-thumb img {
+    height: 100%;
+}
