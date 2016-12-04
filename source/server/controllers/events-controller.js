@@ -91,9 +91,9 @@ module.exports = (data) => {
                 nowDt = new Date(),
                 eventIsHidden = false,
                 categoryName = req.params.categoryName,
-                pictureUrl = req.body.eventPicture;
+                picture =  { src: req.body.eventPicture };
 
-            data.createAndSaveEvent(body.title, categoryName, pictureUrl, req.user, body.body, nowDt, eventIsHidden, req)
+            data.createAndSaveEvent(body.title, categoryName, picture, req.user, body.body, nowDt, eventIsHidden, req)
                 .then((dbEvent) => {
 
                     // res.redirect(201, '/categories/ski');
