@@ -1,29 +1,23 @@
 extends ../main-frame.pug
 
+block styles
+    link(href="/res/css/gallery.css", rel="stylesheet")    
+
 block content
         .col-md-10.col-md-offset-1
             .row.text-center.heading-gallery
-                if user
-                    .row.text-center
-                        h1 Gallery
-                            span.pull-right
-                                a.btn.btn-success.btn-md.btn-block#btn-add-gallery-photo(href="add-photo") Add Photo
-                else
-                    .row.text-center
-                        h1 Gallery
+                .row.text-center
+                    h1 Gallery
 
             if galleryImages.length && !galleryImages.every(x => x.hidden == true)
                 .row
                     each image in galleryImages
                         if !image.hidden
-                            .col-md-3.thumbnail.gallery-panel.text-center
-                                a.zoom(href="/photo/" + image._id, title= image.title, data-type="image", data-toggle="lightbox")
+                            .col-md-3
+                                a.thumbnail.text-center.gallery-thumb(href="/photo/" + image._id, title= image.title, data-type="image", data-toggle="lightbox")                               
                                     img.image-gallery(src= image.url, alt= image.title)
-                                    a(href='#', title= image.title)= image.title
-                                    if user
-                                        span.pull-right
-                                            #like1.glyphicon.glyphicon-thumbs-up
-                                            #dislike1.glyphicon.glyphicon-thumbs-down
+                if user
+                      a.btn.btn-success.btn-md.btn-block#btn-add-gallery-photo(href="add-photo") Add Photo
                 .row.text-center
                     ul.pagination
                         if page == 1
@@ -46,4 +40,6 @@ block content
             else
                 .row.text-center
                     h3 No photos yet...
+                if user
+                      a.btn.btn-success.btn-md.btn-block#btn-add-gallery-photo(href="add-photo") Add Photo
 

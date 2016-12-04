@@ -82,7 +82,7 @@ module.exports = (models) => {
         },
         getGalleryPhotoById(id) {
             return new Promise((resolve, reject) => {
-                GalleryImage.findOne({ _id: id }, (err, res) => {
+                GalleryImage.findOne({ _id: id, hidden: false }, (err, res) => {
                     if (err) {
                         return reject(err);
                     }

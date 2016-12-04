@@ -77,12 +77,19 @@ module.exports = (data) => {
 
             data.getGalleryPhotoById(imageId)
                 .then((image) => {
+                    if (!image) {
+                        res.status(404);
+                        res.render('page-not-found');
+                        return;
+                    }
+
                     res.render('gallery/single-photo-page', { user: req.user, image });
                 })
                 .catch((err) => {
                     console.log(err);
 
-                    res.status(404).json('No such item found!');
+                    res.status(404);
+                    res.render('page-not-found');
                 });
         },
         postGalleryPhotoComment(req, res) {
