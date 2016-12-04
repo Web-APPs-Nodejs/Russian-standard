@@ -73,10 +73,10 @@ module.exports = (data) => {
                 data.getEventByCategoryAndId(categoryName, eventId)
                     .then((event) => {
                         // TODO remove before production :)
-                        //console.log(event);
+                        console.log(event);
                         res.render('./events/single-event-page', {
                             user: req.user,
-                            category: categoryName,
+                            //category: categoryName,
                             event: event
                         });
                     })

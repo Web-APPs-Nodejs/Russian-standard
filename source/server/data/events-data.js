@@ -142,7 +142,7 @@ module.exports = (models) => {
         getEventByCategoryAndId(categoryName, eventId) {
             return new Promise((resolve, reject) => {
                 EventModel
-                    .find()
+                    .findOne()
                     .where('_id').equals(eventId)
                     .where('category').equals(categoryName)
                     .limit(300)
@@ -151,7 +151,7 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
-                        console.log('All events in ' + categoryName + ' are found.');
+                        console.log('Single events in ' + categoryName + ' with id ' + eventId + ' is found.');
 
                         return resolve(events);
                     });

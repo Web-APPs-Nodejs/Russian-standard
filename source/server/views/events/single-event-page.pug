@@ -4,6 +4,7 @@ block content
 
     //-----------------------------------------------
     // Declarations start
+
     mixin link(href, name)
         //- attributes == {class: "btn"}
         .button-wrapper
@@ -12,17 +13,28 @@ block content
 
     mixin draw-single-event-details(event)
 
+
+            each picture in event.pictures
+                - var src = picture.src;
+                - var alt = 'event picture ' + picture.alt;
+                img(src=event.pictures[0].src, width=150, height=100, alt=alt)
+
             .event-with-detail-draw-wrapper-author
-                //each picture in event.pictures
-                - var src = '/res/images/ski-main.jpg'
-                - var alt = '/categories/ski/' + 'event.picture._id' // put later picture.alt
-                - var hrefUser = '/profile/' + event.author
-                img(src=src, width=40, height=30, alt=alt)
-                +link(hrefUser, event.author)
+                img(src=event.author.profilePicture.src, width=150, alt='profile picture ' + event.author.username)
+
+                - var hrefUser = '/profile/' + event.author.username
+                +link(hrefUser, event.author.username)
 
             .event-with-detail-draw-wrapper-buttons
+                - var interestedInCount = event.interestedIn.length + ' people interested in going';
+                - var participatingInCount = event.participatingIn.length + ' people paricipating in going';
+                    p #{interestedInCount}
+                    ='\n'
+                    p #{participatingInCount}
+
                 +link('/categories/ski/interested/' + event._id, 'Im interested')(class="btn btn-default" role="button")
                 +link('/categories/ski/sure-participate/' + event._id, 'I will sure participate')(class="btn btn-default" role="button")
+
             .event-with-detail-draw-wrapper-event-draw-body
                 h2 #{event.title}
                 = '\n'
@@ -40,13 +52,17 @@ block content
     //-----------------------------------------------
     //-Page content start
 
-    //h3 logged in user: #{user}
+
 
     .single-event-banner
+        = '\n'
+        = '\n'
+        = '\n'
         img(src="/res/images/all-main.jpg", height=100 alt="extreme-sports-main-all")
-        span Hey man, do a can-can ski fahren?! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit odio quis congue aliquam. Cras non placerat neque. Fusce suscipit tempus turpis. Aenean tempus scelerisque nunc, a vulputate sapien pharetra blandit. Donec sit amet massa iaculis, accumsan orci quis, malesuada lorem. Aenean rhoncus molestie congue. Integer sem ligula, auctor ut sodales at, lobortis vel magna. Maecenas convallis metus et libero lacinia, et ultricies ipsum pretium. Etiam vitae blandit leo, hendrerit gravida ex. Quisque malesuada varius luctus. Ut interdum dignissim porta. Vivamus suscipit, nulla in porttitor mattis, libero dui fringilla lectus, eu scelerisque tortor lacus a magna. Aenean fermentum in ante a vestibulum. Maecenas vel gravida lorem, eget vulputate urna. Praesent ultricies nisl ac vestibulum suscipit. Quisque dapibus sodales leo, quis laoreet magna vulputate non.
+        span Hey man, do a can-can ski fahren?!
         = '\n'
         = '\n'
+
 
     .event-with-detail-draw-wrapper.clearfix
         +draw-single-event-details(event)
@@ -62,3 +78,5 @@ block content
                 input#add-comment-body.form-control(type='text', placeholder='text', name="body" required='', autofocus='true')
                 br
                 button#add-comment-button.btn.btn-md.btn-success.btn-block(type='submit' onclick="return false") Add comment
+
+
