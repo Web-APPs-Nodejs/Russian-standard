@@ -102,25 +102,6 @@ module.exports = (models) => {
             });
         },
 
-        // addUsernameToEventSureParticipatingList(event, username) {
-        //
-        //     event.participatingIn.push(username);
-        //
-        //     // TODO remove before production :)
-        //     //console.log('addUsernameToEventSureParticipatingList-event ' + JSON.stringify(event));
-        //     //console.log('addUsernameToEventSureParticipatingList-username ' + username);
-        //
-        //     return new Promise(function (resolve, reject) {
-        //         event.save((error, result) => {
-        //             if (error) {
-        //                 return reject(error);
-        //             }
-        //
-        //             return resolve(result);
-        //         });
-        //     });
-        // },
-
         getAllEvents(){
             return new Promise(function (resolve, reject) {
                 EventModel
