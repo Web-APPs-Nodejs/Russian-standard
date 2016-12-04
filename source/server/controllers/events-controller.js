@@ -25,7 +25,7 @@ function addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayNa
                 // TODO remove before production :)
                 // console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEventUpdated._id);
 
-                res.redirect('/categories/ski/' + dbEventUpdated._id);
+                res.redirect('/categories/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
             })
             .catch((error)=>{
                 res.render('error-page', {
@@ -74,7 +74,7 @@ module.exports = (data) => {
                     .then((events) => {
                         // TODO remove before production :)
                         //console.log(events);
-                        
+
                         res.render('./events/all-categories-page', {
                             user: req.user,
                             category: 'all',
@@ -141,14 +141,14 @@ module.exports = (data) => {
                     // res.status(400).send(err);
                     // res.redirect('/update-info');
                     // TODO remove before production :)
-                    console.log('createAndSaveEvent in controller - then-' + JSON.stringify(dbEvent));
+                    //console.log('createAndSaveEvent in controller - then-' + JSON.stringify(dbEvent));
                     data.putEventInUsersEvents(dbEvent, req.user, data.updateUserInfo);
 
                     return dbEvent;
                 })
                 .then((dbEvent)=>{
                     // TODO remove before production :)
-                    console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
+                    //console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
                     // return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
                     return data.addUsernameToEventPropertyArray(dbEvent, req.user.username, 'participatingIn')
                 })
