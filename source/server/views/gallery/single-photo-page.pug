@@ -17,6 +17,9 @@ block content
             | Created on: #{image.createdOn}
             br
             | Category: #{image.category}
+            if user && (user.username == image.author || user.role == "admin")   
+                form(action="/delete-photo/" + image._id, method="POST")                              
+                    button.btn.btn-xs.btn-danger(type="submit") Delete Photo
             br
             if image.comments.length != 0 && !image.comments.every(x => x.hidden === true)
                 .panel.text-center
@@ -29,7 +32,7 @@ block content
                                     a(href="/profile/" + comment.author)= comment.author
                                     br
                                     | Created on: #{comment.date}   
-                                    if user.username == comment.author || user.role == "admin"   
+                                    if user && (user.username == comment.author || user.role == "admin")   
                                         form(action="/photo/" + image._id + "/delete-comment/" + comment._id, method="POST")                              
                                             button.btn.btn-xs.btn-danger(type="submit") Delete Comment
                                         

@@ -11,7 +11,7 @@ module.exports = (models) => {
             const pageSize = 12;
 
             return new Promise((resolve, reject) => {
-                GalleryImage.find()
+                GalleryImage.find({ hidden: false })
                     .skip((page - 1) * pageSize)
                     .sort({ 'createdOn': -1 })
                     .limit(pageSize)
@@ -20,7 +20,7 @@ module.exports = (models) => {
                             return reject(err);
                         }
 
-                        GalleryImage.count((err, count) => {
+                        GalleryImage.count({ hidden: false }, (err, count) => {
                             if (err) {
                                 return reject(err);
                             }
@@ -62,6 +62,21 @@ module.exports = (models) => {
                     }
 
                     return resolve(res);
+                });
+            });
+        },
+        deleteGalleryPhoto(photoId) {
+            return new Promise((resolve, reject) => {
+                GalleryImage.findOne({ _id: photoId }, (err, photo) => {
+                    console.log(photo);
+                    photo.hidden = true;
+                    photo.save((error, res) => {
+                        if (error) {
+                            return reject(error);
+                        }
+
+                        return resolve(res);
+                    });
                 });
             });
         },
@@ -109,7 +124,7 @@ module.exports = (models) => {
 
                     var comment = photo.comments.id(commentId);
                     comment.hidden = true;
-                    
+
                     photo.save((err, res) => {
                         if (err) {
                             console.log(err);

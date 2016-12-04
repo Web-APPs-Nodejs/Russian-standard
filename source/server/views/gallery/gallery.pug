@@ -12,17 +12,18 @@ block content
                     .row.text-center
                         h1 Gallery
 
-            if galleryImages.length
+            if galleryImages.length && !galleryImages.every(x => x.hidden == true)
                 .row
                     each image in galleryImages
-                        .col-md-3.thumbnail.gallery-panel.text-center
-                            a.zoom(href="/photo/" + image._id, title= image.title, data-type="image", data-toggle="lightbox")
-                                img.image-gallery(src= image.url, alt= image.title)
-                                a(href='#', title= image.title)= image.title
-                                if user
-                                    span.pull-right
-                                        #like1.glyphicon.glyphicon-thumbs-up
-                                        #dislike1.glyphicon.glyphicon-thumbs-down
+                        if !image.hidden
+                            .col-md-3.thumbnail.gallery-panel.text-center
+                                a.zoom(href="/photo/" + image._id, title= image.title, data-type="image", data-toggle="lightbox")
+                                    img.image-gallery(src= image.url, alt= image.title)
+                                    a(href='#', title= image.title)= image.title
+                                    if user
+                                        span.pull-right
+                                            #like1.glyphicon.glyphicon-thumbs-up
+                                            #dislike1.glyphicon.glyphicon-thumbs-down
                 .row.text-center
                     ul.pagination
                         if page == 1

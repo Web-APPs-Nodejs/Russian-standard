@@ -55,6 +55,23 @@ module.exports = (data) => {
                     res.status(500).json(err);
                 });
         },
+        deleteGalleryPhoto(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page');
+                return;
+            }
+            console.log(req);
+            let photoId = req.params.id;
+            console.log(photoId);
+            data.deleteGalleryPhoto(photoId)
+                .then(() => {
+                    res.redirect('/gallery');
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.redirect('/gallery');
+                });
+        },
         getSinglePhotoPage(req, res) {
             let imageId = req.params.id;
 

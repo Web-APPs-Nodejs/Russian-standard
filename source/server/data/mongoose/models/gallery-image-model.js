@@ -29,7 +29,11 @@ let schema = new Schema({
         type: Date,
         default: Date.now
     },
-    comments: [commentSchema]
+    comments: [commentSchema],
+    hidden: {
+        type: Boolean,
+        default: false
+    }
 });
 
 mongoose.model('gallery-image', schema);
