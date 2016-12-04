@@ -26,7 +26,10 @@ block content
                     if userData.age
                         p Age: #{userData.age}
                     if userData.role == 'admin'
-                        p Role: ADMIN
+                        p ADMIN
+                    if user && (userData.role != 'admin' && user.role == 'admin')
+                        form(action="/profile/" + userData.username + "/update-user-status", method="POST")
+                            button.btn.btn-md.btn-warning(type="submit") Promote to Admin
                     if user && user.username == userData.username
                         a.btn.profile(href="/update-info") Update Info
                 

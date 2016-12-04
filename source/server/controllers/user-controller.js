@@ -64,7 +64,7 @@ module.exports = (data) => {
                             newData[key] = req.body[key];
                         }
                         else {
-                            newData.profilePicture = { 
+                            newData.profilePicture = {
                                 src: req.body[key]
                             };
                         }
@@ -79,7 +79,29 @@ module.exports = (data) => {
                     res.status(400).send(err);
                     res.redirect('/update-info');
                 });
+        },
+        createAdmin(req, res) {
+            if (!req.isAuthenticated() || req.user.role !== 'admin') {
+                res.render('auth-not-authorised-page', { user: req.user });
+                return;
+            }
 
+            let targetUser = {
+                username: req.params.username
+            };
+
+            let newData = {
+                role: 'admin'
+            };
+            
+            data.updateUserInfo(targetUser, newData)
+                .then((result) => {
+                    res.redirect('/profile/' + result.username);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.render('auth-not-authorised-page', { user: req.user });
+                });
         }
     };
 };
