@@ -66,8 +66,8 @@ module.exports = (data) => {
             let categoryName=req.params.category;
             let eventId=req.params.id;
 
-            console.log('categoryName ' + categoryName);
-            console.log('eventId ' + eventId);
+            console.log('categoryName: ' + categoryName);
+            console.log('eventId: ' + eventId);
 
             if(!categoryName && !eventId){
                 data.getAllEvents(req, res)
@@ -76,6 +76,7 @@ module.exports = (data) => {
                         //console.log(events);
                         res.render('./events/all-categories-page', {
                             user: req.user,
+                            category: 'all',
                             events: events
                         });
                     })
@@ -105,6 +106,7 @@ module.exports = (data) => {
                         //console.log(event);
                         res.render('./events/single-event-page', {
                             user: req.user,
+                            category: event.category,
                             event: event
                         });
                     })
@@ -146,7 +148,8 @@ module.exports = (data) => {
                 .then((dbEvent)=>{
                     // TODO remove before production :)
                     console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
-                    return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
+                    // return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
+                    return data.addUsernameToEventPropertyArray(dbEvent, req.user.username, 'participatingIn')
                 })
                 .then((dbEventUpdated)=>{
                     // TODO remove before production :)
