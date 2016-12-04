@@ -7,6 +7,7 @@
 
 module.exports = (models) => {
     var CommentModel = models.CommentModel;
+    var GalleryImage = models.GalleryImage;
 
     return {
         commentCreate(author, body, date, hidden = false, meta){
@@ -74,5 +75,40 @@ module.exports = (models) => {
                 });
             });
         },
+
+        getLatestPicturesByCategory(categoryName, picturesCount) {
+
+            return new Promise((resolve, reject) => {
+
+                var categoryNameCapitalised = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+                GalleryImage
+                    .find()
+                    // .where('category').equals(categoryName)
+                    .where('category').equals(categoryNameCapitalised)
+                    .limit(picturesCount)
+                    .sort('-date')
+                    .exec(function (error, pictures) {
+                        if(error){
+                            return reject(error);
+                        }
+                        // TODO remove before production :)
+                        //console.log('Pictures found-' + pictures);
+
+                        return resolve(pictures);
+                    });
+            });
+
+
+            return new Promise((resolve, reject) => {
+                GalleryImage.find({ _id: commentId }, (error, comment) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    console.log('Single comment in with _id ' + commentId + ' is found.');
+
+                    return resolve(comment);
+                });
+            });
+        }
     };
 };

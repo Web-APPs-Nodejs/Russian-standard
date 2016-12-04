@@ -170,6 +170,7 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
+                        // TODO remove before production :)
                         console.log('Single events in ' + categoryName + ' with id ' + eventId + ' is found.');
 
                         return resolve(events);
