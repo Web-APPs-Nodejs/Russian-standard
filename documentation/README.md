@@ -13,7 +13,7 @@ Share your ideas, share your event, lets ride together
 
 ##Project Description
 
-This is a  simple single page application for ski, board and bicycle fans.
+This is a Standard Web application for ski, board and bicycle fans.
 
 It is an open-closed :) group for extreme and regular activities. 
 People can joint the group by creating account. After the account is approved by admin the user can start creating events or join to already present.
