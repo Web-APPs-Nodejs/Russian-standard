@@ -9,13 +9,13 @@ module.exports = (models) => {
     var CommentModel = models.CommentModel;
 
     return {
-        commentCreate(author, body, date, hidden = false){
+        commentCreate(author, body, date, hidden = false, meta){
             var commentObject = {
                 author: author,
                 body: body,
                 date: date,
                 hidden: hidden ,
-                meta: { like: 0 }
+                meta: meta
             };
 
             return new Promise((resolve, reject) => {

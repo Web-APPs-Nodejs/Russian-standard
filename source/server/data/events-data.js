@@ -6,7 +6,7 @@
 'use strict';
 
 const validate  = require('./utilities').validate;
-const updateUserInfoFromData = require('./users-data')
+const updateUserInfoFromData = require('./users-data');
 
 module.exports = (models) => {
     var EventModel = models.EventModel;
@@ -99,6 +99,25 @@ module.exports = (models) => {
 
                     return resolve(result);
                 });
+            });
+        },
+
+        createCommentAndAddToEvent(event, data, author, commentBody, nowDt, commentIsHidden, meta){
+
+            return new Promise(function (resolve, reject) {
+                validate.isValidCommentBodyString(commentBody)
+                    .then(() => {
+                        return data.commentCreate(author, commentBody, nowDt, commentIsHidden, meta)
+                    })
+                    .then((comment)=>{
+                        return data.commentAddToEvent(event, comment);
+                    })
+                    .then((dbEventUpdated)=>{
+                        return resolve (dbEventUpdated);
+                    })
+                    .catch((error) => {
+                        return reject(error);
+                    });
             });
         },
 

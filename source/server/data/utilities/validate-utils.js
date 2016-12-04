@@ -39,8 +39,6 @@ var validatePictureObject = function(pictureObj, req) {
     // http://localhost:3001/res/images/default-image.png
     const defaultPicture = { src: 'http://' + req.headers.host + '/res/images/default-image.png' };
 
-
-
     var _picture = defaultPicture;
 
     if((pictureObj == undefined) || (pictureObj == null)){
@@ -58,8 +56,27 @@ var validatePictureObject = function(pictureObj, req) {
     return _picture;
 };
 
+var isValidCommentBodyString = function(commentBody) {
+
+    if((commentBody == undefined) || (commentBody == null)){
+
+        return Promise.resolve(false);
+    }
+    if(!(commentBody === '')){
+
+        return Promise.resolve(false);
+    }
+    if(!(commentBody.length() > 200)){
+
+        return Promise.resolve(false);
+    }
+
+    return Promise.resolve(true);
+};
+
 module.exports.validate = {
     categoryName: validateCategoryName,
-    pictureObject: validatePictureObject
+    pictureObject: validatePictureObject,
+    isValidCommentBodyString: isValidCommentBodyString
 };
 
