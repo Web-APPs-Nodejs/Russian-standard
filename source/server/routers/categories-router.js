@@ -12,16 +12,16 @@ module.exports = function (app, data) {
     let eventsController = require('../controllers/events-controller')(data);
 
     router
-        .get('/', eventsController.getEventsPage)
-        .get('/categories/add-event', eventsController.getCreateEventPage )
-        .get('/categories/add-event/:categoryName', eventsController.getCreateEventPage )
-        .post('/categories/add-event/:categoryName', eventsController.createEvent )
+        .get('/events/', eventsController.getEventsPage)
+        .get('/events/add-event', eventsController.getCreateEventPage )
+        .get('/events/add-event/:categoryName', eventsController.getCreateEventPage )
+        .post('/events/add-event/:categoryName', eventsController.createEvent )
         .post('/comments/post-comment-to-event/:id', eventsController.createCommentToEventButtonAction )
-        .get('/categories/:category', eventsController.getEventsPage)
-        .get('/categories/:category/:id', eventsController.getEventsPage)
-        .get('/categories/:category/sure-participate/:id', eventsController.getIncreaseParticipatingInEventButtonAction)
-        .get('/categories/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction)
-        .get('/categories/:category/:id', eventsController.getIncreaseInterestedInEventButtonAction);
+        .get('/events/:category', eventsController.getEventsPage)
+        .get('/events/:category/:id', eventsController.getEventsPage)
+        .get('/events/:category/sure-participate/:id', eventsController.getIncreaseParticipatingInEventButtonAction)
+        .get('/events/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction)
+        .get('/events/:category/:id', eventsController.getIncreaseInterestedInEventButtonAction);
 
     // app.use('/categories',  router);
     app.use(router);
