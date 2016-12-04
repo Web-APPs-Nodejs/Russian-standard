@@ -48,7 +48,8 @@ var userSchema = function () {
         facebookId: String,
         facebookToken: String,      
         addedPhotos: [{}],
-        addedEvents: [{}]
+        addedEvents: [{}],
+        addedStories: [{}]
     });
 
     userSchemaToReturn.method({
