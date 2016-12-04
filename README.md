@@ -23,3 +23,24 @@ This is a  simple single page application for ski, board and bicycle fans..
 
 It is an open-closed :) group for extreme and regular activities. 
 People can joint the group by creating account. After the account is approved by admin the user can start creating events or join to already present.
+
+##Project Description
+
+###SSB: Extreme sport
+
+Design and implement a Standard Web application using Node.js, Express and MongoDB. Our project is a page with the goal of providing a user experience similar to that of a Extreme sport desktop application. All necessary code – __HTML5__, __JavaScript__, and __CSS3__ – is retrieved as Standard Web application using Node.js.
+Programmer bookstore was developed with __Node.js__, __Express__, __Passport__ and __Twitter Bootstrap__ for our UI design. We implemented __OOP design__ as our application logic using objects, modules, and __ES2015__ standart. Our Standard Web application uses third-party API to share a book to Facebook.
+
+* Used __GIT__ as source control system. 
+* Hosted on __Heroku__: <a href="#">SSB: Extreme sport</a>
+
+
+The application is a specific SSB: Extreme sport for passionate skiers, snowboarders and bikers. The users can find the best resources for sports events, cool pictures and shred stories. 
+The Standard Web application have navigation Home/Events/Stories/Gallery/Contacts. Every user can have a private profile by Sign Up - Log in/Log out functionality. Have the option to login with facebook account. Evry user can add events, stories or pictures. Can leave comments above the pictures from Gallery section. The APP provide an option to have access to the most popular sites for online shops. Our application uses third-party API to Share status to Facebook, Linkedin, Twitter, etc...
+
+###Deliverables
+  * Record a short video showcasing your application - <a href="#">SSB: Extreme sport video</a>
+  * Registered application at Telerik Academy Showcase System - <a href="#">Showcase System - SSB: Extreme sport</a>
+  * Link for the GitHub repository of our App - <a href="https://github.com/Web-APPs-Nodejs/Russian-standard">SSB: Extreme sport GitHub repository</a>
+  * Link to the presentation - <a href="#">SSB: Extreme sport presentation</a>
+  * Hosted application on a server, link - <a href="#">SSB: Extreme sport hosted on Heroku</a>
