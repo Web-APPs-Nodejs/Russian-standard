@@ -9,3 +9,10 @@
 .gallery-thumb img {
     height: 100%;
 }
+footer .hideFooter {
+    display:none;
+}
+
+.gallery {
+    height: 50px;
+}
