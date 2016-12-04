@@ -14,8 +14,8 @@ module.exports = (models) => {
     return {
         createAndSaveEvent(title, category, picture, author, body, date, hidden = false, req){
 
-            var _category = validate.category(category);
-            var _picture = validate.picture(picture, req);
+            var _category = validate.categoryName(category);
+            var _picture = validate.pictureObject(picture, req);
 
             // TODO remove before production :)
             //console.log('picture- '+ JSON.stringify(_picture));
@@ -85,11 +85,11 @@ module.exports = (models) => {
             });
         },
 
-        addUsernameToEventSureParticipatingList(event, username) {
+        addUsernameToEventPropertyArray(event, username, propertyArrayName) {
 
-            event.participatingIn.push(username);
-
-            //console.log('addUsernameToEventSureParticipatingList');
+            event[propertyArrayName].push(username);
+            // TODO remove before production :)
+            console.log('addUsernameToEventPropertyArray-event[' + propertyArrayName + '] ' + JSON.stringify(event));
 
             return new Promise(function (resolve, reject) {
                 event.save((error, result) => {
@@ -101,6 +101,25 @@ module.exports = (models) => {
                 });
             });
         },
+
+        // addUsernameToEventSureParticipatingList(event, username) {
+        //
+        //     event.participatingIn.push(username);
+        //
+        //     // TODO remove before production :)
+        //     //console.log('addUsernameToEventSureParticipatingList-event ' + JSON.stringify(event));
+        //     //console.log('addUsernameToEventSureParticipatingList-username ' + username);
+        //
+        //     return new Promise(function (resolve, reject) {
+        //         event.save((error, result) => {
+        //             if (error) {
+        //                 return reject(error);
+        //             }
+        //
+        //             return resolve(result);
+        //         });
+        //     });
+        // },
 
         getAllEvents(){
             return new Promise(function (resolve, reject) {
@@ -152,6 +171,22 @@ module.exports = (models) => {
                             return reject(error);
                         }
                         console.log('Single events in ' + categoryName + ' with id ' + eventId + ' is found.');
+
+                        return resolve(events);
+                    });
+            });
+        },
+
+        getEventById(eventId) {
+            return new Promise((resolve, reject) => {
+                EventModel
+                    .findOne()
+                    .where('_id').equals(eventId)
+                    .exec(function (error, events) {
+                        if(error){
+                            return reject(error);
+                        }
+                        console.log('Single events in with id ' + eventId + ' is found.');
 
                         return resolve(events);
                     });

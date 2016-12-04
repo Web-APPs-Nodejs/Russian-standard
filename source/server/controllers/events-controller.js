@@ -7,8 +7,37 @@
 
 const passport = require('passport');
 
-var putEventInUsersEvents = function () {
+function addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayName) {
+    let eventId=req.params.id;
 
+    // TODO remove before production :)
+    //console.log('getIncreaseParticipatingInEventButtonAction' + req.user.username);
+
+    if (req.isAuthenticated()) {
+        data.getEventById(eventId)
+            .then((dbEvent)=>{
+                // TODO remove before production :)
+                //console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEvent._id);
+
+                return data.addUsernameToEventPropertyArray(dbEvent, req.user.username, propertyArrayName);
+            })
+            .then((dbEventUpdated) => {
+                // TODO remove before production :)
+                // console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEventUpdated._id);
+
+                res.redirect('/categories/ski/' + dbEventUpdated._id);
+            })
+            .catch((error)=>{
+                res.render('error-page', {
+                    user: res.user,
+                    error: error
+                });
+            });
+    } else {
+        res.render('auth-not-authorised-page', {
+            user: res.user
+        });
+    }
 }
 
 module.exports = (data) => {
@@ -44,7 +73,7 @@ module.exports = (data) => {
                 data.getAllEvents(req, res)
                     .then((events) => {
                         // TODO remove before production :)
-                        console.log(events);
+                        //console.log(events);
                         res.render('./events/all-categories-page', {
                             user: req.user,
                             events: events
@@ -73,10 +102,9 @@ module.exports = (data) => {
                 data.getEventByCategoryAndId(categoryName, eventId)
                     .then((event) => {
                         // TODO remove before production :)
-                        console.log(event);
+                        //console.log(event);
                         res.render('./events/single-event-page', {
                             user: req.user,
-                            //category: categoryName,
                             event: event
                         });
                     })
@@ -85,6 +113,18 @@ module.exports = (data) => {
                     });
             }
         },
+
+        getIncreaseInterestedInEventButtonAction(req, res) {
+            let propertyArrayName='interestedIn';
+            addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayName);
+        },
+
+        getIncreaseParticipatingInEventButtonAction(req, res) {
+            let propertyArrayName='participatingIn';
+            addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayName);
+        },
+
+
 
         createEvent(req, res) {
             let body = req.body,
@@ -99,28 +139,21 @@ module.exports = (data) => {
                     // res.redirect(201, '/categories/ski');
                     // res.status(400).send(err);
                     // res.redirect('/update-info');
+                    // TODO remove before production :)
                     console.log('createAndSaveEvent in controller - then-' + JSON.stringify(dbEvent));
                     data.putEventInUsersEvents(dbEvent, req.user, data.updateUserInfo);
 
                     return dbEvent;
                 })
                 .then((dbEvent)=>{
+                    // TODO remove before production :)
                     console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
                     return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
                 })
                 .then((dbEventUpdated)=>{
+                    // TODO remove before production :)
                     console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
                     res.redirect('/categories/ski');
-
-                    // .catch((error)=>{
-                    //     res.render('error-page', {
-                    //         user: req.user,
-                    //         error: error
-                    //     });
-                    //     // Mitak ? OR
-                    //     // throw error;
-                    //     // mislq, che throw shte e po dobre ?
-                    // });
                 })
                 .catch((error) => {
                     var statusCode = 400;
@@ -138,8 +171,7 @@ module.exports = (data) => {
 
                 });
 
-        }
-
+        },
 
     };
 };

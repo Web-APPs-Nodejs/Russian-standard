@@ -11,65 +11,62 @@ block content
             //<a class="btn btn-default" href="#" role="button">Link</a>
             a(class!=attributes.class href=href)= name
 
-    mixin draw-single-event-details(event)
-
-
-            each picture in event.pictures
-                - var src = picture.src;
-                - var alt = 'event picture ' + picture.alt;
-                img(src=event.pictures[0].src, width=150, height=100, alt=alt)
-
-            .event-with-detail-draw-wrapper-author
-                img(src=event.author.profilePicture.src, width=150, alt='profile picture ' + event.author.username)
-
-                - var hrefUser = '/profile/' + event.author.username
-                +link(hrefUser, event.author.username)
-
-            .event-with-detail-draw-wrapper-buttons
-                - var interestedInCount = event.interestedIn.length + ' people interested in going';
-                - var participatingInCount = event.participatingIn.length + ' people paricipating in going';
-                    p #{interestedInCount}
-                    ='\n'
-                    p #{participatingInCount}
-
-                +link('/categories/ski/interested/' + event._id, 'Im interested')(class="btn btn-default" role="button")
-                +link('/categories/ski/sure-participate/' + event._id, 'I will sure participate')(class="btn btn-default" role="button")
-
-            .event-with-detail-draw-wrapper-event-draw-body
-                h2 #{event.title}
-                = '\n'
-                = '\n'
-
-                p #{event.body}
-                = '\n'
-
-            .event-with-detail-draw-wrapper-footer
-
-
-
     //-Declarations end
 
     //-----------------------------------------------
     //-Page content start
 
-
-
-    .single-event-banner
-        = '\n'
-        = '\n'
-        = '\n'
+    .event-banner
         img(src="/res/images/all-main.jpg", height=100 alt="extreme-sports-main-all")
         span Hey man, do a can-can ski fahren?!
         = '\n'
         = '\n'
 
+    .event-conntent
+        // Event pictures part
+        .line
+            each picture in event.pictures
+                - var alt = 'event picture ' + picture.alt;
+                img(src=event.pictures[0].src, width=150, height=100, alt=alt)
+        |<hr>
+        // Author details
+        .line
+            img(src=event.author.profilePicture.src, width=150, alt='profile picture ' + event.author.username)
+            - var hrefUser = '/profile/' + event.author.username
+            +link(hrefUser, event.author.username)
 
-    .event-with-detail-draw-wrapper.clearfix
-        +draw-single-event-details(event)
-        = '\n'
-        = '\n'
+        | <hr>
+        // Event body
+        .line
+            h2 #{event.title}
+            h3 #{event.category} with date: #{event.date}
 
-    .event-with-detail-comments
+            = '\n'
+            p #{event.body}
+            = '\n'
+
+        | <hr>
+        // Interested in and Participating In info and  buttons
+        p #{event.interestedIn.length} people interested in going.
+            ul
+                each userInterested in event.interestedIn
+                    li
+                        - var hrefUser = '/profile/' + userInterested
+                        +link(hrefUser, userInterested)
+                        ='\n'
+        p #{event.participatingIn.length} people participating the event.
+            ul
+                each userParticipating in event.participatingIn
+                    li
+                        - var hrefUser = '/profile/' + userParticipating
+                        +link(hrefUser, userParticipating)
+                        ='\n'
+
+        +link('/categories/ski/interested/' + event._id, 'Im interested too')(class="btn btn-default" role="button")
+        +link('/categories/ski/sure-participate/' + event._id, 'I will participate')(class="btn btn-default" role="button")
+
+    | <hr>
+    .event-comments
         .col-md-4.col-md-offset-4.text-left
             form.form-add-comment(action='/categories/add-comment/' + event._id, method="post")
                 h2.form-add-comment-heading Add new comment

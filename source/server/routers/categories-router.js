@@ -3,39 +3,6 @@
  */
 /* globals module require */
 
-// 'use strict';
-//
-// const express = require('express');
-//
-// module.exports = function (app, data) {
-//     let router = new express.Router(),
-//         controllers = require('../controllers')(data);
-//
-//     router
-//         .get('/login', controllers.getLoginPage)
-//         .post('/login', controllers.login)
-//         .get('/register', controllers.getRegisterPage)
-//         .post('/register', controllers.register);
-//
-//     app.use(router);
-//
-/* globals module require */
-//
-// const express = require("express");
-//
-// module.exports = function(app, data) {
-//     let controller = require("./controllers/superhero-controller")(data);
-//
-//     let router = new express.Router();
-//
-//     router
-//         .get("/", controller.getAll)
-//         .get("/:id", controller.getById)
-//         .post("/", controller.create);
-//
-//     app.use("/superheroes", router);
-// };
-
 'use strict';
 
 const express = require('express');
@@ -50,8 +17,9 @@ module.exports = function (app, data) {
         .get('/add-event/:categoryName', eventsController.getCreateEventPage )
         .post('/add-event/:categoryName', eventsController.createEvent )
         .get('/:category', eventsController.getEventsPage)
-        .get('/:category/:id', eventsController.getEventsPage);
-
+        .get('/:category/:id', eventsController.getEventsPage)
+        .get('/:category/sure-participate/:id', eventsController.getIncreaseParticipatingInEventButtonAction)
+        .get('/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction);
 
     app.use('/categories',  router);
 
