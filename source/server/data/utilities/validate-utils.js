@@ -5,7 +5,7 @@
 
 'use strict';
 
-var validateCategory = function(category) {
+var validateCategoryName = function(category) {
     const defaultCategory = 'ski';
 
     var _category = defaultCategory;
@@ -21,8 +21,9 @@ var validateCategory = function(category) {
     return _category;
 };
 
-var validatePicture = function(pictureObj, req) {
+var validatePictureObject = function(pictureObj, req) {
 
+    // TODO remove before production :)
     // console.log(JSON.stringify(req.headers));
     // {
     //     "host":"localhost:8081",
@@ -58,7 +59,7 @@ var validatePicture = function(pictureObj, req) {
 };
 
 module.exports.validate = {
-    category: validateCategory,
-    picture: validatePicture
+    categoryName: validateCategoryName,
+    pictureObject: validatePictureObject
 };
 
