@@ -131,6 +131,16 @@ module.exports = (data) => {
                     console.log(err);
                     res.redirect('/photo/' + imageId);
                 });
+        },
+        likeOrDislikePhoto(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page', { user: req.user });
+            }
+
+            data.likeOrDislikePhoto(req.params.id, req.user)
+                .then(() => {
+                    res.redirect('/photo/' + req.params.id);
+                });
         }
     };
 };

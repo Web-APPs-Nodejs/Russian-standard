@@ -9,3 +9,8 @@
 .gallery-thumb img {
     height: 100%;
 }
+
+.panel-footer > p {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1em;
+}

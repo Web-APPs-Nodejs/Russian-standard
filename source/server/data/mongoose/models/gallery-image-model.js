@@ -33,6 +33,9 @@ let schema = new Schema({
     hidden: {
         type: Boolean,
         default: false
+    },
+    likes: {
+        type: [String]
     }
 });
 

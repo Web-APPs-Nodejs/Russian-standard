@@ -15,7 +15,8 @@ module.exports = function (app, data) {
         .get('/photo/:id', controllers.getSinglePhotoPage)
         .post('/photo/:id/post-comment', controllers.postGalleryPhotoComment)
         .post('/photo/:id/delete-comment/:commentId', controllers.deleteGalleryPhotoComment)
-        .post('/delete-photo/:id', controllers.deleteGalleryPhoto);
+        .post('/delete-photo/:id', controllers.deleteGalleryPhoto)
+        .post('/photo/:id/like-or-dislike', controllers.likeOrDislikePhoto);
 
     app.use(router);
 };

@@ -11,6 +11,16 @@ block content
         .panel-body.text-center.gallery-single-photo
             img(src= image.url, alt= image.title)
         .panel-footer.text-center
+            if user
+                form(action="/photo/" + image._id + "/like-or-dislike" method="POST")
+                    if !image.likes.includes(user.username)
+                        button.btn.btn-success.btn-xs(type="submit")
+                            span.glyphicon.glyphicon-thumbs-up
+                            |  Like (#{image.likes.length})
+                    else
+                        button.btn.btn-success.btn-xs(type="submit")
+                            span.glyphicon.glyphicon-thumbs-up
+                            |  Liked (#{image.likes.length})
             | Added by: 
             a(href="/profile/" + image.author)= image.author
             br
