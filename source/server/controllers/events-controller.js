@@ -124,8 +124,6 @@ module.exports = (data) => {
             addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayName);
         },
 
-
-
         createEvent(req, res) {
             let body = req.body,
                 nowDt = new Date(),
