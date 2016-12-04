@@ -68,7 +68,6 @@ module.exports = (models) => {
         deleteGalleryPhoto(photoId) {
             return new Promise((resolve, reject) => {
                 GalleryImage.findOne({ _id: photoId }, (err, photo) => {
-                    console.log(photo);
                     photo.hidden = true;
                     photo.save((error, res) => {
                         if (error) {

@@ -38,7 +38,7 @@ module.exports = (models) => {
         },
         getStoriesByPage(page) {
             page = page || 1;
-            const pageSize = 12;
+            const pageSize = 8;
 
             return new Promise((resolve, reject) => {
                 Story.find({ hidden: false })
@@ -67,12 +67,52 @@ module.exports = (models) => {
         },
         getStoryById(storyId) {
             return new Promise((resolve, reject) => {
-                Story.findOne({ _id: storyId }, (err, res)  => {
+                Story.findOne({ _id: storyId }, (err, res) => {
                     if (err) {
-                        return reject(err);                        
+                        return reject(err);
                     }
 
                     return resolve(res);
+                });
+            });
+        },
+        likeOrDislikeStory(storyId, user) {
+            return new Promise((resolve, reject) => {
+                Story.findOne({ _id: storyId }, (error, story) => {
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    if (!story.likes.includes(user.username)) {
+                        story.likes.push(user.username);
+                    }
+                    else {
+                        let index = story.likes.indexOf(user.username);
+                        story.likes.splice(index, 1);
+                    }
+
+                    story.save((err, res) => {
+                        if (err) {
+                            console.log(err);
+                            return reject(err);
+                        }
+
+                        return resolve(res);
+                    });
+                });
+            });
+        },
+        deleteStory(storyId) {
+            return new Promise((resolve, reject) => {
+                Story.findOne({ _id: storyId }, (err, story) => {
+                    story.hidden = true;
+                    story.save((error, res) => {
+                        if (error) {
+                            return reject(error);
+                        }
+
+                        return resolve(res);
+                    });
                 });
             });
         }

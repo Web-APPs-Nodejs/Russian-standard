@@ -9,7 +9,7 @@ block content
         .col-md-3.text-center.panel-left
             img.thumbnail.single-story-picture(src= story.pictureUrl, alt= story.title)
             if user
-                form(action="" method="POST")
+                form(action="/stories/" + story._id + "/like-or-dislike", method="POST")
                     if !story.likes.includes(user.username)
                         button.btn.btn-success.btn-xs(type="submit")
                             span.glyphicon.glyphicon-thumbs-up
@@ -23,8 +23,8 @@ block content
             br
             | Created on: #{story.createdOn}
             if user && (user.username == story.author || user.role == 'admin')
-                form(action="")
-                    button.btn.btn-xm.btn-danger(type="submit") Delete Story  
+                form(action="/stories/" + story._id + "/delete-story" method="POST")
+                    button.btn.btn-sm.btn-danger(type="submit") Delete Story
         .col-md-9
             h1= story.title
             p= story.body
