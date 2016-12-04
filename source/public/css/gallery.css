@@ -1,6 +1,6 @@
 .gallery-single-photo > img {
-    max-width: 100%;
-} 
+     max-width: 100%;
+ }
 
 .gallery-thumb {
     height: 14em;
@@ -25,5 +25,4 @@ footer .hideFooter {
 .panel-footer > p {
     border-bottom: 1px solid lightgray;
     padding-bottom: 1em;
-
 }
