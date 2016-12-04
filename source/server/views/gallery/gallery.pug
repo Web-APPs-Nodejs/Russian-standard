@@ -4,6 +4,8 @@ block styles
     link(href="/res/css/gallery.css", rel="stylesheet")    
 
 block content
+    .gallery
+    .galleryContent
         .col-md-10.col-md-offset-1
             .row.text-center.heading-gallery
                 .row.text-center
@@ -23,13 +25,13 @@ block content
                         if page == 1
                             li.disabled
                                 a() &laquo;
-                        else 
+                        else
                             li.active
                                 a(href="/gallery?page=" + (page - 1)) &laquo;
-                        
+
                         - for (let i = 1; i <= totalPagesCount; i += 1)
                             li.active
-                                a(href="/gallery?page=" + i)= i 
+                                a(href="/gallery?page=" + i)= i
 
                         if page == totalPagesCount
                             li.disabled
@@ -45,3 +47,4 @@ block content
                         a.btn.btn-success.btn-md.btn-block#btn-add-gallery-photo(href="add-photo") Add Photo
                     br
 
+        .hideFooter

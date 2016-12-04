@@ -93,9 +93,7 @@ body {
     /*background-color: rgba(92, 165, 255, 0.3);*/
     background-color: #1E74FF;
 }
-.navColor ul{
 
-}
 .navColor ul .searchNav{
     margin-left: 400px;
 }
@@ -126,10 +124,10 @@ body {
 }
 
 footer {
-    /*position: fixed;
+    position: fixed;
     height: 100px;
     bottom: 0;
-    width: 100%;*/
+    width: 100%;
     background-color: #1E74FF;
 }
 
@@ -165,11 +163,13 @@ footer {
 .snowBG{
     background-color: black;
 }
+
 /*.container-fluid {
     margin-right: auto;
     margin-left: auto;
     max-width: 1600px; /* or 950px
 }*/
+
 @media (max-width: 800px) {
     /* Smaller Resolution Desktops and Laptops */
 
@@ -181,4 +181,11 @@ footer {
 @media (max-width: 450px) {
     /* Even Smaller devices */
 
+}
+.icons li a img{
+    margin-top: 0;
+}
+
+footer.landing{
+    height: 1000px;
 }
