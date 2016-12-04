@@ -68,16 +68,7 @@ block content
 
 
 
-    | <hr>
-    //.event-comments
-    //    .col-md-4.col-md-offset-4.text-left
-    //        form.form-add-comment(action='/categories/add-comment/' + event._id, method="post")
-    //            h2.form-add-comment-heading Add new comment
-    //            br
-    //            label.sr-only(for='body') text
-    //            input#add-comment-body.form-control(type='text', placeholder='text', name="body" required='', autofocus='true')
-    //            br
-    //            button#add-comment-button.btn.btn-md.btn-success.btn-block(type='submit' onclick="return false") Add comment
+
 
 
     .panel.text-center
@@ -93,3 +84,21 @@ block content
                         if user && (user.username == comment.author || user.role == "admin")
                             form(action="/comments/" + comment._id + "/delete-comment/" + comment._id, method="POST")
                                 button.btn.btn-xs.btn-danger(type="submit") Delete Comment
+
+    | <hr>
+    if user
+        button#btn-gallery-add-comment.btn.btn-warning.btn-block(href="#" data-toggle="modal" data-target="#gallery-comment-modal") Add Comment
+
+    #gallery-comment-modal.modal.fade(role='dialog')
+        .modal-dialog.modal-lg
+            .modal-content
+            .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h3.modal-title(style="color: white") Add Comment:
+            .modal-body
+                form.form-group(action="/comments/post-comment-to-event/" + event._id  method="POST")
+                    input.form-control(type="text" name="comment" placeholder="What do you think...")
+                    br
+                    button.btn.btn-success.btn-md(type="submit") Submit
+                    span
+                    button.btn.btn-danger(type='button', data-dismiss='modal' onclick="false") Discard
