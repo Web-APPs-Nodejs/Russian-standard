@@ -6,6 +6,7 @@
 'use strict';
 
 const validate  = require('./utilities').validate;
+const updateUserInfoFromData = require('./users-data')
 
 module.exports = (models) => {
     var EventModel = models.EventModel;
@@ -17,9 +18,9 @@ module.exports = (models) => {
             var _picture = validate.picture(picture, req);
 
             // TODO remove before production :)
-            console.log('picture- '+ JSON.stringify(_picture));
-            console.log('category- '+_category);
-            console.log('author-' + JSON.stringify(author));
+            //console.log('picture- '+ JSON.stringify(_picture));
+            //console.log('category- '+_category);
+            //console.log('author-' + JSON.stringify(author));
 
             var eventObject = {
                 title: title,
@@ -32,7 +33,7 @@ module.exports = (models) => {
             };
             var event = new EventModel(eventObject);
             // TODO remove before production :)
-            console.log('eventCreateAndSave' + JSON.stringify(event));
+            //console.log('eventCreateAndSave' + JSON.stringify(event));
 
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
@@ -41,8 +42,62 @@ module.exports = (models) => {
                     }
 
                     // TODO remove before production :)
-                    console.log('eventCreateAndSave' + JSON.stringify(event));
+                    //console.log('eventCreateAndSave' + JSON.stringify(event));
                     return resolve(dbEvent);
+                });
+            });
+        },
+
+        putEventInUsersEvents(event, user, updateUserInfoFunction) {
+            console.log();
+            console.log('putEventInUsersEvents event' + JSON.stringify(event));
+            console.log();
+            // updating user info => adding relation to the event he created
+            let eventToAdd = {
+                _id: event._id,
+                category: event.category,
+                date: event.date,
+                photo: event.pictures[0].src,
+                title: event.title
+            };
+            console.log();
+            console.log('putEventInUsersEvents user.addedEvents .' + JSON.stringify(user.addedEvents) );
+            console.log();
+
+            let query = {
+                addedEvents: user.addedEvents || []
+            };
+
+            query.addedEvents.push(eventToAdd);
+
+            console.log();
+            console.log('putEventInUsersEvents query' + JSON.stringify(query));
+            console.log();
+
+            return new Promise(function (resolve, reject) {
+                updateUserInfoFunction (user, query)
+                    .then((userRes)=>{
+                        return resolve(userRes);
+                    })
+                    .catch((error) => {
+                        return reject(error);
+                    });
+            });
+        },
+
+        addUsernameToEventSureParticipatingList(event, username) {
+
+            event.participatingIn.push(username);
+
+            //console.log('addUsernameToEventSureParticipatingList');
+
+            return new Promise(function (resolve, reject) {
+                event.save((error, result) => {
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    return resolve(result);
                 });
             });
         },

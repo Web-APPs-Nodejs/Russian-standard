@@ -7,6 +7,10 @@
 
 const passport = require('passport');
 
+var putEventInUsersEvents = function () {
+
+}
+
 module.exports = (data) => {
     return {
 
@@ -95,34 +99,33 @@ module.exports = (data) => {
                     // res.redirect(201, '/categories/ski');
                     // res.status(400).send(err);
                     // res.redirect('/update-info');
-                    res.redirect('/categories/ski');
-                    //
-                    // // updating user info => adding relation to the event he created
-                    // let event = {
-                    //     _id: dbEvent._id,
-                    //     category: dbEvent.category,
-                    //     date: dbEvent.date,
-                    //     photo: dbEvent.pictures[0].src,
-                    //     title: dbEvent.title
-                    // };
-                    //
-                    // let query = {
-                    //     addedEvents: req.user.addedEvents || []
-                    // };
-                    //
-                    // query.addedEvents.push(event);
-                    // data.updateUserInfo(req.user, query);
-                    //
-                    // res.render('error-page', {
-                    //     user: req.user,
-                    //     error: dbEvent
-                    // });
+                    console.log('createAndSaveEvent in controller - then-' + JSON.stringify(dbEvent));
+                    data.putEventInUsersEvents(dbEvent, req.user, data.updateUserInfo);
 
+                    return dbEvent;
+                })
+                .then((dbEvent)=>{
+                    console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
+                    return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
+                })
+                .then((dbEventUpdated)=>{
+                    console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
+                    res.redirect('/categories/ski');
+
+                    // .catch((error)=>{
+                    //     res.render('error-page', {
+                    //         user: req.user,
+                    //         error: error
+                    //     });
+                    //     // Mitak ? OR
+                    //     // throw error;
+                    //     // mislq, che throw shte e po dobre ?
+                    // });
                 })
                 .catch((error) => {
                     var statusCode = 400;
 
-                    // TODO delete duplicated index and try again
+                    // TODO delete duplicated index and try to save event again
                     if(error.code == 11000) {
                         statusCode = 409;
                     }
@@ -135,51 +138,8 @@ module.exports = (data) => {
 
                 });
 
-            // if (req.isAuthenticated()) {
-            //     data.eventCreateAndSave(body.title, categoryName, _picture, req.user, body.body, nowDt, eventIsHidden)
-            //         .then(() => {
-            //             //res.status(201).redirect('http://localhost:3001/categories/201', { user: req.user }).end();
-            //             //res.status(201).send('The request has been fulfilled and resulted in a new resource being created. OK!');
-            //             // res.redirect('/categories/201', {
-            //             //     user: req.user
-            //             // });
-            //             //console.log('thenthen');
-            //             res.render('all-categories-page', {
-            //                 user: req.user,
-            //                 category: categoryName,
-            //                 event: event
-            //             });
-            //         })
-            //         .catch((err) => {
-            //             // The request could not be completed due to a conflict with the current state of the resource.
-            //             // {"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection...
-            //             if(err.code == 11000){
-            //                 // TODO delete duplicated key and try again
-            //
-            //                 var EventModel = data.EventModel;
-            //                 // mongoose.connection.db.executeDbCommand({ dropIndexes: EventModel, index: 'a*' },
-            //                 // var db = mongoose.connection;
-            //                 mongoose.connection.executeDbCommand({ dropIndexes: EventModel, index: 'a*' },
-            //                     function(err, result) {
-            //                         console.log('index is dropped');
-            //                         res.status(201).location('/categories/2011', { user: req.user }).end();
-            //                     });
-            //
-            //                 console.log('index error');
-            //                 res.status(409).location('/categories/409', { user: req.user }).end();
-            //             }
-            //
-            //             res.status(400).location('/categories/400', { user: req.user }).end();
-            //
-            //             //res.status(409).send(err);
-            //             //res.redirect('/', { user: req.user });
-            //
-            //             //return;
-            //         });
-            // }
-
-            //res.render('auth-not-authorised-page');
-
         }
+
+
     };
 };
