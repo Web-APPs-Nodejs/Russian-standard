@@ -48,8 +48,8 @@ module.exports = (data) => {
 
                     query.addedPhotos.push(photo);
                     data.updateUserInfo(req.user, query);
-                    
-                    res.status(201).json(success);   
+
+                    res.status(201).json(success);
                 })
                 .catch(err => {
                     res.status(500).json(err);
@@ -66,6 +66,46 @@ module.exports = (data) => {
                     console.log(err);
 
                     res.status(404).json('No such item found!');
+                });
+        },
+        postGalleryPhotoComment(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page');
+                return;
+            }
+
+            let imageId = req.params.id;
+
+            if (!req.body.comment.trim() || req.body.comment.length > 100) {
+                res.redirect('/photo/' + imageId);
+                return;
+            }
+
+            data.postGalleryPhotoComment(imageId, req.user.username, req.body.comment)
+                .then(() => {
+                    res.redirect('/photo/' + imageId);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.redirect('/photo/' + imageId);
+                });
+        },
+        deleteGalleryPhotoComment(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page');
+                return;
+            }
+
+            let imageId = req.params.id,
+                commentId = req.params.commentId;
+
+            data.deleteGalleryPhotoComment(imageId, commentId)
+                .then(() => {
+                    res.redirect('/photo/' + imageId);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.redirect('/photo/' + imageId);
                 });
         }
     };
