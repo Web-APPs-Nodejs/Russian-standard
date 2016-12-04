@@ -124,10 +124,10 @@ body {
 }
 
 footer {
-    position: fixed;
+    /*position: fixed;
     height: 100px;
     bottom: 0;
-    width: 100%;
+    width: 100%;*/
     background-color: #1E74FF;
 }
 
@@ -188,4 +188,25 @@ footer {
 
 footer.landing{
     height: 1000px;
+}
+.marginBottom{
+    margin-bottom: 50px;
+    /*margin-bottom: 100px;*/
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 100px;
+}
+.mainFoot {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    background-color: #1E74FF;
 }
