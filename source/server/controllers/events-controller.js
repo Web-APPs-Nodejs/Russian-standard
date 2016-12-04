@@ -72,9 +72,6 @@ module.exports = (data) => {
             if(!categoryName && !eventId){
                 data.getAllEvents(req, res)
                     .then((events) => {
-                        // TODO remove before production :)
-                        //console.log(events);
-
                         res.render('./events/all-categories-page', {
                             user: req.user,
                             category: 'all',
@@ -103,14 +100,30 @@ module.exports = (data) => {
             } else if (categoryName && eventId) {
                 data.getEventByCategoryAndId(categoryName, eventId)
                     .then((event) => {
-                        // TODO remove before production :)
-                        //console.log(event);
-                        res.render('./events/single-event-page', {
-                            user: req.user,
-                            category: event.category,
-                            event: event
-                        });
+                        data.getLatestPicturesByCategory(event.category, 5)
+                            .then((picturesFromGallery) => {
+                                event['latestPicturesFromGallery'] = picturesFromGallery;
+
+                                console.log(event.latestPicturesFromGallery);
+                                //return event;
+
+                                res.render('./events/single-event-page', {
+                                            user: req.user,
+                                            category: event.category,
+                                            event: event
+                                });
+                            });
+
                     })
+                    // .then((eventWithPicturesFromGallery) => {
+                    //     // TODO remove before production :)
+                    //     console.log(eventWithPicturesFromGallery);
+                    //     res.render('./events/single-event-page', {
+                    //         user: req.user,
+                    //         category: event.category,
+                    //         event: eventWithPicturesFromGallery
+                    //     });
+                    // })
                     .catch((error) => {
                         throw error;
                     });
@@ -201,7 +214,7 @@ module.exports = (data) => {
                     return data.createCommentAndAddToEvent(dbEvent, data, req.user, body.comment, nowDt, commentIsHidden, meta)
                 })
                 .then((dbEventUpdated) => {
-                    res.redirect('/categories/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
+                    res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
                 })
                 .catch((error) => {
                     res.render('error-page', {
@@ -209,7 +222,6 @@ module.exports = (data) => {
                         error: error
                     });
                 });
-        }
-
+        },
     };
 };
