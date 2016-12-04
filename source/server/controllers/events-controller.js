@@ -74,6 +74,7 @@ module.exports = (data) => {
                     .then((events) => {
                         // TODO remove before production :)
                         //console.log(events);
+                        
                         res.render('./events/all-categories-page', {
                             user: req.user,
                             category: 'all',
