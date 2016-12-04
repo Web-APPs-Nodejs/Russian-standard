@@ -107,7 +107,7 @@ module.exports = (models) => {
             return new Promise(function (resolve, reject) {
                 validate.isValidCommentBodyString(commentBody)
                     .then(() => {
-                        return data.commentCreate(author, commentBody, nowDt, commentIsHidden, meta)
+                        return data.commentCreate(author.username, commentBody, nowDt, commentIsHidden, meta)
                     })
                     .then((comment)=>{
                         return data.commentAddToEvent(event, comment);
