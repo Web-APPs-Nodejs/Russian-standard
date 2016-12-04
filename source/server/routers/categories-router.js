@@ -22,5 +22,5 @@ module.exports = function (app, data) {
         .get('/:category/interested/:id', eventsController.getIncreaseInterestedInEventButtonAction);
 
     app.use('/categories',  router);
-
+    
 };
