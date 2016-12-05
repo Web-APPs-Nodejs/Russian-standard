@@ -34,7 +34,7 @@ ul.information{
     list-style-type: none;
     display: inline-block;
 }
-ul.update{
+ul.update, ul.contacts{
     list-style-type: none;
     padding: 5px;
 }
