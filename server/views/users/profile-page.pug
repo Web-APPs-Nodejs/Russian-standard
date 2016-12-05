@@ -32,7 +32,7 @@ block rightSide
                             img(src= event.photo, alt= event.title)
                         td.category-cell #{event.category}
                         td.link-cell
-                            a.link-title(href="/categories/" + event.category + "/" + event._id)= event.title
+                            a.link-title(href="/events/" + event.category + "/" + event._id)= event.title
                         td #{event.date}
         if userData.addedStories.length != 0
             h2.text-center Stories added by #{userData.username}
