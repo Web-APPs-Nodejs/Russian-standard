@@ -81,21 +81,41 @@ module.exports = (models) => {
             return new Promise((resolve, reject) => {
 
                 var categoryNameCapitalised = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-                GalleryImage
-                    .find()
-                    // .where('category').equals(categoryName)
-                    .where('category').equals(categoryNameCapitalised)
-                    .limit(picturesCount)
-                    .sort('-date')
-                    .exec(function (error, pictures) {
-                        if(error){
-                            return reject(error);
-                        }
-                        // TODO remove before production :)
-                        //console.log('Pictures found-' + pictures);
 
-                        return resolve(pictures);
-                    });
+                // TODO refactor later if time
+                if(categoryNameCapitalised === '' || categoryNameCapitalised == undefined){
+                    GalleryImage
+                        .find()
+                        // .where('category').equals(categoryNameCapitalised)
+                        .limit(picturesCount)
+                        .sort('-date')
+                        .exec(function (error, pictures) {
+                            if(error){
+                                return reject(error);
+                            }
+                            // TODO remove before production :)
+                            //console.log('Pictures found-' + pictures);
+
+                            return resolve(pictures);
+                        });
+                } else {
+                    GalleryImage
+                        .find()
+                        .where('category').equals(categoryNameCapitalised)
+                        .limit(picturesCount)
+                        .sort('-date')
+                        .exec(function (error, pictures) {
+                            if(error){
+                                return reject(error);
+                            }
+                            // TODO remove before production :)
+                            //console.log('Pictures found-' + pictures);
+
+                            return resolve(pictures);
+                        });
+                }
+
+
             });
 
 
