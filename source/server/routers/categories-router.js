@@ -17,6 +17,7 @@ module.exports = function (app, data) {
         .get('/events/add-event/:categoryName', eventsController.getCreateEventPage )
         .post('/events/add-event/:categoryName', eventsController.createEvent )
         .post('/comments/post-comment-to-event/:id', eventsController.createCommentToEventButtonAction )
+        .post('/comments/:commentId/delete-comment/:eventId', eventsController.deleteCommentButtonAction )
         .get('/events/:category', eventsController.getEventsPage)
         .get('/events/:category/:id', eventsController.getEventsPage)
         .get('/events/:category/sure-participate/:id', eventsController.getIncreaseParticipatingInEventButtonAction)
