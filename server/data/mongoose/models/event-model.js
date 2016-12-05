@@ -42,28 +42,27 @@ var eventSchema = function () {
     let PictureSchema = pictureSchema();
     let CommentSchema = commentSchema();
 
-    // test: {
-    //     type: String,
-    //         index: true,
-    //         unique: true // Unique index. If you specify `unique: true`
-    //     // specifying `index: true` is optional if you do `unique: true`
-    // }
-
     let eventSchemaToReturn = new Schema({
         title: { type: String, required: true, validate: titleValidation },
         category: { type: String, required: true, validate: categoryValidation },
-        // pictures: [PictureSchema],
         pictures: {
             type: [PictureSchema],
             index: false,
             unique: false
         },
-        //author: UserSchema,
-        author: { type: UserSchema, index: false, unique: false},
+        author: {
+            type: UserSchema,
+            index: false,
+            unique: false
+        },
         body: { type: String, required: true },
         date: { type: Date, default: Date.now },
         createdOn: { type: Date },
-        comments: { type: [CommentSchema], index: false, unique: false},
+        comments: {
+            type: [CommentSchema],
+            index: false,
+            unique: false
+        },
         hidden: {type: Boolean },
         interestedIn: [{type: String}],
         participatingIn: [{type: String}],
