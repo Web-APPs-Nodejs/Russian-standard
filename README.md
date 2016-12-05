@@ -32,6 +32,7 @@ The Standard Web application have navigation Home/Events/Stories/Gallery/Categor
 
 ###Deliverables
   * Record a short video showcasing your application - <a href="http://www.screencast.com/t/I9S1fHUunvFG">SBS: Extreme sport video</a>
+  * Record second video with better quality - <a href="http://www.screencast.com/t/AU1jR6ppuA">SBS: Extreme sport video</a>
   * Registered application at Telerik Academy Showcase System - <a href="http://best.telerikacademy.com/projects/402/SBS-Extreme-sport">Showcase System - SBS: Extreme sport</a>
   * Link for the GitHub repository of our App - <a href="https://github.com/Web-APPs-Nodejs/Russian-standard">SBS: Extreme sport GitHub repository</a>
   * Link to the presentation - <a href="https://prezi.com/6myuqmxzst8y/team-quotrussian-standardquot/">SBS: Extreme sport presentation</a>
