@@ -1,26 +1,36 @@
 extends ../main-frame
 
+block styles
+    link(href="/res/css/events.css", rel="stylesheet")
+
 block content
 
-    //-----------------------------------------------
-    // Declarations start
-    mixin link(href, name)
-        .button-wrapper
-            a(class!=attributes.class href=href)= name
+    .col-md-10.col-md-offset-1.single-event-page
+        .row.text-center
+            .image-bar
+                if events.length
+                    each galleryPicture in events.latestPicturesFromGallery
+                        img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
 
-    //----------------------------------------------
-    //-Page content start
-    .ski-banner.banner-extra-styles
-        img.left(src='/res/images/' + category + '-main.jpg', width=300 alt='extreme-sports' + category)
-        span Hey man, do a can-can category fahren?!
+            h1 Share your ideas with other, share your best places and have fun together...
 
-    +link('/events/add-event/' + category, 'Add ' + category + ' event')(class="btn btn-default text-right" role="button")
+        if user
+            - var href = '/events/add-event/' + category;
+            a.btn.btn-default(href='/events/add-event/' + category)= 'Add ' + category + ' event'
 
-    each event in events
-        //p #{event}
-        .ski-event
-            img(src=event.pictures[0].src, width=40, height=30, alt="extreme-sports-event-main-picture")
-            a(href='/categories/' + event.category)= event.category
-            a(href='/profile/' + event.author.username)= event.author.username
-            a(href='/categories/' + event.category + '/' + event._id)= event.title
+        if events.length
+            each event in events
+                a.thumbnail(href='/events/' + event.category + '/' + event._id)
+                    .row.event-entry
+                        .col-md-3
+                            img.thumbnail(src= event.pictures[0].src, alt= event.title)
+                        .col-md-9
+                            h2 #{event.title}
+                            h4 #{event.category}
+                            p #{event.body}
+        else
+            h3 No events yet...
+
+
+
 
