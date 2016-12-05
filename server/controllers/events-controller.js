@@ -2,29 +2,21 @@
  * Created by admin on 2.12.2016 г..
  */
 /* globals module require */
-
 'use strict';
 
 const passport = require('passport');
 
+
 function addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayName) {
     let eventId=req.params.id;
-
-    // TODO remove before production :)
-    //console.log('getIncreaseParticipatingInEventButtonAction' + req.user.username);
 
     if (req.isAuthenticated()) {
         data.getEventById(eventId)
             .then((dbEvent)=>{
-                // TODO remove before production :)
-                //console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEvent._id);
 
                 return data.addUsernameToEventPropertyArray(dbEvent, req.user.username, propertyArrayName);
             })
             .then((dbEventUpdated) => {
-                // TODO remove before production :)
-                // console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEventUpdated._id);
-
                 res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
             })
             .catch((error)=>{
@@ -66,17 +58,12 @@ module.exports = (data) => {
             let categoryName=req.params.category;
             let eventId=req.params.id;
 
-            console.log('categoryName: ' + categoryName);
-            console.log('eventId: ' + eventId);
-
             if(!categoryName && !eventId){
                 data.getAllEvents(req, res)
                     .then((events) => {
                         data.getLatestPicturesByCategory('', 5)
                             .then((picturesFromGallery) => {
                                 events['latestPicturesFromGallery'] = picturesFromGallery;
-
-                                console.log('latestPicturesFromGallery-' + picturesFromGallery);
 
                                 res.render('./events/all-categories-page', {
                                     user: req.user,
@@ -98,21 +85,12 @@ module.exports = (data) => {
                             .then((picturesFromGallery) => {
                                 events['latestPicturesFromGallery'] = picturesFromGallery;
 
-                                // TODO remove before production :)
-                                console.log('latestPicturesFromGallery' + events.latestPicturesFromGallery);
-
                                 res.render('./events/single-category-page', {
                                     user: req.user,
                                     category: categoryName,
                                     events: events
                                 });
                             });
-                        // console.log('getEventsPage');
-                        // res.render('./events/single-category-page', {
-                        //     user: req.user,
-                        //     category: categoryName,
-                        //     events: events
-                        // });
                     })
                     .catch((error) => {
                         throw error;
@@ -125,9 +103,6 @@ module.exports = (data) => {
                             .then((picturesFromGallery) => {
                                 event['latestPicturesFromGallery'] = picturesFromGallery;
 
-                                console.log(event.latestPicturesFromGallery);
-                                //return event;
-
                                 res.render('./events/single-event-page', {
                                             user: req.user,
                                             category: event.category,
@@ -136,15 +111,6 @@ module.exports = (data) => {
                             });
 
                     })
-                    // .then((eventWithPicturesFromGallery) => {
-                    //     // TODO remove before production :)
-                    //     console.log(eventWithPicturesFromGallery);
-                    //     res.render('./events/single-event-page', {
-                    //         user: req.user,
-                    //         category: event.category,
-                    //         event: eventWithPicturesFromGallery
-                    //     });
-                    // })
                     .catch((error) => {
                         throw error;
                     });
@@ -170,25 +136,15 @@ module.exports = (data) => {
 
             data.createAndSaveEvent(body.title, categoryName, picture, req.user, body.body, nowDt, eventIsHidden, req)
                 .then((dbEvent) => {
-
-                    // res.redirect(201, '/events/ski');
-                    // res.status(400).send(err);
-                    // res.redirect('/update-info');
-                    // TODO remove before production :)
-                    //console.log('createAndSaveEvent in controller - then-' + JSON.stringify(dbEvent));
                     data.putEventInUsersEvents(dbEvent, req.user, data.updateUserInfo);
 
                     return dbEvent;
                 })
                 .then((dbEvent)=>{
-                    // TODO remove before production :)
-                    //console.log('createAndSaveEvent in controller - thenthen-after putEventInUsersEvents');
-                    // return data.addUsernameToEventSureParticipatingList(dbEvent, req.user.username);
+
                     return data.addUsernameToEventPropertyArray(dbEvent, req.user.username, 'participatingIn')
                 })
                 .then((dbEventUpdated)=>{
-                    // TODO remove before production :)
-                    //console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
 
                     res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
                 })
@@ -199,15 +155,12 @@ module.exports = (data) => {
                     if(error.code == 11000) {
                         statusCode = 409;
                     }
-                    //res.status(statusCode).send(error.errmsg);
 
                     res.render('error-page', {
                         user: res.user,
                         error: error
                     });
-
                 });
-
         },
 
         createCommentToEventButtonAction(req, res) {
@@ -229,13 +182,13 @@ module.exports = (data) => {
                 return;
             }
 
-            console.log('createCommentToEventButtonAction');
-
             data.getEventById(eventId)
                 .then((dbEvent) => {
+
                     return data.createCommentAndAddToEvent(dbEvent, data, req.user, body.comment, nowDt, commentIsHidden, meta)
                 })
                 .then((dbEventUpdated) => {
+
                     res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
                 })
                 .catch((error) => {
@@ -255,9 +208,6 @@ module.exports = (data) => {
             let body = req.body,
                 commentId = req.params.commentId,
                 eventId = req.params.eventId;
-
-            console.log('commentId-' + commentId);
-            console.log('eventId-' + eventId);
 
             data.deleteSingleComment(eventId, commentId)
                 .then((dbEventUpdated) => {
