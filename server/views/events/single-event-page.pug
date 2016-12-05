@@ -24,7 +24,6 @@ block content
         .row.text-left
             p #{event.body}
 
-
         // Interested in and Participating In info and  buttons
         p #{event.interestedIn.length} people interested in going.
             ul
@@ -60,13 +59,6 @@ block content
         if user
             button#btn-gallery-add-comment.btn.btn-warning.btn-block(href="#" data-toggle="modal" data-target="#gallery-comment-modal") Add Comment
         .footer-fix
-            br
-            br
-            br
-            br
-            br
-            br
-            br
 
         #gallery-comment-modal.modal.fade(role='dialog')
             .modal-dialog.modal-lg

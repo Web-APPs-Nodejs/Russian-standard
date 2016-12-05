@@ -112,15 +112,12 @@ module.exports = (models) => {
                 if(categoryNameCapitalised === '' || categoryNameCapitalised == undefined){
                     GalleryImage
                         .find()
-                        // .where('category').equals(categoryNameCapitalised)
                         .limit(picturesCount)
                         .sort({ 'createdOn': -1 })
                         .exec(function (error, pictures) {
                             if(error){
                                 return reject(error);
                             }
-                            // TODO remove before production :)
-                            //console.log('Pictures found-' + pictures);
 
                             return resolve(pictures);
                         });
@@ -134,8 +131,6 @@ module.exports = (models) => {
                             if(error){
                                 return reject(error);
                             }
-                            // TODO remove before production :)
-                            //console.log('Pictures found-' + pictures);
 
                             return resolve(pictures);
                         });
