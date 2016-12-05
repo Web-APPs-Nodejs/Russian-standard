@@ -4,18 +4,18 @@
 
 const fs = require('fs'),
     path = require('path'),
-    passport = require('passport');
+        passport = require('passport');
 
-module.exports = (app, data) => {
-    fs.readdirSync('./server/config/passport')
-        .filter(x => x.includes('-strategy'))
-        .forEach(strategy => passport.use(require(path.join(__dirname, strategy))));
+    module.exports = (app, data) => {
+        fs.readdirSync('./server/config/passport')
+            .filter(x => x.includes('-strategy'))
+            .forEach(strategy => passport.use(require(path.join(__dirname, strategy))));
 
-    passport.serializeUser((user, done) => {
-        if (user) {
-            done(null, user._id);
-        }
-    });
+        passport.serializeUser((user, done) => {
+            if (user) {
+                done(null, user._id);
+            }
+        });
 
     passport.deserializeUser((userId, done) => {
         data
