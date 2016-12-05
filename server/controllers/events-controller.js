@@ -188,8 +188,9 @@ module.exports = (data) => {
                 })
                 .then((dbEventUpdated)=>{
                     // TODO remove before production :)
-                    console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
-                    res.redirect('/events/ski');
+                    //console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
+
+                    res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
                 })
                 .catch((error) => {
                     var statusCode = 400;
