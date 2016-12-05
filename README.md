@@ -34,5 +34,5 @@ The Standard Web application have navigation Home/Events/Stories/Gallery/Contact
   * Record a short video showcasing your application - <a href="#">SSB: Extreme sport video</a>
   * Registered application at Telerik Academy Showcase System - <a href="#">Showcase System - SSB: Extreme sport</a>
   * Link for the GitHub repository of our App - <a href="https://github.com/Web-APPs-Nodejs/Russian-standard">SSB: Extreme sport GitHub repository</a>
-  * Link to the presentation - <a href="#">SSB: Extreme sport presentation</a>
-  * Hosted application on a server, link - <a href="#">SSB: Extreme sport hosted on Heroku</a>
+  * Link to the presentation - <a href="https://prezi.com/6myuqmxzst8y/team-quotrussian-standardquot/">SSB: Extreme sport presentation</a>
+  * Hosted application on a server, link - <a href="https://extreme-sports.herokuapp.com/">SSB: Extreme sport hosted on Heroku</a>
