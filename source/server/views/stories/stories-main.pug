@@ -6,10 +6,10 @@ block styles
 block content
     .col-md-10.col-md-offset-1.single-story-page
         .row.text-center
-            h1 Your story...
+            h1 Share your story...
         if user
             .row
-                a.btn.btn-success.btn-md.btn-block(href="/add-story") Add Story
+                a.btn.btn-warning.btn-md.btn-block(href="/add-story") Add Story
                 br
         if stories.length
             each story in stories
