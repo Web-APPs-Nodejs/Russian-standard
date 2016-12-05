@@ -163,7 +163,7 @@ module.exports = (data) => {
 
         createEvent(req, res) {
             let body = req.body,
-                nowDt = new Date(),
+                nowDt = req.date,
                 eventIsHidden = false,
                 categoryName = req.params.categoryName,
                 picture =  { src: req.body.eventPicture };

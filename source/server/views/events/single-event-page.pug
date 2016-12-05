@@ -2,14 +2,19 @@ extends ../main-frame
 
 block content
 
+    .header-fix
+        br
+        br
+        br
     .col-md-10.col-md-offset-1.single-event-page
         .row.text-left
             .image-bar
                 each picture in event.pictures
-                    img(src=event.pictures[0].src, width=150, height=100, alt='event picture ' + picture.alt)
+                    img.thumbnail(src=event.pictures[0].src, max-width=300, height=200, alt='event picture ' + picture.alt)
 
         .row.text-left
-            h1 #{event.title}
+            h2 #{event.title}
+            | Category:   
             a(href='/events/' + event.category)= event.category
                 .text-right
                     a(href='/profile/' + event.author.username)
@@ -54,6 +59,14 @@ block content
         | <hr>
         if user
             button#btn-gallery-add-comment.btn.btn-warning.btn-block(href="#" data-toggle="modal" data-target="#gallery-comment-modal") Add Comment
+        .footer-fix
+            br
+            br
+            br
+            br
+            br
+            br
+            br
 
         #gallery-comment-modal.modal.fade(role='dialog')
             .modal-dialog.modal-lg

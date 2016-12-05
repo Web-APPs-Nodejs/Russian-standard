@@ -5,16 +5,18 @@ head
     title Extreme Sports
 
     link(rel="shortcut icon", href="/res/images/Nav/mountain.png")
-    link(rel="stylesheet", href="/res/css/bootstrap.css")
+    link(rel="stylesheet", href="/res/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/res/css/bootstrap-datepicker.min.css")
     link(rel="stylesheet", href="/res/css/main.css")
-    link(rel="stylesheet", href="/res/css/toastr.css")
+    link(rel="stylesheet", href="/res/css/toastr.min.css")
     link(rel="stylesheet", href="/res/css/usersPages.css")
 
     block styles
             
-    script(src="/res/lib/jquery.js")
-    script(src="/res/lib/bootstrap.js")
-    script(src="/res/lib/toastr.js")
+    script(src="/res/lib/jquery.min.js")
+    script(src="/res/lib/bootstrap.min.js")
+    script(src="/res/lib/toastr.min.js")
+    script(src="/res/lib/bootstrap-datepicker.min.js")
     block scripts
     
 body
@@ -93,17 +95,14 @@ body
                         li
                             a(href='https://www.facebook.com/groups/333384170107922/') SHRED TOGETHER
                         li.divider
-                li
-                    a(href='/contacts') CONTACTS
                 li.searchNav
                     ul.nav.navbar-nav.navbar-right
                         li
-                            form.navbar-form.navbar-right
+                            form.navbar-form.navbar-right(method="POST" action="/search")
                                 .form-group
-                                    input#search-bar.form-control.search(type='text', name="search" placeholder='Search...', onfocus="this.placeholder = ''" onblur="this.placeholder ='Search...'")
-                        li
-                            a#btn-search.pointer
-                                img(src="/res/images/Nav/search_wht.PNG")
+                                    input#search-bar.form-control.search(type='text', name="query" placeholder='Search events...', onfocus="this.placeholder = ''" onblur="this.placeholder ='Search events...'")
+                                    span | 
+                                    button#btn-search.btn.btn-xs.btn-warning(type="submit") Search!
 
 #content.container-full
     block content

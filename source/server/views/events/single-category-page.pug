@@ -9,10 +9,11 @@ block content
         .row.text-center
             .image-bar
                 if events.length
-                    each galleryPicture in events.latestPicturesFromGallery
-                        img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
+                    .panel.panel-heding-events
+                        each galleryPicture in events.latestPicturesFromGallery
+                            img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
 
-            h1 Share your ideas with other, share your best places and have fun together...
+            h1.heading-category Share your ideas with other, share your favourite spots and have fun together...
 
         if user
             - var href = '/events/add-event/' + category;
@@ -30,6 +31,7 @@ block content
                             p #{event.body}
         else
             h3 No events yet...
+        .footer-fix
 
 
 

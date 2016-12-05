@@ -8,13 +8,13 @@
 }
 
 .event-entry img {
-    max-height: 11em;
-    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .single-event-picture {
     max-width: 100%;
-    max-heigth: 100%;
+    max-height: 100%;
 }
 
 .single-event-page {
@@ -25,12 +25,18 @@
     padding-top: 2em;
 }
 
-.image-bar img{
-    max-height: 11em;
-    height: 100%;
-    width: 20%;
-}
-
 .name-box img{
     max-width: 11em;
+}
+
+.heading-category {
+    margin: 1em;
+}
+
+.panel-heding-events img {
+    max-height: 8em;
+}
+
+.footer-fix {
+    height: 8em;
 }

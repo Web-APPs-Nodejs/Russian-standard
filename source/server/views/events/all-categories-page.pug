@@ -4,15 +4,15 @@ block styles
     link(href="/res/css/events.css", rel="stylesheet")
 
 block content
-
     .col-md-10.col-md-offset-1.single-event-page
         .row.text-center
             .image-bar
                 if events.length
-                    each galleryPicture in events.latestPicturesFromGallery
-                        img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
+                    .panel.panel-heding-events
+                        each galleryPicture in events.latestPicturesFromGallery
+                            img(src=galleryPicture.url, alt='event picture ' + galleryPicture.category)
 
-            h1 See peoples near plans, choose a category and join...
+            h1.heading-category Choose a category, meet up with people and enjoy...
 
         if events.length
             each event in events
@@ -26,4 +26,4 @@ block content
                             p #{event.body}
         else
             h3 No events yet...
-
+        .footer-fix

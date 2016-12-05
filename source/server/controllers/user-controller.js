@@ -55,6 +55,10 @@ module.exports = (data) => {
         },
 
         updateUserInfo(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page', { user: req.user });
+                return;
+            }
             let newData = {};
 
             Object.keys(req.body)

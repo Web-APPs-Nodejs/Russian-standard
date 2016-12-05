@@ -114,7 +114,7 @@ module.exports = (models) => {
                         .find()
                         // .where('category').equals(categoryNameCapitalised)
                         .limit(picturesCount)
-                        .sort('-date')
+                        .sort({ 'createdOn': -1 })
                         .exec(function (error, pictures) {
                             if(error){
                                 return reject(error);
@@ -129,7 +129,7 @@ module.exports = (models) => {
                         .find()
                         .where('category').equals(categoryNameCapitalised)
                         .limit(picturesCount)
-                        .sort('-date')
+                        .sort({ 'createdOn': -1 })
                         .exec(function (error, pictures) {
                             if(error){
                                 return reject(error);
