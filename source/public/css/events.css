@@ -1,0 +1,32 @@
+.event-entry {
+    height: 11em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
+
+.event-entry img {
+    max-height: 11em;
+    height: 100%;
+}
+
+.single-event-picture {
+    max-width: 100%;
+    max-heigth: 100%;
+}
+
+.single-event-page {
+    margin-top: 2em;
+}
+
+.panel-left {
+    padding-top: 2em;
+}
+
+.image-bar img{
+    max-height: 11em;
+    height: 100%;
+    width: 20%;
+}
