@@ -25,7 +25,7 @@ function addUsernameToEventPropertyArrayExecutor(req, res, data, propertyArrayNa
                 // TODO remove before production :)
                 // console.log('getIncreaseParticipatingInEventButtonAction-eventId' + dbEventUpdated._id);
 
-                res.redirect('/categories/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
+                res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
             })
             .catch((error)=>{
                 res.render('error-page', {
@@ -72,26 +72,47 @@ module.exports = (data) => {
             if(!categoryName && !eventId){
                 data.getAllEvents(req, res)
                     .then((events) => {
-                        res.render('./events/all-categories-page', {
-                            user: req.user,
-                            category: 'all',
-                            events: events
-                        });
+                        data.getLatestPicturesByCategory('', 5)
+                            .then((picturesFromGallery) => {
+                                events['latestPicturesFromGallery'] = picturesFromGallery;
+
+                                console.log('latestPicturesFromGallery-' + picturesFromGallery);
+
+                                res.render('./events/all-categories-page', {
+                                    user: req.user,
+                                    category: 'all',
+                                    events: events
+                                });
+                            })
                     })
                     .catch((error) => {
                         throw error;
                     });
 
             } else if (categoryName && !eventId) {
+                console.log('getEventsPage');
+
                 data.getEventByCategoryName(categoryName)
                     .then((events) => {
-                        // TODO remove before production :)
-                        //console.log(events);
-                        res.render('./events/single-category-page', {
-                            user: req.user,
-                            category: categoryName,
-                            events: events
-                        });
+                        data.getLatestPicturesByCategory(categoryName, 5)
+                            .then((picturesFromGallery) => {
+                                events['latestPicturesFromGallery'] = picturesFromGallery;
+
+                                // TODO remove before production :)
+                                console.log('latestPicturesFromGallery' + events.latestPicturesFromGallery);
+
+                                res.render('./events/single-category-page', {
+                                    user: req.user,
+                                    category: categoryName,
+                                    events: events
+                                });
+                            });
+                        // console.log('getEventsPage');
+                        // res.render('./events/single-category-page', {
+                        //     user: req.user,
+                        //     category: categoryName,
+                        //     events: events
+                        // });
                     })
                     .catch((error) => {
                         throw error;
@@ -150,7 +171,7 @@ module.exports = (data) => {
             data.createAndSaveEvent(body.title, categoryName, picture, req.user, body.body, nowDt, eventIsHidden, req)
                 .then((dbEvent) => {
 
-                    // res.redirect(201, '/categories/ski');
+                    // res.redirect(201, '/events/ski');
                     // res.status(400).send(err);
                     // res.redirect('/update-info');
                     // TODO remove before production :)
@@ -168,7 +189,7 @@ module.exports = (data) => {
                 .then((dbEventUpdated)=>{
                     // TODO remove before production :)
                     console.log('after addUsernameToEventSureParticipatingList-' + JSON.stringify(dbEventUpdated));
-                    res.redirect('/categories/ski');
+                    res.redirect('/events/ski');
                 })
                 .catch((error) => {
                     var statusCode = 400;
@@ -203,7 +224,7 @@ module.exports = (data) => {
                 meta = { like: 0 };
 
             if (!body.comment.trim() || body.comment.length > 100) {
-                res.redirect('/categories/' + categoryName + '/' + body.event._id);
+                res.redirect('/events/' + categoryName + '/' + body.event._id);
                 return;
             }
 
