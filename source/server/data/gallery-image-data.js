@@ -5,6 +5,21 @@
 module.exports = (models) => {
     let GalleryImage = models.GalleryImage;
 
+    function updateUserInfo(photo) { 
+        models.UserModel.findOne({username: photo.author}, (err, user) => {
+            for(let i = 0; i < user.addedPhotos.length; i += 1) {
+                let photoId = String(photo._id);
+                let arrayPhotoId = String(user.addedPhotos[i]._id);
+                if (arrayPhotoId == photoId) {
+                    user.addedPhotos.splice(i, 1);
+                    break;
+                }
+            }
+
+            user.save();
+        });
+    }
+
     return {
         getGalleryImagesByPage(page) {
             page = page || 1;
@@ -74,6 +89,7 @@ module.exports = (models) => {
                             return reject(error);
                         }
 
+                        updateUserInfo(photo);
                         return resolve(res);
                     });
                 });

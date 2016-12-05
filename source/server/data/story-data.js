@@ -5,6 +5,21 @@
 module.exports = (models) => {
     let Story = models.Story;
 
+    function updateUserInfo(story) { 
+        models.UserModel.findOne({username: story.author}, (err, user) => {
+            for(let i = 0; i < user.addedStories.length; i += 1) {
+                let storyId = String(story._id);
+                let arrayStoryId = String(user.addedStories[i]._id);
+                if (arrayStoryId == storyId) {
+                    user.addedStories.splice(i, 1);
+                    break;
+                }
+            }
+
+            user.save();
+        });
+    }
+
     return {
         addStory(author, title, body, category, pictureUrl) {
             let story = new Story({
@@ -67,7 +82,7 @@ module.exports = (models) => {
         },
         getStoryById(storyId) {
             return new Promise((resolve, reject) => {
-                Story.findOne({ _id: storyId }, (err, res) => {
+                Story.findOne({ _id: storyId, hidden: false }, (err, res) => {
                     if (err) {
                         return reject(err);
                     }
@@ -110,7 +125,8 @@ module.exports = (models) => {
                         if (error) {
                             return reject(error);
                         }
-
+                        
+                        updateUserInfo(story);
                         return resolve(res);
                     });
                 });

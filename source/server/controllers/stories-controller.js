@@ -41,7 +41,9 @@ module.exports = (data) => {
                 .then(success => {
                     let story = {
                         pictureUrl: req.body.picture,
-                        title: req.body.title,
+                        title: req.body.title,                        
+                        date: success.createdOn,
+                        category: success.category,
                         _id: success._id
                     };
 

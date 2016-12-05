@@ -39,6 +39,8 @@ module.exports = (data) => {
                     let photo = {
                         url: req.body.url,
                         title: req.body.title,
+                        date: success.createdOn,
+                        category: success.category,
                         _id: success._id
                     };
 
