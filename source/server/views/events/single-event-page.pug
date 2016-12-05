@@ -33,45 +33,38 @@ block content
                     li
                         a(href='/profile/' + userParticipating)= userParticipating
                         ='\n'
+        .show-interest
+            a.btn.btn-default(href='/events/ski/interested/' + event._id)= 'Im interested'
+            a.btn.btn-default(href='/events/ski/sure-participate/' + event._id)= 'I will participate'
 
-        //+link('/events/ski/interested/' + event._id, 'Im interested too')(class="btn btn-default" role="button")
-        //+link('/events/ski/sure-participate/' + event._id, 'I will participate')(class="btn btn-default" role="button")
+        .panel.text-center
+            .panel-heading
+                h2 Comments:
+                each comment in event.comments
+                    if !comment.hidden
+                        .panel-footer
+                            p #{comment.body}
+                            a(href="/profile/" + comment.author)= comment.author
+                            br
+                            | Created on: #{comment.date}
+                            if user && (user.username == comment.author || user.role == "admin")
+                                form(action="/comments/" + comment._id + "/delete-comment/" + comment._id, method="POST")
+                                    button.btn.btn-xs.btn-danger(type="submit") Delete Comment
 
+        | <hr>
+        if user
+            button#btn-gallery-add-comment.btn.btn-warning.btn-block(href="#" data-toggle="modal" data-target="#gallery-comment-modal") Add Comment
 
-
-
-
-
-
-
-    .panel.text-center
-        .panel-heading
-            h2 Comments:
-            each comment in event.comments
-                if !comment.hidden
-                    .panel-footer
-                        p #{comment.body}
-                        a(href="/profile/" + comment.author)= comment.author
+        #gallery-comment-modal.modal.fade(role='dialog')
+            .modal-dialog.modal-lg
+                .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal') &times;
+                    h3.modal-title(style="color: white") Add Comment:
+                .modal-body
+                    form.form-group(action="/comments/post-comment-to-event/" + event._id  method="POST")
+                        input.form-control(type="text" name="comment" placeholder="What do you think...")
                         br
-                        | Created on: #{comment.date}
-                        if user && (user.username == comment.author || user.role == "admin")
-                            form(action="/comments/" + comment._id + "/delete-comment/" + comment._id, method="POST")
-                                button.btn.btn-xs.btn-danger(type="submit") Delete Comment
-
-    | <hr>
-    if user
-        button#btn-gallery-add-comment.btn.btn-warning.btn-block(href="#" data-toggle="modal" data-target="#gallery-comment-modal") Add Comment
-
-    #gallery-comment-modal.modal.fade(role='dialog')
-        .modal-dialog.modal-lg
-            .modal-content
-            .modal-header
-                button.close(type='button', data-dismiss='modal') &times;
-                h3.modal-title(style="color: white") Add Comment:
-            .modal-body
-                form.form-group(action="/comments/post-comment-to-event/" + event._id  method="POST")
-                    input.form-control(type="text" name="comment" placeholder="What do you think...")
-                    br
-                    button.btn.btn-success.btn-md(type="submit") Submit
-                    span
-                    button.btn.btn-danger(type='button', data-dismiss='modal' onclick="false") Discard
+                        button.btn.btn-success.btn-md(type="submit") Submit
+                        span
+                        button.btn.btn-danger(type='button', data-dismiss='modal' onclick="false") Discard
