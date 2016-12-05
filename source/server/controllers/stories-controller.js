@@ -8,7 +8,7 @@ module.exports = (data) => {
     return {
         getStoriesPage(req, res) {
             const page = +req.query.page || 1,
-                pageSize = 12;
+                pageSize = 8;
 
             data.getStoriesByPage(page)
                 .then(storiesObj => {
@@ -41,7 +41,9 @@ module.exports = (data) => {
                 .then(success => {
                     let story = {
                         pictureUrl: req.body.picture,
-                        title: req.body.title,
+                        title: req.body.title,                        
+                        date: success.createdOn,
+                        category: success.category,
                         _id: success._id
                     };
 
@@ -77,6 +79,33 @@ module.exports = (data) => {
 
                     res.status(404);
                     res.render('page-not-found', { user: req.user });
+                });
+        },
+        likeOrDislikeStory(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page', { user: req.user });
+            }
+
+            data.likeOrDislikeStory(req.params.id, req.user)
+                .then(() => {
+                    res.redirect('/stories/' + req.params.id);
+                });
+        },
+        deleteStory(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page', { user: req.user });
+                return;
+            }
+
+            let storyId = req.params.id;
+            
+            data.deleteStory(storyId)
+                .then(() => {
+                    res.redirect('/stories');
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.redirect('/stories');
                 });
         }
     };

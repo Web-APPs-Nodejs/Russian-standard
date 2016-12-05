@@ -22,3 +22,7 @@
 .panel-left {
     padding-top: 2em;
 }
+
+.footer-fix {
+    height: 8em;
+}
