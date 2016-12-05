@@ -31,7 +31,7 @@ The application is a specific SBS: Extreme sport for passionate skiers, snowboar
 The Standard Web application have navigation Home/Events/Stories/Gallery/Categories/Online shops/Contacts. Every user can have a private profile by Sign Up - Log in/Log out functionality. Have the option to login with facebook account. Evry user can creating events or join to already present, add stories or pictures. Can leave comments above the pictures from Gallery section. The APP provide an option to have access to the most popular sites for online shops. Our application uses third-party API to Share status to Facebook, Linkedin, Twitter, etc.
 
 ###Deliverables
-  * Record a short video showcasing your application - <a href="#">SBS: Extreme sport video</a>
+  * Record a short video showcasing your application - <a href="http://www.screencast.com/t/I9S1fHUunvFG">SBS: Extreme sport video</a>
   * Registered application at Telerik Academy Showcase System - <a href="http://best.telerikacademy.com/projects/402/SBS-Extreme-sport">Showcase System - SBS: Extreme sport</a>
   * Link for the GitHub repository of our App - <a href="https://github.com/Web-APPs-Nodejs/Russian-standard">SBS: Extreme sport GitHub repository</a>
   * Link to the presentation - <a href="https://prezi.com/6myuqmxzst8y/team-quotrussian-standardquot/">SBS: Extreme sport presentation</a>
