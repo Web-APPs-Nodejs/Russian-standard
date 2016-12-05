@@ -2,17 +2,11 @@
 
 'use strict';
 
-const express = require("express");
-let Router = express.Router;
+const express = require('express');
 
-module.exports = function({ app, controllers }) {
-    let controller = controllers.search;
-    let router = new Router();
+module.exports = function (app, data) {
+    let router = new express.Router(),
+        controllers = require('../controllers')(data);
 
-    router
-        .get("/", controller.search);
-
-    app.use("/search", router);
-
-    return router;
+    app.use(router);
 };

@@ -1,9 +1,9 @@
 extends profile-frame.pug
                
 block rightSide
-    .col-md-9
+    .col-md-9.profile-right-panel
         if userData.addedPhotos.length != 0
-            h2 Photos added by #{userData.username}
+            h2.text-center Photos added by #{userData.username}
             table.table.table-stripped.table-hover
                 thead
                     th.image-thumb
@@ -19,7 +19,7 @@ block rightSide
                             a(href="/photo/" + photo._id)= photo.title
                         td #{photo.date}
         if userData.addedEvents.length != 0
-            h2 Events added by #{userData.username}
+            h2.text-center Events added by #{userData.username}
             table.table.table-stripped.table-hover
                 thead
                     th.image-thumb
@@ -35,7 +35,7 @@ block rightSide
                             a.link-title(href="/categories/" + event.category + "/" + event._id)= event.title
                         td #{event.date}
         if userData.addedStories.length != 0
-            h2 Stories added by #{userData.username}
+            h2.text-center Stories added by #{userData.username}
             table.table.table-stripped.table-hover
                 thead
                     th.image-thumb
@@ -50,6 +50,6 @@ block rightSide
                         td.link-cell
                             a.link-title(href="/stories/" + story._id)= story.title
                         td #{story.date}
-        if userData.addedEvents.length == 0 && userData.addedPhotos.length == 0 && userData.addedStories.length
+        if userData.addedEvents.length == 0 && userData.addedPhotos.length == 0 && userData.addedStories.length == 0
             .row.text-center
-                h2 No photos or events uploaded by #{userData.username} yet...
+                h2 No materials uploaded by #{userData.username} yet...
