@@ -244,5 +244,30 @@ module.exports = (data) => {
                     });
                 });
         },
+
+        deleteCommentButtonAction(req, res) {
+            if (!req.isAuthenticated()) {
+                res.render('auth-not-authorised-page');
+                return;
+            }
+
+            let body = req.body,
+                commentId = req.params.commentId,
+                eventId = req.params.eventId;
+
+            console.log('commentId-' + commentId);
+            console.log('eventId-' + eventId);
+
+            data.deleteSingleComment(eventId, commentId)
+                .then((dbEventUpdated) => {
+                    res.redirect('/events/' + dbEventUpdated.category + '/' + dbEventUpdated._id);
+                })
+                .catch((error) => {
+                    res.render('error-page', {
+                        user: res.user,
+                        error: error
+                    });
+                });
+        }
     };
 };

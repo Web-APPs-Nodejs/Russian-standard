@@ -30,3 +30,7 @@
     height: 100%;
     width: 20%;
 }
+
+.name-box img{
+    max-width: 11em;
+}

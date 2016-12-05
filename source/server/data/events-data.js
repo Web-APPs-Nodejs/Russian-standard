@@ -49,9 +49,6 @@ module.exports = (models) => {
         },
 
         putEventInUsersEvents(event, user, updateUserInfoFunction) {
-            console.log();
-            console.log('putEventInUsersEvents event' + JSON.stringify(event));
-            console.log();
             // updating user info => adding relation to the event he created
             let eventToAdd = {
                 _id: event._id,
@@ -60,19 +57,11 @@ module.exports = (models) => {
                 photo: event.pictures[0].src,
                 title: event.title
             };
-            console.log();
-            console.log('putEventInUsersEvents user.addedEvents .' + JSON.stringify(user.addedEvents) );
-            console.log();
 
             let query = {
                 addedEvents: user.addedEvents || []
             };
-
             query.addedEvents.push(eventToAdd);
-
-            console.log();
-            console.log('putEventInUsersEvents query' + JSON.stringify(query));
-            console.log();
 
             return new Promise(function (resolve, reject) {
                 updateUserInfoFunction (user, query)
@@ -87,18 +76,26 @@ module.exports = (models) => {
 
         addUsernameToEventPropertyArray(event, username, propertyArrayName) {
 
-            event[propertyArrayName].push(username);
+            var valueIsContained = (event[propertyArrayName].indexOf(username) > -1);
+            if(!valueIsContained){
+                event[propertyArrayName].push(username);
+            }
+
             // TODO remove before production :)
             console.log('addUsernameToEventPropertyArray-event[' + propertyArrayName + '] ' + JSON.stringify(event));
 
             return new Promise(function (resolve, reject) {
-                event.save((error, result) => {
-                    if (error) {
-                        return reject(error);
-                    }
+                if(!valueIsContained){
+                    event.save((error, result) => {
+                        if (error) {
+                            return reject(error);
+                        }
 
-                    return resolve(result);
-                });
+                        return resolve(result);
+                    });
+                } else {
+                    return resolve(event);
+                }
             });
         },
 

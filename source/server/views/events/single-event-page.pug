@@ -48,7 +48,7 @@ block content
                             br
                             | Created on: #{comment.date}
                             if user && (user.username == comment.author || user.role == "admin")
-                                form(action="/comments/" + comment._id + "/delete-comment/" + comment._id, method="POST")
+                                form(action="/comments/" + comment._id + "/delete-comment/" + event._id, method="POST")
                                     button.btn.btn-xs.btn-danger(type="submit") Delete Comment
 
         | <hr>

@@ -8,6 +8,7 @@
 module.exports = (models) => {
     var CommentModel = models.CommentModel;
     var GalleryImage = models.GalleryImage;
+    var EventModel = models.EventModel;
 
     return {
         commentCreate(author, body, date, hidden = false, meta){
@@ -65,7 +66,7 @@ module.exports = (models) => {
 
         commentFindById(commentId) {
             return new Promise((resolve, reject) => {
-                CommentModel.find({ _id: commentId }, (error, comment) => {
+                CommentModel.findOne({ _id: commentId }, (error, comment) => {
                     if (error) {
                         return reject(error);
                     }
@@ -74,6 +75,31 @@ module.exports = (models) => {
                     return resolve(comment);
                 });
             });
+        },
+
+        deleteSingleComment(eventId, commentId) {
+            return new Promise((resolve, reject) => {
+                EventModel
+                    .findOne()
+                    .where('_id').equals(eventId)
+                    .exec(function (error, event) {
+                        if (error) {
+                            return reject(error);
+                        }
+
+                        var comment = event.comments.id(commentId);
+                        comment.hidden = true;
+
+                        event.save((error, dbEvent) => {
+                            if (error) {
+                                console.log(error);
+                                return reject(error);
+                            }
+
+                            return resolve(dbEvent);
+                        });
+                    })
+                });
         },
 
         getLatestPicturesByCategory(categoryName, picturesCount) {
