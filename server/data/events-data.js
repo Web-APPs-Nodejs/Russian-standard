@@ -17,11 +17,6 @@ module.exports = (models) => {
             var _category = validate.categoryName(category);
             var _picture = validate.pictureObject(picture, req);
 
-            // TODO remove before production :)
-            //console.log('picture- '+ JSON.stringify(_picture));
-            //console.log('category- '+_category);
-            //console.log('author-' + JSON.stringify(author));
-
             var eventObject = {
                 title: title,
                 category: _category,
@@ -32,8 +27,6 @@ module.exports = (models) => {
                 hidden: hidden
             };
             var event = new EventModel(eventObject);
-            // TODO remove before production :)
-            //console.log('eventCreateAndSave' + JSON.stringify(event));
 
             return new Promise(function (resolve, reject) {
                 event.save(function (error, dbEvent) {
@@ -41,15 +34,13 @@ module.exports = (models) => {
                         return reject(error);
                     }
 
-                    // TODO remove before production :)
-                    //console.log('eventCreateAndSave' + JSON.stringify(event));
                     return resolve(dbEvent);
                 });
             });
         },
 
         putEventInUsersEvents(event, user, updateUserInfoFunction) {
-            // updating user info => adding relation to the event he created
+
             let eventToAdd = {
                 _id: event._id,
                 category: event.category,
@@ -81,9 +72,6 @@ module.exports = (models) => {
                 event[propertyArrayName].push(username);
             }
 
-            // TODO remove before production :)
-            console.log('addUsernameToEventPropertyArray-event[' + propertyArrayName + '] ' + JSON.stringify(event));
-
             return new Promise(function (resolve, reject) {
                 if(!valueIsContained){
                     event.save((error, result) => {
@@ -94,6 +82,7 @@ module.exports = (models) => {
                         return resolve(result);
                     });
                 } else {
+
                     return resolve(event);
                 }
             });
@@ -128,8 +117,6 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
-                        // TODO remove before production :)
-                        // console.log('All events in all categories are found.');
 
                         return resolve(events);
                     });
@@ -147,8 +134,6 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
-                        // TODO remove before production :)
-                        // console.log('All events in ' + categoryName + ' are found.');
 
                         return resolve(events);
                     });
@@ -167,8 +152,6 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
-                        // TODO remove before production :)
-                        console.log('Single events in ' + categoryName + ' with id ' + eventId + ' is found.');
 
                         return resolve(events);
                     });
@@ -184,7 +167,6 @@ module.exports = (models) => {
                         if(error){
                             return reject(error);
                         }
-                        console.log('Single events in with id ' + eventId + ' is found.');
 
                         return resolve(events);
                     });
