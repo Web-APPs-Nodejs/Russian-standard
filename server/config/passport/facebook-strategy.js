@@ -7,7 +7,7 @@ const LocalStrategy = require('passport-facebook'),
     facebookAuth = {
         clientID: '788019178002659',
         clientSecret: 'e33f6659126baca5527c4bc2c5e20730',
-        callbackURL: 'http://localhost:3001/login/facebook/callback',
+        callbackURL: 'https://extreme-sports.herokuapp.com/login/facebook/callback',
         profileFields: ['id', 'first_name', 'last_name', 'displayName', 'picture.type(large)', 'email', 'gender']
     };
 
