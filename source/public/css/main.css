@@ -95,7 +95,7 @@ body {
 }
 
 .navColor ul .searchNav{
-    margin-left: 400px;
+    margin-left: 280px;
 }
 .pointer{
     cursor: pointer;
@@ -208,5 +208,9 @@ body {
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 100px;
+    background-color: #1E74FF;
+}
+.dropdown ul{
+    color: white;
     background-color: #1E74FF;
 }
